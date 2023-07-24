@@ -4,7 +4,7 @@ import './Land.css'
 
 function Land({ setToken }) {
     const CLIENT_ID = "da420f0feb8244f4a8c20acd024a6a45"
-    const REDIRECT_URI = "http://localhost:3000/home" // Assuming you've registered "http://localhost:3000/home" as the redirection URL with Spotify
+    const REDIRECT_URI = "http://www.wrappify.uk/home" // Assuming you've registered "http://localhost:3000/home" as the redirection URL with Spotify
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
     const RESPONSE_TYPE = "token"
     const SCOPES = "user-top-read playlist-modify-public"

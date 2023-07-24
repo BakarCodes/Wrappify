@@ -7,7 +7,6 @@
 section {
   position: relative;
   padding-right: 50px;
-  timeline-scope: --listTimeline;
 }
 
 .artist-list-item, .track-list-item { 
@@ -90,7 +89,7 @@ body {
   align-items: center;
   min-height: 100vh;
   color: #37392e;
-  background: #ddcecd;
+  background: #ffffff;
   font-family: "Poppins", sans-serif;
 }
 
