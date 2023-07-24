@@ -1,0 +1,33 @@
+.homePage{
+    background-color: black;
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; 
+}
+
+.titleBar{
+
+    color: white;
+    background-color: black;
+    border: 2px black;
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; 
+}
+
+.one{
+    background-color: rgb(246, 238, 227);
+    height: 92vh;
+}
+
+.titleBar{
+    font-family: 'futura';
+    color: rgb(231, 57, 50);
+    font-size: 15vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+    margin-right: 11%;
+}
