@@ -10,11 +10,155 @@ body {
   }
 
 .section{
-    border: 2px solid white;
+
 }
 
+
+.table{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 68%;
+    margin: 0 auto; /* Center the table horizontally */
+    text-align: center;
+
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+ 
+}
+.outline {
+    border: 2px solid white;
+    box-shadow: 4px 4px rgb(10, 122, 0);
+    margin-bottom: 3%;
+    text-align: right;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5fr 1fr; /* Two equal-width columns */
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-align: left;
+
+}
+
+.firstRow{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.ranking {
+    text-align: center;
+    min-width: 100px;
+    max-width: 100px;
+    color: #1DB954;
+    font-size: 5vw;
+
+}
+
+.description{
+    padding: 2%;
+    font-size: 10vw;
+
+}
+.trackName {
+    font-size: 2.5vw;
+}
+
+.artistName {
+    color: grey;
+    font-size: 2vw;
+
+}
+
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align image to the right */
+    align-items: center;
+    width: 100%;
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    width: 100%;
+}
+
+.albumImg {
+    width: 100%;
+
+ /* Adjust the height of the image as needed */
+  /* Add more styling for the image if required */
+}
+
+.selections{
+    width: 100%;
+    display: grid;
+}
+.menu{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 2px;
+}
+
+.topArtistButton{
+    background-color: #1DB954;
+}
+
+.topTrackButton{
+    background-color: #1DB954;
+}
+
+.topGenreButton{
+    background-color: #1DB954;
+}
+
+
+  .links{
+  }
+  
+  .spotify-button {
+    text-align: center;
+    font-size: 3vh;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    background-color: #1DB954;
+    transition: background-color 0.2s ease;
+  }
+  
+  .spotify-button:hover {
+      background-color: #1ED760;
+  }
+  
+  .spotify-logo {
+      width: 40px;
+      height: 40px;
+      margin-right: 0px;
+  }
+
+
   /* Mobile-friendly styles */
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .section {
       margin-bottom: 2%; /* Reduce the margin for better spacing on mobile */
     }
@@ -49,97 +193,8 @@ body {
   }
   
 
-.image-grid{
 
-}
-
-.section{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-bottom: 2%;
-}
-.outline {
-    text-align: right;
-    margin-left: auto; /* Push the sections to the right */
-    width: 80%;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-    gap: 0px; /* Spacing between columns */
-    margin-top: 5%;
-}
-
-.info {
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-}
-
-.firstRow{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 100%;
-
-}
-
-.ranking {
-    color: #1DB954;
-    font-size: 12vw;
-    width: 350px;
-}
-
-.description{
-    font-size: 3vw;
-    padding: 30px;
-
-}
-.trackName {
-    font-size: 3vw;
-}
-
-.artistName {
-    color: grey;
-    font-size: 2vw;
-
-}
-
-
-.image-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align image to the right */
-    align-items: center;
-    max-width: 50%;
-
-}
-
-.image{
-
-}
-
-.albumImg {
-
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    max-width: 100%; /* Adjust the width of the image as needed */
-    max-height: 100%; /* Adjust the height of the image as needed */
-  /* Add more styling for the image if required */
-}
-
-.topArtistButton{
-    background-color: #1DB954;
-}
-
-.topTrackButton{
-    background-color: #1DB954;
-}
-
-.topGenreButton{
-    background-color: #1DB954;
-}
-  /* width */
+    /* width */
 ::-webkit-scrollbar {
     width: 10px;
   }
@@ -160,36 +215,3 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #19647e;
   }
-
-  .links{
-    height: 20px;
-    width: 160px;
-    text-align: left;
-  }
-  
-  .spotify-button {
-    text-align: center;
-    font-size: 3vh;
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    align-items: center;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    background-color: #1DB954;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .spotify-button:hover {
-      background-color: #1ED760;
-  }
-  
-  .spotify-logo {
-      width: 40px;
-      height: 40px;
-      margin-right: 0px;
-  }
-
-

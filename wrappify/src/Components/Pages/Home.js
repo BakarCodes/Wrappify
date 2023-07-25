@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css'
+import Navbar from '../Navbar'
 import { useNavigate } from 'react-router-dom'; // import useNavigate from react-router-dom
-import Navbar from '../Navbar';
 import logo from '../Images/Spotify-logo.png';
 
 
@@ -142,7 +142,7 @@ function Home({setToken}) {
         <div className='outline'>
           <div className='info'>
 
-            <div className='ranking'>{`0${index + 1}`}</div>
+            <div className='ranking'>{`${index + 1}`}</div>
             <div className='firstRow'>
                 <div className='description'>
                     <div className='trackName'>{track.name}</div>
@@ -173,7 +173,7 @@ const renderArtists = () => {
             <div className='outline'>
             <div className='info'>
               <div className='ranking'>
-                {`0${index + 1}`}
+                {`${index + 1}`}
               </div>
               <div className='artistName'>
                 {artist.name}
@@ -208,39 +208,48 @@ const renderGenres = () => {
 
 return (
     <div>
-        <Navbar/>
-        <section class="three">
-            <div className='image-grid'>
-                {token ? 
-                    <>
+    <Navbar/>
+      <section class="three">
+        <div className='image-grid'>
+          {token ? (
+            <>
+
+              
+              <div className="table">
+
+                <div className="selections">
                     <div className='menu'>
                         <div>
-                            <select onChange={(e) => setTimeRange(e.target.value)}>
-                                <option value="short_term">Monthly</option>
-                                <option value="medium_term">6 Months</option>
-                                <option value="long_term">Yearly</option>
-                            </select>
+
                         </div>
-                        <div className="Selections">
-                            <button className="topArtistButton" onClick={getTopArtists}>Get Top Artists</button>
-                            <button className="topTrackButton"onClick={getTopTracks}>Get Top Tracks</button>
-                            <button className="topGenreButton" onClick={getTopGenres}>Get Top Genres</button>
-                            {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
-                            {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
+                        <select onChange={(e) => setTimeRange(e.target.value)}>
+                            <option value="short_term">Monthly</option>
+                            <option value="medium_term">6 Months</option>
+                            <option value="long_term">Yearly</option>
+                        </select>
+                        <button className="topArtistButton" onClick={getTopArtists}>Get Top Artists</button>
+                        <button className="topTrackButton" onClick={getTopTracks}>Get Top Tracks</button>
+                        <button className="topGenreButton" onClick={getTopGenres}>Get Top Genres</button>
+                        {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
+                        {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
+                        <div className='logout'>
                             <button onClick={logout}>Logout</button>
                         </div>
                     </div>
-                    </>
-                    : <h2>Please login</h2>
-                }
+                </div>
+                {/* Rendered items go here */}
                 {renderArtists()}
                 {renderTracks()}
                 {renderGenres()}
-            </div>
-        </section>
+              </div>
+            </>
+          ) : (
+            <h2>Please login</h2>
+          )}
+        </div>
+      </section>
     </div>
-);
-
+  );
 }
 
 export default Home;
