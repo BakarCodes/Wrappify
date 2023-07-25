@@ -8,13 +8,11 @@ import logo from '../Images/Spotify-logo.png';
 
 function Home({setToken}) {
     const navigate = useNavigate(); // initialize useNavigate
-
     const logout = () => {
         window.localStorage.removeItem("token"); // remove the token from localStorage
         setToken(null); // remove the token from the app's state
         navigate('/'); // redirect the user to the landing page
     }
-    
 
     console.log("Home page rendered");
 
@@ -153,9 +151,12 @@ function Home({setToken}) {
           <div className='image-container'>
             <div className='image'>
                 {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt="" /> : <div>No Image</div>}
-                    <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='spotify-button'>PLAY TRACK
+                <div className='spotify-link'>
+                    <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
                                 <img src={logo} alt="Spotify Logo" className="spotify-logo" />
+                                OPEN TRACK
                     </a>
+                </div>    
             </div>
           </div>
         </div>
@@ -175,18 +176,21 @@ const renderArtists = () => {
               <div className='ranking'>
                 {`${index + 1}`}
               </div>
-              <div className='artistName'>
-                {artist.name}
+              <div className='firstRow'>
+                <div className='description'>
+                    <div className='artistOnly'>
+                        {artist.name}
+                    </div>
+                </div>
               </div>
-              <div className='links'>
-
               </div>
-              </div>
-              <div className='image'>
-                  {artist.images.length ? <img className='albumImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
-                  <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
-                    <img src={logo} alt="Spotify Logo" className="spotify-logo" /> View Artist
-                </a>
+              <div className='image-container'>
+                <div className='artistImage'>
+                    {artist.images.length ? <img className='artistImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+                    <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
+                        <img src={logo} alt="Spotify Logo" className="spotify-logo" /> View Artist
+                    </a>
+                </div>
               </div>
 
             </div>
@@ -207,9 +211,26 @@ const renderGenres = () => {
     ))
 }
 
+const handleTopArtists = async () => {
+    await getTopArtists();
+  };
+
+  const handleTopTracks = async () => {
+    await getTopTracks();
+  };
+
+  const handleTopGenres = async () => {
+    await getTopGenres();
+  };
+
 return (
     <div>
-    <Navbar/>
+    <Navbar 
+        onTopArtists={handleTopArtists}
+        onTopTracks={handleTopTracks}
+        onTopGenres={handleTopGenres}
+        onLogout={logout} 
+        />
       <section class="three">
         <div className='image-grid'>
           {token ? (
@@ -228,20 +249,19 @@ return (
                             <option value="medium_term">6 Months</option>
                             <option value="long_term">Yearly</option>
                         </select>
-                        <button className="topArtistButton" onClick={getTopArtists}>Get Top Artists</button>
-                        <button className="topTrackButton" onClick={getTopTracks}>Get Top Tracks</button>
-                        <button className="topGenreButton" onClick={getTopGenres}>Get Top Genres</button>
-                        {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
-                        {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
-                        <div className='logout'>
-                            <button onClick={logout}>Logout</button>
+                        <div className='playlistBox'>
+                            {tracks.length > 0 && <button className='playlist' onClick={createPlaylist}>Create Playlist</button>}
+                                {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
                         </div>
                     </div>
+
                 </div>
+
                 {/* Rendered items go here */}
                 {renderArtists()}
                 {renderTracks()}
                 {renderGenres()}
+
               </div>
             </>
           ) : (

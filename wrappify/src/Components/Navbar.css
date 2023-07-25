@@ -1,44 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
 
 
-  .navbar {
-    background: #00000000;
-    height: 10vh;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2vw;
-    position: sticky;
+.navbar {
+  background: #161616;
+  height: 8vh;
+  display: grid;
+  font-size: 1.3vw;
+  position: sticky;
+  z-index: 999;
+  box-shadow: 1px 0px 0px 1px rgba(255, 255, 255, 1);
 
-    z-index: 999;
-    /*box-shadow: 1px 0px 0px 1px rgba(255, 255, 255, 1);*/
-    
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .navbar-logo {
-    color: #1DB954;
-    justify-self: start;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2vw;
-    margin-right: 60vw;
-  }
-  
-  .nav-menu {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 0px;
-    list-style: none;
-    text-align: right;
-    /*width: 60vw;*/
-    justify-content: end;
-    
-  }
+}
+
+.navbar-buttons {
+  display: flex;
+
+  gap: 30px;
+}
+
+.navbar-container {
+  gap: 40vh;
+  display: flex;
+  justify-content:space-around; /* Change to space-between */
+  align-items: center;
+}
+
+.navbar-logo {
+  color: #1DB954;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2vw;
+  margin-left: 20px; /* Add margin on the left */
+}
+
+.navbar-logout {
+  margin-right: 20px;
+  /* Remove the flex and justify-content properties */
+}
+
+/* Center the three top buttons in the navbar */
+.nav-menu {
+  display: flex;
+  justify-content: center; /* Change to center */
+  list-style: none;
+  text-align: right;
+  align-items: center; /* Add align-items property */
+}
   
   .nav-item {
     height: auto;
@@ -62,6 +70,7 @@
   }
 
   .nav-links:hover,a:hover {
+    border-bottom: 2px solid #1DB954 ;
     color: #1DB954;
     transition: all 0.1s ease-out;
     

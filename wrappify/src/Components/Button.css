@@ -1,12 +1,13 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
 
 :root{
-    --primary:rgb(241,191,1);
+    --primary:#1DB954;
 }
 
 .btn{
+    font-family: 'Roboto Slab', serif;
     font-weight: 500;
-    padding: 8px 20px;
+    padding: 10px 10px;
     border-radius: 2px;
     outline: none;
     border: 1px rgba(0, 0, 0, 0.322);
