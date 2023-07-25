@@ -197,38 +197,38 @@ const renderGenres = () => {
 
 return (
     <div>
-        <Navbar/>
-        <section class="three">
-            <div className='image-grid'>
-                {token ? 
-                    <>
-                    <div className='menu'>
-                        <div>
-                            <select onChange={(e) => setTimeRange(e.target.value)}>
-                                <option value="short_term">Monthly</option>
-                                <option value="medium_term">6 Months</option>
-                                <option value="long_term">Yearly</option>
-                            </select>
-                        </div>
-                        <div className="Selections">
-                            <button onClick={getTopArtists}>Get Top Artists</button>
-                            <button onClick={getTopTracks}>Get Top Tracks</button>
-                            <button onClick={getTopGenres}>Get Top Genres</button>
-                            {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
-                            {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    </div>
-                    </>
-                    : <h2>Please login</h2>
-                }
-                {renderArtists()}
-                {renderTracks()}
-                {renderGenres()}
-            </div>
-        </section>
+      <Navbar />
+      <section className="three">
+        <div className='image-grid'>
+          {token ?
+            <>
+              <div className='menu'>
+                <div>
+                  <select onChange={(e) => setTimeRange(e.target.value)}>
+                    <option value="short_term">Monthly</option>
+                    <option value="medium_term">6 Months</option>
+                    <option value="long_term">Yearly</option>
+                  </select>
+                </div>
+                <div className="Selections">
+                  <button onTouchEnd={getTopArtists}>Get Top Artists</button>
+                  <button onTouchEnd={getTopTracks}>Get Top Tracks</button>
+                  <button onTouchEnd={getTopGenres}>Get Top Genres</button>
+                  {tracks.length > 0 && <button onTouchEnd={createPlaylist}>Create Playlist</button>}
+                  {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
+                  <button onTouchEnd={logout}>Logout</button>
+                </div>
+              </div>
+            </>
+            : <h2>Please login</h2>
+          }
+          {renderArtists()}
+          {renderTracks()}
+          {renderGenres()}
+        </div>
+      </section>
     </div>
-);
+  );
 
 }
 

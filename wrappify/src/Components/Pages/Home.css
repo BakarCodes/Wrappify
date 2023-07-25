@@ -9,6 +9,41 @@ body {
 
   }
 
+  /* Mobile-friendly styles */
+@media (max-width: 768px) {
+    .section {
+      margin-bottom: 2%; /* Reduce the margin for better spacing on mobile */
+    }
+  
+    .outline {
+      width: 90%; /* Reduce the width to fit better on smaller screens */
+      grid-template-columns: 1fr; /* Change to one column for better mobile layout */
+    }
+  
+    .image {
+      justify-content: center; /* Center the image on mobile */
+    }
+  
+    .albumImg {
+      max-width: 100%; /* Adjust the width to fit the screen */
+      max-height: auto; /* Allow the height to adjust automatically */
+    }
+  
+    /* Adjust font sizes for better readability on mobile */
+    .ranking {
+      font-size: 7vw;
+    }
+  
+    .trackName {
+      font-size: 4vw;
+    }
+  
+    .artistName {
+      font-size: 3vw;
+    }
+  }
+  
+
 .image-grid{
 
 }
