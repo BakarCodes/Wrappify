@@ -52,7 +52,7 @@ function Home({setToken}) {
     }
 
     const getTopArtists = async () => {
-      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=5`, {
+      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=20`, {
           headers: {
               Authorization: `Bearer ${token}`
           }
@@ -64,7 +64,7 @@ function Home({setToken}) {
 
 
     const getTopTracks = async () => {
-      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=5`, {
+      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=20`, {
           headers: {
               Authorization: `Bearer ${token}`
           }
@@ -138,23 +138,32 @@ function Home({setToken}) {
 
   const renderTracks = () => {
     return tracks.map((track, index) => (
-        <section ref={[index]} className={`section${index + 1}`}>
-        <div className='outline' key={track.id}>
-            <div className='info'>
+      <section ref={[index]} className={`section${index + 1}`} key={track.id}>
+        <div className='outline'>
+          <div className='info'>
+
             <div className='ranking'>{`0${index + 1}`}</div>
-            <div className='trackName'>{track.name}</div>
-            <div className='artistName'>{track.artists.map(artist => artist.name).join(" ft. ")}</div>
-            <div className='links'>
-                <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='github'>Play Track</a>
+            <div className='firstRow'>
+                <div className='description'>
+                    <div className='trackName'>{track.name}</div>
+                    <div className='artistName'>{track.artists.map(artist => artist.name).join(" ft. ")}</div>
+                </div>
             </div>
-            </div>
+          </div>
+          <div className='image-container'>
             <div className='image'>
-            {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt=""/> : <div>No Image</div>}
+                {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt="" /> : <div>No Image</div>}
+                    <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='spotify-button'>PLAY TRACK
+                                <img src={logo} alt="Spotify Logo" className="spotify-logo" />
+                    </a>
             </div>
+          </div>
         </div>
-        </section>
+      </section>
     ));
   };
+  
+  
   
   
 
@@ -170,7 +179,9 @@ const renderArtists = () => {
                 {artist.name}
               </div>
               <div className='links'>
-                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='view'>View Artist</a>
+                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
+                    <img src={logo} alt="Spotify Logo" className="spotify-logo" /> View Artist
+                </a>
               </div>
               </div>
               <div className='image'>
@@ -197,38 +208,38 @@ const renderGenres = () => {
 
 return (
     <div>
-      <Navbar />
-      <section className="three">
-        <div className='image-grid'>
-          {token ?
-            <>
-              <div className='menu'>
-                <div>
-                  <select onChange={(e) => setTimeRange(e.target.value)}>
-                    <option value="short_term">Monthly</option>
-                    <option value="medium_term">6 Months</option>
-                    <option value="long_term">Yearly</option>
-                  </select>
-                </div>
-                <div className="Selections">
-                  <button onTouchEnd={getTopArtists}>Get Top Artists</button>
-                  <button onTouchEnd={getTopTracks}>Get Top Tracks</button>
-                  <button onTouchEnd={getTopGenres}>Get Top Genres</button>
-                  {tracks.length > 0 && <button onTouchEnd={createPlaylist}>Create Playlist</button>}
-                  {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
-                  <button onTouchEnd={logout}>Logout</button>
-                </div>
-              </div>
-            </>
-            : <h2>Please login</h2>
-          }
-          {renderArtists()}
-          {renderTracks()}
-          {renderGenres()}
-        </div>
-      </section>
+        <Navbar/>
+        <section class="three">
+            <div className='image-grid'>
+                {token ? 
+                    <>
+                    <div className='menu'>
+                        <div>
+                            <select onChange={(e) => setTimeRange(e.target.value)}>
+                                <option value="short_term">Monthly</option>
+                                <option value="medium_term">6 Months</option>
+                                <option value="long_term">Yearly</option>
+                            </select>
+                        </div>
+                        <div className="Selections">
+                            <button className="topArtistButton" onClick={getTopArtists}>Get Top Artists</button>
+                            <button className="topTrackButton"onClick={getTopTracks}>Get Top Tracks</button>
+                            <button className="topGenreButton" onClick={getTopGenres}>Get Top Genres</button>
+                            {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
+                            {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
+                            <button onClick={logout}>Logout</button>
+                        </div>
+                    </div>
+                    </>
+                    : <h2>Please login</h2>
+                }
+                {renderArtists()}
+                {renderTracks()}
+                {renderGenres()}
+            </div>
+        </section>
     </div>
-  );
+);
 
 }
 

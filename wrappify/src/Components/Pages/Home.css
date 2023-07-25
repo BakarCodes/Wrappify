@@ -5,9 +5,13 @@ body {
     background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
     background-position: center;
     font-family: "Poppins", sans-serif;
-    text-align: right; /* Align all text to the right */
-
+    /* Align all text to the right */
+    text-align: left;
   }
+
+.section{
+    border: 2px solid white;
+}
 
   /* Mobile-friendly styles */
 @media (max-width: 768px) {
@@ -35,7 +39,8 @@ body {
     }
   
     .trackName {
-      font-size: 4vw;
+
+        font-size: 4vw;
     }
   
     .artistName {
@@ -49,58 +54,91 @@ body {
 }
 
 .section{
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 .outline {
+    text-align: right;
     margin-left: auto; /* Push the sections to the right */
-    width: 70%;
+    width: 80%;
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
-    gap: 20px; /* Spacing between columns */
+    gap: 0px; /* Spacing between columns */
+    margin-top: 5%;
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+
+.firstRow{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+
 }
 
 .ranking {
     color: #1DB954;
-    font-size: 10vw;
-
+    font-size: 12vw;
+    width: 350px;
 }
 
+.description{
+    font-size: 3vw;
+    padding: 30px;
+
+}
 .trackName {
     font-size: 3vw;
-
 }
 
 .artistName {
+    color: grey;
     font-size: 2vw;
 
 }
 
-.links {
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align image to the right */
+    align-items: center;
+    max-width: 50%;
+
 }
 
-.image {
-  display: flex;
-  justify-content: flex-start; /* Align image to the right */
-  align-items: center;
+.image{
 
 }
 
 .albumImg {
 
-    border-radius: 10px;
-    max-width: 90%; /* Adjust the width of the image as needed */
-    max-height: 90%; /* Adjust the height of the image as needed */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-width: 100%; /* Adjust the width of the image as needed */
+    max-height: 100%; /* Adjust the height of the image as needed */
   /* Add more styling for the image if required */
 }
 
+.topArtistButton{
+    background-color: #1DB954;
+}
+
+.topTrackButton{
+    background-color: #1DB954;
+}
+
+.topGenreButton{
+    background-color: #1DB954;
+}
   /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -122,16 +160,26 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #19647e;
   }
+
+  .links{
+    height: 20px;
+    width: 160px;
+    text-align: left;
+  }
   
   .spotify-button {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      padding: 5px 10px;
-      color: white;
-      background-color: #1DB954;
-      border-radius: 30px;
-      transition: background-color 0.2s ease;
+    text-align: center;
+    font-size: 3vh;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    background-color: #1DB954;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: background-color 0.2s ease;
   }
   
   .spotify-button:hover {
@@ -139,9 +187,9 @@ body {
   }
   
   .spotify-logo {
-      width: 30px;
-      height: 30px;
-      margin-right: 5px;
+      width: 40px;
+      height: 40px;
+      margin-right: 0px;
   }
 
 
