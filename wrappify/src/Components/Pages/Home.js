@@ -52,7 +52,7 @@ function Home({setToken}) {
     }
 
     const getTopArtists = async () => {
-      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=20`, {
+      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=5`, {
           headers: {
               Authorization: `Bearer ${token}`
           }
@@ -64,7 +64,7 @@ function Home({setToken}) {
 
 
     const getTopTracks = async () => {
-      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=20`, {
+      const {data} = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=5`, {
           headers: {
               Authorization: `Bearer ${token}`
           }
@@ -136,40 +136,49 @@ function Home({setToken}) {
   }
   
 
-const renderTracks = () => {
-    return tracks.map(track => (
-        <div className='projectOne' key={track.id}>
-            <div className='projectTitle'>Track</div>
-            <div className='projectDesc'>{track.name} - {track.artists.map(artist => artist.name).join(", ")}</div>
+  const renderTracks = () => {
+    return tracks.map((track, index) => (
+        <section ref={[index]} className={`section${index + 1}`}>
+        <div className='outline' key={track.id}>
+            <div className='info'>
+            <div className='ranking'>{`0${index + 1}`}</div>
+            <div className='trackName'>{track.name}</div>
+            <div className='artistName'>{track.artists.map(artist => artist.name).join(" ft. ")}</div>
             <div className='links'>
                 <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='github'>Play Track</a>
             </div>
+            </div>
             <div className='image'>
-                {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt=""/> : <div>No Image</div>}
+            {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt=""/> : <div>No Image</div>}
             </div>
         </div>
-    ))
-}
+        </section>
+    ));
+  };
+  
+  
 
 const renderArtists = () => {
     return artists.map((artist, index) => (
-        <section ref={[index]} className="sections">
-          <div className='image-grid'>
-            <div className='projectOne'>
-              <div className='projectTitle'>
+        <section ref={[index]} className={`section${index + 1}`}>
+            <div className='outline'>
+            <div className='info'>
+              <div className='ranking'>
                 {`0${index + 1}`}
               </div>
-              <div className='projectDesc'>
+              <div className='artistName'>
                 {artist.name}
               </div>
               <div className='links'>
-                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='github'>View Artist</a>
+                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='view'>View Artist</a>
+              </div>
               </div>
               <div className='image'>
-                  {artist.images.length ? <img className='artistImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+                  {artist.images.length ? <img className='albumImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
               </div>
+
             </div>
-          </div>
+
         </section>
     ))
 }
@@ -193,11 +202,14 @@ return (
             <div className='image-grid'>
                 {token ? 
                     <>
-                        <select onChange={(e) => setTimeRange(e.target.value)}>
-                            <option value="short_term">Monthly</option>
-                            <option value="medium_term">6 Months</option>
-                            <option value="long_term">Yearly</option>
-                        </select>
+                    <div className='menu'>
+                        <div>
+                            <select onChange={(e) => setTimeRange(e.target.value)}>
+                                <option value="short_term">Monthly</option>
+                                <option value="medium_term">6 Months</option>
+                                <option value="long_term">Yearly</option>
+                            </select>
+                        </div>
                         <div className="Selections">
                             <button onClick={getTopArtists}>Get Top Artists</button>
                             <button onClick={getTopTracks}>Get Top Tracks</button>
@@ -206,6 +218,7 @@ return (
                             {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
                             <button onClick={logout}>Logout</button>
                         </div>
+                    </div>
                     </>
                     : <h2>Please login</h2>
                 }
