@@ -1,141 +1,115 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-:root {
-  --container-height: 498px;
-}
-
-section {
-  position: relative;
-  padding-right: 50px;
-}
-
-.artist-list-item, .track-list-item { 
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    max-height: var(--container-height);
-    scroll-timeline: --listTimeline block;
-    height: 120px;
-    background-color: white;
-    width: 40vw;   /* Set width as 70% of viewport width */
-    margin: 0 auto; /* Center items on the page */
-}
-
-
-.artistImg, .albumImg {
-    border: 2px solid #37392e;
-    border-radius: 0px;
-    height: 100px;  /* Adjust as needed */
-    width: 90px;   /* Adjust as needed */
-    object-fit: cover;
-    box-shadow: 2px 2px;
-}
-
-.animation {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 100%;
-  background-size: 50px 40px;
-  /* background image on bottom of css for readability */
-}
-
-@supports (animation-timeline: scroll()) {
-  .animation {
-    animation: moveBackground alternate linear;
-    animation-timeline: --listTimeline;
-  }
-}
-
-@keyframes moveBackground {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 calc(var(--container-height) / -1);
-  }
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-li {
-    border: 2px solid #37392e;
-    padding: 20px;
-    scroll-snap-align: start;
-    box-shadow: 2px 2px;
-    margin-bottom: 10px;
-}
-
-
-/* Demo styles */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  color: #37392e;
-  background: #ffffff;
-  font-family: "Poppins", sans-serif;
-}
+    color: #ffffff;
+    background: #212121;
+    font-family: "Poppins", sans-serif;
+  }
 
-.animation {
-  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='Isolation_Mode' data-name='Isolation Mode' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 633.33 680'%3E%3Cpath fill='%2328AFB0' d='M383.33,500c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50c-27.61,0-50-22.39-50-50,0-25.99,19.83-47.35,45.18-49.77l4.82-.23H383.33Zm200-166.67c27.61,0,50,22.39,50,50s-22.39,50-50,50H50c-27.61,0-50-22.39-50-50s22.39-50,50-50H583.33Zm-200-166.67c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50c-27.61,0-50-22.39-50-50,0-25.99,19.83-47.35,45.18-49.77l4.82-.23H383.33ZM583.33,0c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50C22.39,100,0,77.61,0,50,0,24.01,19.83,2.65,45.18,.23l4.82-.23H583.33Z'/%3E%3C/svg%3E");
-}
-
-/* width */
+  /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-}
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #212121;
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1DB954;
+    border-radius: 0px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #19647e;
+  }
+  
+  
+  .spotify-button {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 5px 10px;
+      color: white;
+      background-color: #1DB954;
+      border-radius: 30px;
+      transition: background-color 0.2s ease;
+  }
+  
+  .spotify-button:hover {
+      background-color: #1ED760;
+  }
+  
+  .spotify-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #3b3b3b;
-  border-radius: 10px;
-}
+  
+.image-grid {
+    height: 100%;
+    display: grid;
+    gap: 0px; /* Add some gap between the image and text */
+  }
+  
+  .projectOne {
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #19647e;
-}
-
-
-.spotify-button {
+    width: 40%;
+    font-family: "Poppins", sans-serif;
     display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: #1DB954;
-    border-radius: 30px;
-    transition: background-color 0.2s ease;
+    flex-direction: column;
+  }
+  
+
+
+
+
+.projectTitle{
+    font-size: 10vw;
+    font-family: "Poppins", sans-serif;
+    color: #1DB954;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
 }
 
-.spotify-button:hover {
-    background-color: #1ED760;
+.projectDesc{
+    font-size: 2vw;
+    font-family: 'helvetica';
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
 }
 
-.spotify-logo {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
+.image{
+    height: 32%;
 }
+
+.technologies{
+    font-family: 'futura';
+    color: rgb(231, 57, 50);
+    padding: 10px;
+    gap: 20px;
+    display: flex;
+}
+
+.links{
+    display: flex;
+    padding: 10px;
+    
+}
+
+.github{
+
+
+}
+
+

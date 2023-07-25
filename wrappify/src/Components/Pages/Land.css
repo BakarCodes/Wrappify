@@ -1,4 +1,8 @@
-.App-header {
+.App {
+
+}
+
+.mainPage{
     display: flex;
     flex-direction: column;
     justify-content: center;

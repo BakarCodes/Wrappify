@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css'
 import { useNavigate } from 'react-router-dom'; // import useNavigate from react-router-dom
-import Sidebar from '../sideBar';
+import Navbar from '../Navbar';
 import logo from '../Images/Spotify-logo.png';
 
 
@@ -135,60 +135,62 @@ function Home({setToken}) {
       }
   }
   
-  const renderTracks = () => {
-    return (
-        <ul className="track-list">
-            {tracks.map(track => (
-                <li className="track-list-item" key={track.id}>
-                    {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt=""/> : <div>No Image</div>}
-                    <div>{track.name} - {track.artists.map(artist => artist.name).join(", ")}</div>
-                    <div>
-                        <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className="spotify-button">
-                            <img src={logo} alt="Spotify Logo" className="spotify-logo"/>
-                            <span>Play Track</span>
-                        </a>
-                    </div>
-                </li>
-            ))}
-        </ul>
-    )
+
+const renderTracks = () => {
+    return tracks.map(track => (
+        <div className='projectOne' key={track.id}>
+            <div className='projectTitle'>Track</div>
+            <div className='projectDesc'>{track.name} - {track.artists.map(artist => artist.name).join(", ")}</div>
+            <div className='links'>
+                <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className='github'>Play Track</a>
+            </div>
+            <div className='image'>
+                {track.album.images.length ? <img className='albumImg' src={track.album.images[0].url} alt=""/> : <div>No Image</div>}
+            </div>
+        </div>
+    ))
 }
 
 const renderArtists = () => {
-    return (
-        <ul className="artist-list">
-            {artists.map(artist => (
-                <li className="artist-list-item" key={artist.id}>
-                    {artist.images.length ? <img className="artistImg" src={artist.images[0].url} alt=""/> : <div>No Image</div>}
-                    <div>{artist.name}</div>
-                    <div>
-                        <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className="spotify-button">
-                            <img src={logo} alt="Spotify Logo" className="spotify-logo"/>
-                            <span>View Artist</span>
-                        </a>
-                    </div>
-                </li>
-            ))}
-        </ul>
-    )
+    return artists.map((artist, index) => (
+        <section ref={[index]} className="sections">
+          <div className='image-grid'>
+            <div className='projectOne'>
+              <div className='projectTitle'>
+                {`0${index + 1}`}
+              </div>
+              <div className='projectDesc'>
+                {artist.name}
+              </div>
+              <div className='links'>
+                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='github'>View Artist</a>
+              </div>
+              <div className='image'>
+                  {artist.images.length ? <img className='artistImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+              </div>
+            </div>
+          </div>
+        </section>
+    ))
 }
 
-    const renderGenres = () => {
-        return (
-            <div className="top-genres">
-                {genres.map((genre, index) => (
-                    <div key={index}>
-                        {genre}
-                    </div>
-                ))}
+const renderGenres = () => {
+    return genres.map((genre, index) => (
+        <div className='projectOne' key={index}>
+            <div className='projectTitle'>Genre</div>
+            <div className='projectDesc'>{genre}</div>
+            <div className='image'>
+                <img className='genreImg' src={logo} alt=""/> {/* You can replace `logo` with a suitable image */}
             </div>
-        )
-    }
-    return (
-        <div>
-            <div className='homePage'>
-                <h1 className="title">WRAPPIFY</h1>
+        </div>
+    ))
+}
 
+return (
+    <div>
+        <Navbar/>
+        <section class="three">
+            <div className='image-grid'>
                 {token ? 
                     <>
                         <select onChange={(e) => setTimeRange(e.target.value)}>
@@ -196,22 +198,25 @@ const renderArtists = () => {
                             <option value="medium_term">6 Months</option>
                             <option value="long_term">Yearly</option>
                         </select>
-                        <button onClick={getTopArtists}>Get Top Artists</button>
-                        <button onClick={getTopTracks}>Get Top Tracks</button>
-                        <button onClick={getTopGenres}>Get Top Genres</button>
-                        {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
-                        {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
-                        <button onClick={logout}>Logout</button> {/* logout button */}
+                        <div className="Selections">
+                            <button onClick={getTopArtists}>Get Top Artists</button>
+                            <button onClick={getTopTracks}>Get Top Tracks</button>
+                            <button onClick={getTopGenres}>Get Top Genres</button>
+                            {tracks.length > 0 && <button onClick={createPlaylist}>Create Playlist</button>}
+                            {playlistUrl && <a href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
+                            <button onClick={logout}>Logout</button>
+                        </div>
                     </>
                     : <h2>Please login</h2>
                 }
-
                 {renderArtists()}
                 {renderTracks()}
                 {renderGenres()}
             </div>
-        </div>
-    );
+        </section>
+    </div>
+);
+
 }
 
 export default Home;
