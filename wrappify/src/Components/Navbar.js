@@ -61,13 +61,13 @@ function Navbar({ onLogout, onTopArtists, onTopTracks, onTopGenres }) {
             <div className="navbar-buttons">
                 {button && (
                     <>
-                    <Link className="navbar__button" onClick={handleTopArtists}>
+                    <Link className="navbar-buttons" onClick={handleTopArtists}>
                         Top Artists
                     </Link>
-                    <Link className="navbar__button" onClick={handleTopTracks}>
+                    <Link className="navbar-buttons" onClick={handleTopTracks}>
                         Top Tracks
                     </Link>
-                    <Link className="navbar__button" onClick={handleTopGenres}>
+                    <Link className="navbar-buttons" onClick={handleTopGenres}>
                         Top Genres
                     </Link>
                     </>

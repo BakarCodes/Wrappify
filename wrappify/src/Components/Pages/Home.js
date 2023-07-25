@@ -171,7 +171,7 @@ function Home({setToken}) {
 const renderArtists = () => {
     return artists.map((artist, index) => (
         <section ref={[index]} className={`section${index + 1}`}>
-            <div className='outline'>
+            <div className='outlineArtist'>
             <div className='info'>
               <div className='ranking'>
                 {`${index + 1}`}

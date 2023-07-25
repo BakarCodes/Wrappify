@@ -38,6 +38,16 @@ body {
     grid-template-columns: 5fr 1fr; /* Two equal-width columns */
 }
 
+.outlineArtist {
+    border: 2px solid white;
+    margin-top: 3%;
+
+    text-align: right;
+    width: 955px;
+    display: grid;
+    grid-template-columns: 5fr 1fr; /* Two equal-width columns */
+}
+
 .section1{
     margin-top: -3%;
 }
@@ -109,6 +119,15 @@ body {
     border-left: 2px solid white;
 }
 
+.albumImg {
+    
+    width: 100%;
+
+ /* Adjust the height of the image as needed */
+  /* Add more styling for the image if required */
+}
+
+
 .artistImage{
     display: flex;
     flex-direction: column;
@@ -118,23 +137,10 @@ body {
 }
 
 .artistImg{
-    display: flex;
-    flex-direction: column;
-    align-items: right;
-    width: 100%;
-    min-height: 200px;
-    max-height: 200px;
-
-    
+    height: 130px;
+    width: 162px;
 }
 
-.albumImg {
-    
-    width: 100%;
-
- /* Adjust the height of the image as needed */
-  /* Add more styling for the image if required */
-}
 
 .selections{
     width: 100%;

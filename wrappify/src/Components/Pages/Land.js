@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Navbar'
 import './Land.css'
 
 function Land({ setToken }) {
@@ -34,9 +35,11 @@ function Land({ setToken }) {
 
     return (
         <div className="App">
+
             <header className="App-header">
                 <h1 className="landTitle">WRAPPIFY</h1>
                 {!window.localStorage.getItem("token") ?
+
                     <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
                     : <button onClick={logout}>Logout</button>}
             </header>
