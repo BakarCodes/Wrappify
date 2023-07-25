@@ -222,7 +222,7 @@ return (
                         <div>
 
                         </div>
-                        <select onChange={(e) => setTimeRange(e.target.value)}>
+                        <select className='duration' onChange={(e) => setTimeRange(e.target.value)}>
                             <option value="short_term">Monthly</option>
                             <option value="medium_term">6 Months</option>
                             <option value="long_term">Yearly</option>
