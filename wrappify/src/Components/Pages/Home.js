@@ -179,13 +179,14 @@ const renderArtists = () => {
                 {artist.name}
               </div>
               <div className='links'>
-                <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
-                    <img src={logo} alt="Spotify Logo" className="spotify-logo" /> View Artist
-                </a>
+
               </div>
               </div>
               <div className='image'>
                   {artist.images.length ? <img className='albumImg' src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+                  <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className='spotify-button'>
+                    <img src={logo} alt="Spotify Logo" className="spotify-logo" /> View Artist
+                </a>
               </div>
 
             </div>

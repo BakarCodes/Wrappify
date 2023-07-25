@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
 
 body {
     color: #ffffff;
@@ -9,13 +11,7 @@ body {
     text-align: left;
   }
 
-.section{
-
-}
-
-
 .table{
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +31,7 @@ body {
 .outline {
     border: 2px solid white;
     box-shadow: 4px 4px rgb(10, 122, 0);
-    margin-bottom: 3%;
+    margin-top: 3%;
     text-align: right;
     width: 100%;
     display: grid;
@@ -78,6 +74,8 @@ body {
 }
 
 .artistName {
+    font-family: 'Roboto Slab', serif;
+
     color: grey;
     font-size: 2vw;
 

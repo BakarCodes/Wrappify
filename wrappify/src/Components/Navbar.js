@@ -36,28 +36,6 @@ function Navbar() {
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
                 WRAPPIFY
             </Link>
-            <div className='menu-icon' onClick={handleClick}>
-                <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
-            </div>
-            <ul2 className={click ? 'nav-menu active' : 'nav-menu'}>
-                <li2 className='ProjBut'>
-                    <Link to = "/Projects" className='nav-links' onClick={closeMobileMenu}>
-                        TopTracks
-                    </Link>
-                </li2>
-                <li2 className='about'>
-                    <Link to = "/Projects" className='nav-links' onClick={closeMobileMenu}>
-                        TopArtists
-                    </Link>
-                </li2>
-                <li2 className='Projects'>
-                    <Link to = "/Projects" className='nav-links' onClick={closeMobileMenu}>
-                        TopGenres
-                    </Link>
-                </li2>
-                
-            </ul2>
-
         </div>
     </nav>
   )
