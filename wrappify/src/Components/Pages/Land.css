@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
+
+body {
+
+  }
+
 .App {
 
 }
@@ -7,12 +16,158 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
 }
 
 .landTitle {
     text-align: center;
 
-    margin-bottom: 20px;
+
 }
+
+
+section{
+    height:92vh;
+    display: flex;
+    scroll-snap-align: start;
+  }
+  
+  .one{
+    display:flex; 
+    flex-direction:row;
+    align-items: center;
+    color: #858585;
+    background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
+    background-position: center;
+
+    /* Align all text to the right */
+    text-align: center;
+  }
+
+  .landGridOne {
+    height: 50vh;
+    display: flex;
+  }
+  
+  .personal {
+    flex: 6; /* Take 30% of the available space */
+    padding: 20px; /* Optional: Add padding for better spacing */
+    font-size: 2.4vh;
+  }
+
+  .loginButton{
+    margin-top: 2%;
+    font-family: "Poppins", sans-serif;
+    background-color: #1DB954;
+    border-radius: 12px;
+    border: none;
+    color: #000000;
+    font-size: 1.2vw;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    height: 6vh;
+  }
+  
+  .loginButton:hover{
+    background-color: #6dffa0;
+    text-decoration: none;
+    transition: color 0.6s ease-in-out;
+    cursor: pointer;
+  }
+  .buttons{
+    padding: 2%;
+    display: flex;
+    gap: 20px
+  }
+  .musicSVG {
+
+    flex: 4; /* Take 70% of the available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .musicSVG img {
+    max-width: 100%; /* Set the maximum width for the music SVG */
+    max-height: 100%; /* Set the maximum height for the music SVG */
+  }
+
+  .buttons{
+
+  }
+  
+  
+  
+
+  .AboutMe{
+    color: #ffffff;
+    text-align: center;
+    font-size: 7vh;
+  }
+
+  
+  .Home{
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+  
+
+  .grid-col-span2 {
+    grid-column: span 1;
+  }
+  
+  .testimonial-grid{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: min(70%,170vw);
+    height: min(80%,92vh);
+    margin-inline: auto;
+
+  
+  }
+  
+  .testimonial{
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 1px;
+    padding: 20px; /* Adjust padding as needed */
+    overflow-wrap: break-word;
+    
+  }
+  
+  article {
+    transition: transform 0.2s ease-in;
+  }
+  
+  .personal{
+
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  }
+  
+  .testimonial{
+    margin: -5%;
+    font-family: "Poppins", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 1.1vw;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+  
+  }
+  
+  .testimonial:first-child{
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start: 1;
+    grid-row-end: 10;
+  }
+  
+  
+  .testimonial:nth-child(2){
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start: 4;
+    grid-row-end: 10;
+  }

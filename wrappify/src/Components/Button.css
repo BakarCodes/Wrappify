@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 :root{
     --primary:#1DB954;
 }
 
 .btn{
-    font-family: 'Roboto Slab', serif;
+    font-family: "Poppins", sans-serif;
     font-weight: 500;
     padding: 10px 10px;
-    border-radius: 2px;
+    border-radius: 10px;
     outline: none;
     border: 1px rgba(0, 0, 0, 0.322);
     cursor: pointer;
+    max-height: 6vh;
 }
 
 .btn--primary{
