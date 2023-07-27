@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css';
 import Navbar from '../Navbar';
@@ -15,6 +15,19 @@ function Home({ setToken }) {
 
   console.log('Home page rendered');
 
+  useEffect(() => {
+    const hash = window.location.hash;
+
+    if (hash) {
+      const token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1];
+
+      if (token) {
+        window.location.hash = '';
+        window.localStorage.setItem('token', token);
+        setToken(token);
+      }
+    }
+  }, [setToken]);
 
   const token = window.localStorage.getItem('token');
   console.log('Token:', token);
@@ -45,7 +58,7 @@ function Home({ setToken }) {
     return data.id;
   };
 
-  const getTopArtists = useCallback(async () => {
+  const getTopArtists = async () => {
     try {
       const { data } = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=20`, {
         headers: {
@@ -59,9 +72,10 @@ function Home({ setToken }) {
       console.error(error);
       // Handle the 401 error here, e.g., redirect to the login page or refresh the access token.
     }
-  }, [token, timeRange]);
+  };
 
-  const getTopTracks = useCallback(async () => {
+
+  const getTopTracks = async () => {
     try {
       const { data } = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=20`, {
         headers: {
@@ -75,9 +89,9 @@ function Home({ setToken }) {
       console.error(error);
       // Handle the 401 error here, e.g., redirect to the login page or refresh the access token.
     }
-  }, [token, timeRange]);
+  };
 
-  const getTopGenres = useCallback(async () => {
+  const getTopGenres = async () => {
     const { data } = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=50`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -104,25 +118,7 @@ function Home({ setToken }) {
     let topGenres = sortedGenres.slice(0, 20);
 
     setGenres(topGenres);
-  }, [token, timeRange]);
-
-  useEffect(() => {
-    const hash = window.location.hash;
-  
-    if (hash) {
-      const token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1];
-  
-      if (token) {
-        // Remove the hash from the URL
-        window.history.replaceState(null, null, window.location.pathname);
-  
-        // Store the token in local storage
-        window.localStorage.setItem('token', token);
-        setToken(token);
-      }
-    }
-    getTopTracks();
-  }, [setToken, getTopTracks]);
+  };
 
   useEffect(() => {
     // Fetch the data based on the selected time range when the component mounts and when the time range changes
@@ -133,7 +129,7 @@ function Home({ setToken }) {
     } else if (selectedTable === 'genres') {
       getTopGenres();
     }
-  }, [timeRange, selectedTable, getTopArtists, getTopTracks, getTopGenres]);
+  }, [timeRange, selectedTable]);
 
   const handleTopArtists = async () => {
     setSelectedTable('artists');
