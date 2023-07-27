@@ -40,6 +40,15 @@ function Home({ setToken }) {
   const [timeRange, setTimeRange] = useState('short_term');
   const [selectedTable, setSelectedTable] = useState('tracks');
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is logged in by checking the token from localStorage
+    const token = window.localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
+
   const getUserId = async () => {
     const { data } = await axios.get('https://api.spotify.com/v1/me', {
       headers: {
@@ -50,25 +59,36 @@ function Home({ setToken }) {
   };
 
   const getTopArtists = async () => {
-    const { data } = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=20`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      const { data } = await axios.get(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=20`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    setTracks([]); // Clear tracks state
-    setArtists(data.items);
+      setTracks([]); // Clear tracks state
+      setArtists(data.items);
+    } catch (error) {
+      console.error(error);
+      // Handle the 401 error here, e.g., redirect to the login page or refresh the access token.
+    }
   };
 
-  const getTopTracks = async () => {
-    const { data } = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=20`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
 
-    setArtists([]); // Clear artists state
-    setTracks(data.items);
+  const getTopTracks = async () => {
+    try {
+      const { data } = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=20`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setArtists([]); // Clear artists state
+      setTracks(data.items);
+    } catch (error) {
+      console.error(error);
+      // Handle the 401 error here, e.g., redirect to the login page or refresh the access token.
+    }
   };
 
   const getTopGenres = async () => {
@@ -279,6 +299,7 @@ function Home({ setToken }) {
         onTopTracks={handleTopTracks}
         onTopGenres={handleTopGenres}
         onLogout={logout}
+        isLoggedIn={isLoggedIn} // Pass the isLoggedIn state to the Navbar
       />
       <section className="three">
         <div className="image-grid">

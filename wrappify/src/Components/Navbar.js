@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres }) {
+function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres, isLoggedIn }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if the user is logged in by checking the token from localStorage
-    const token = window.localStorage.getItem("token");
-    setLoggedIn(!!token);
-  }, []);
+    // Set the login status based on the 'isLoggedIn' prop passed from the parent component (App.js)
+    setLoggedIn(isLoggedIn);
+  }, [isLoggedIn]);
 
   const handleLoginClick = () => {
     onLogin(); // Call the onLogin function from props to handle login
@@ -29,25 +28,25 @@ function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres }) {
         <div className="navbar-buttons">
           {loggedIn ? (
             <>
-            <div className="navbar-menu">
+              <div className="navbar-menu">
                 <ul className="nav-menu">
-                    <li className="nav-item">
-                    <Link className="nav-links" onClick={onTopArtists}>
-                        Top Artists
+                  <li className="nav-item">
+                    <Link className="nav-links" to="/home" onClick={onTopArtists}>
+                      Top Artists
                     </Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-links" onClick={onTopTracks}>
-                        Top Tracks
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-links" to="/home" onClick={onTopTracks}>
+                      Top Tracks
                     </Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-links" onClick={onTopGenres}>
-                        Top Genres
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-links" to="/home" onClick={onTopGenres}>
+                      Top Genres
                     </Link>
-                    </li>
+                  </li>
                 </ul>
-            </div>
+              </div>
               <Button className="navbar__logout" onClick={handleLogoutClick}>
                 Logout
               </Button>

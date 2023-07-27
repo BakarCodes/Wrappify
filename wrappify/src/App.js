@@ -4,18 +4,29 @@ import Land from './Components/Pages/Land';
 import Home from './Components/Pages/Home';
 
 function App() {
-    const [token, setToken] = useState(window.localStorage.getItem("token") || "");
+  const [token, setToken] = useState(window.localStorage.getItem('token') || '');
 
-    return (
-        <Router>
-              <Routes>
-                  <Route path="/" element={<Land token={token} setToken={setToken} />} />
-                  <Route path="/home" element={<Home token={token} setToken={setToken} />} />
-              </Routes>
-        </Router>
-    );
+  // Define isLoggedIn state to pass to Home and Navbar components
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
+
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<Land token={token} setToken={setToken} isLoggedIn={isLoggedIn} />}
+        />
+        <Route
+          path="/home"
+          element={<Home token={token} setToken={setToken} isLoggedIn={isLoggedIn} />}
+        />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
+
 
 
