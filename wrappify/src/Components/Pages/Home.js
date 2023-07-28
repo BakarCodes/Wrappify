@@ -4,6 +4,7 @@ import './Home.css';
 import Navbar from '../Navbar';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Spotify-logo.png';
+import music from '../Images/Music.svg';
 
 function Home({ setToken }) {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ function Home({ setToken }) {
   console.log('Token:', token);
   console.log('Home page rendered');
   console.log('Token:', token);
+
+  const [showWelcome, setShowWelcome] = useState(true);
   const [artists, setArtists] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -133,16 +136,19 @@ function Home({ setToken }) {
 
   const handleTopArtists = async () => {
     setSelectedTable('artists');
+    setShowWelcome(false);
     await getTopArtists();
   };
 
   const handleTopTracks = async () => {
     setSelectedTable('tracks');
+    setShowWelcome(false);
     await getTopTracks();
   };
 
   const handleTopGenres = async () => {
     setSelectedTable('genres');
+    setShowWelcome(false);
     await getTopGenres();
   };
 
@@ -317,29 +323,59 @@ function Home({ setToken }) {
 
   return (
     <div>
-    <Navbar
-      onTopArtists={handleTopArtists}
-      onTopTracks={handleTopTracks}
-      onTopGenres={handleTopGenres}
-      onLogout={logout}
-      isLoggedIn={isLoggedIn}
-    />
-    <section className="three">
-      <div className="image-grid">
-        {token ? (
-          <>
-            {/* Render the appropriate table based on the selected table */}
-            {selectedTable === 'artists' && renderArtists()}
-            {selectedTable === 'tracks' && renderTracks()}
-            {selectedTable === 'genres' && renderGenres()}
-          </>
-        ) : (
-          <h2>Please login</h2>
-        )}
-      </div>
-    </section>
-  </div>
-);
+      <Navbar 
+        onTopArtists={handleTopArtists}
+        onTopTracks={handleTopTracks}
+        onTopGenres={handleTopGenres}
+        onLogout={logout}
+        isLoggedIn={isLoggedIn}
+       />
+
+      <section className="three">
+        <div className="image-grid">
+          {token ? (
+            <>
+              {showWelcome ? (
+                <>
+                <section class="one">
+                  <main className='testimonial-grid'>
+                    <article className='testimonial'>
+                    <h2 className='AboutMe'>Who was your guilty pleasure?</h2>
+                    <div className='landGridOne'>
+                        <div className='personal'>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <div className="home-buttons">
+                              <button className='loginButton' onClick={handleTopTracks}>Wrap Up</button>
+                            </div>
+                        </div>
+                  
+                        <div className='musicSVG'>
+                            <img src={music} alt="music" />
+                        </div>
+                    </div>
+                    </article>
+                    
+                  </main>
+                </section>
+
+                </>
+              ) : (
+                <>
+                    {/* Render the appropriate table based on the selected table */}
+                    {selectedTable === 'artists' && renderArtists()}
+                    {selectedTable === 'tracks' && renderTracks()}
+                    {selectedTable === 'genres' && renderGenres()}
+
+                </>
+              )}
+            </>
+          ) : (
+            <h2>Please login</h2>
+          )}
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default Home;
