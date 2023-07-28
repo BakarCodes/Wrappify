@@ -4,32 +4,32 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
 
 body {
-  color: #858585;
-  background-image: url("../Images/background.jpg");
-  background-position: center;
-  font-family: "Poppins", sans-serif;
-}
-
-.center-page {
+    color: #858585;
+    background-image: url("../Images/background.jpg");
+    background-position: center;
+  }
+  
+  .center-page {
+    border: 2px solid white;
+    width: 100%;
+    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
   }
 
-.menu {
-
+  .renderedPage{
+    border: 2px solid green;
+    min-width: 50vw;
+    max-width: 50vw;
+  }
+  
+  .menu {
     justify-content: space-between; /* Align items evenly in the row */
-}
-/* ... (existing CSS) ... */
-
-/* Center all tables horizontally */
-
-/* ... (existing CSS) ... */
-
-/* Center all tables horizontally */
-.table-container {
-    border: 2px solid white;
-    background-color: black; /* Set the background color to black */
+  }
+  
+  .table-container {/* Set the background color to black */
     width: 80%;
     height: 300px;
     margin: 20px auto;
@@ -47,8 +47,8 @@ body {
   .columnTitle th {
     background-color: #1DB954;
     color: rgb(0, 0, 0);
-    padding: 10px;
-    font-family: 'Comfortaa', cursive; /* Use the 'Comfortaa' font for the table headers */
+    padding: 20px;
+    font-weight: bold; /* Add bold font weight */
   }
   
   /* Style the table body cells */
@@ -73,7 +73,8 @@ body {
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    max-width: 200px;
+    max-width: 150px;
+    border: 2px solid black;
   }
   
   /* Style the Spotify link button */
@@ -86,14 +87,17 @@ body {
     text-align: center;
     font-size: 1vw;
     display: flex;
+    width: 100%;
+    max-width: 150px;
     align-items: center;
     color: rgb(0, 0, 0);
-    background-color: #1DB954;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 2px solid black;
     text-decoration: none;
     transition: background-color 0.2s ease;
     font-family: 'Poppins', sans-serif; /* Use the 'Poppins' font for the Spotify link button */
+    font-weight: bold; /* Add bold font weight */
   }
   
   .spotify-button:hover {
@@ -101,8 +105,8 @@ body {
   }
   
   .spotify-logo {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin-right: 5px;
   }
   
@@ -112,32 +116,36 @@ body {
     align-items: left;
     justify-content: left; /* Add this line to center horizontally */
     margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif; 
+  }
+
+  MenuItem{
+    font-family: 'Poppins', sans-serif; 
   }
   
   /* Style the duration dropdown */
   .duration {
-    font-size: 1.3vw;
-    font-family: 'DM Sans', sans-serif;
+    font-size: 2vw;
+    font-family: 'Poppins', sans-serif; 
     border-top-left-radius: 10px;
     padding: 5px 10px;
     background-color: #1DB954;
     color: white;
     border: none;
+    font-weight: bold; /* Add bold font weight */
   }
   
   /* Style the create playlist button */
   .playlist {
-    font-size: 1.3vw;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif; 
     border: none;
     background-color: #1DB954;
     color: white;
     padding: 5px 10px;
     border-top-right-radius: 10px;
     cursor: pointer;
+    font-weight: bold; /* Add bold font weight */
   }
-  
-  /* ... (existing CSS) ... */
   
   
 

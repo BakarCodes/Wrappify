@@ -204,27 +204,33 @@ const renderArtists = () => {
           <MenuItem value="long_term">Yearly</MenuItem>
         </Select>
       </div>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} className="spotify-table-container">
+        <Table className="spotify-table">
           <TableHead>
             <TableRow>
-              <TableCell>Ranking</TableCell>
-              <TableCell>Artist Name</TableCell>
-              <TableCell>Image</TableCell>
+              <TableCell className="spotify-table-cell">Ranking</TableCell>
+              <TableCell className="spotify-table-cell">Artist Name</TableCell>
+              <TableCell className="spotify-table-cell">Image</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {artists.map((artist, index) => (
               <TableRow key={artist.id}>
-                <TableCell>{`${index + 1}`}</TableCell>
-                <TableCell>{artist.name}</TableCell>
-                <TableCell>
+                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell">{artist.name}</TableCell>
+                <TableCell className="spotify-table-cell">
                   {artist.images.length ? (
                     <img className="artistImg" src={artist.images[0].url} alt="" />
                   ) : (
                     <div>No Image</div>
                   )}
-                  <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className="spotify-button">
+                  <a
+                    href={`https://open.spotify.com/artist/${artist.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="spotify-button"
+                    style={{ backgroundColor: 'var(--spotify-green)', color: 'var(--spotify-white)' }}
+                  >
                     <img src={logo} alt="Spotify Logo" className="spotify-logo" />
                     View Artist
                   </a>
@@ -253,38 +259,41 @@ const renderTracks = () => {
         )}
         {playlistUrl && (
           <a className="spotify-link" href={playlistUrl} target="_blank" rel="noreferrer">
-            <Button variant="contained">
-              Open Playlist
-            </Button>
           </a>
         )}
       </div>
-      <TableContainer className='bigTable' component={Card}>
-        <Table>
+      <TableContainer component={Card} className="spotify-table-container">
+        <Table className="spotify-table">
           <TableHead>
             <TableRow>
-              <TableCell>Ranking</TableCell>
-              <TableCell>Artist Name with Track Name</TableCell>
-              <TableCell>Image</TableCell>
+              <TableCell className="spotify-table-cell">Ranking</TableCell>
+              <TableCell className="spotify-table-cell">Artist Name with Track Name</TableCell>
+              <TableCell className="spotify-table-cell">Image</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tracks.map((track, index) => (
               <TableRow key={track.id}>
-                <TableCell>{`${index + 1}`}</TableCell>
-                <TableCell>
+                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell">
                   <div className="trackName">{track.name}</div>
                   <div className="artistName">
                     {track.artists.map((artist) => artist.name).join(' ft. ')}
                   </div>
                 </TableCell>
-                <TableCell className="image-container">
+                <TableCell className="spotify-table-cell image-container">
                   {track.album.images.length ? (
                     <img className="albumImg" src={track.album.images[0].url} alt="" />
                   ) : (
                     <div>No Image</div>
                   )}
-                  <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className="spotify-button">
+                  <a
+                    href={`https://open.spotify.com/track/${track.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="spotify-button"
+                    style={{ backgroundColor: 'var(--spotify-green)', color: 'var(--spotify-white)' }}
+                  >
                     <img src={logo} alt="Spotify Logo" className="spotify-logo" />
                     OPEN TRACK
                   </a>
@@ -298,7 +307,6 @@ const renderTracks = () => {
   );
 };
 
-
 const renderGenres = () => {
   return (
     <div className="center-container">
@@ -309,22 +317,22 @@ const renderGenres = () => {
           <MenuItem value="long_term">Yearly</MenuItem>
         </Select>
       </div>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} className="spotify-table-container">
+        <Table className="spotify-table">
           <TableHead>
             <TableRow>
-              <TableCell>Ranking</TableCell>
-              <TableCell>Genre</TableCell>
-              <TableCell>Percentage</TableCell>
+              <TableCell className="spotify-table-cell">Ranking</TableCell>
+              <TableCell className="spotify-table-cell">Genre</TableCell>
+              <TableCell className="spotify-table-cell">Percentage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {genres.map((genre, index) => (
               <TableRow key={index}>
-                <TableCell>{`${index + 1}`}</TableCell>
-                <TableCell>{genre}</TableCell>
+                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell">{genre}</TableCell>
                 {/* Add percentage data if you have it available */}
-                <TableCell>{/* Add percentage data here */}</TableCell>
+                <TableCell className="spotify-table-cell">{/* Add percentage data here */}</TableCell>
               </TableRow>
             ))}
           </TableBody>
