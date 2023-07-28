@@ -10,7 +10,6 @@ body {
   }
   
   .center-page {
-    border: 2px solid white;
     width: 100%;
     margin-top: 2%;
     display: flex;
@@ -20,7 +19,6 @@ body {
   }
 
   .renderedPage{
-    border: 2px solid green;
     min-width: 50vw;
     max-width: 50vw;
   }
