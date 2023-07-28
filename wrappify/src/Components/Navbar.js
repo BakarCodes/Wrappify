@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres, isLoggedIn }) {
+function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres, onLogoClick, isLoggedIn }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     // Set the login status based on the 'isLoggedIn' prop passed from the parent component (App.js)
     setLoggedIn(isLoggedIn);
   }, [isLoggedIn]);
+
+  const handleLogoClick = () => {
+    onLogoClick(); // Call the onLogoClick function from props to handle logo click
+  };
 
   const handleLoginClick = () => {
     onLogin(); // Call the onLogin function from props to handle login
@@ -22,7 +26,7 @@ function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres, isL
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/home" className="navbar-logo">
+        <Link to="/home" className="navbar-logo" onClick={handleLogoClick}>
           Wrappify
         </Link>
         <div className="navbar-buttons">

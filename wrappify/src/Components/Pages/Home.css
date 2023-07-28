@@ -8,26 +8,27 @@ body {
   background-image: url("../Images/background.jpg");
   background-position: center;
   font-family: "Poppins", sans-serif;
-  text-align: left;
 }
 
-.navbar {
-  /* Your navbar styles here */
+.center-container{
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Change "left" to "center" to center the content horizontally */
+    justify-content: center;
 }
-
-
 .menu {
     display: flex;
     flex-direction: row;
     justify-content: space-between; /* Align items evenly in the row */
 }
 
-.section {
+.table-container{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
 }
-/* ... (previously existing code) */
 
-/* Style the ranking element */
-/* Style the ranking element */
 .ranking {
     color: #1DB954;
     font-size: 5vw;
@@ -46,7 +47,7 @@ body {
 }
   
 /* Style the album image */
-.albumImg {
+.albumImg, .artistImg{
     
     width: 100%;
     max-width: 200px;
@@ -54,6 +55,7 @@ body {
   
 /* Add some margin for spacing */
 .image-container {
+    
     align-items: center;
     justify-content: center;
 
@@ -90,9 +92,9 @@ body {
   
 /* Style the selections container */
 .selections {
+    
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 20px;
 }
   
@@ -119,81 +121,6 @@ body {
     cursor: pointer;
 }
   
-/* Add margin to the grid items */
-.grid-item {
-    margin-bottom: 20px;
-}
-  
-/* Use grid layout for the grid container */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-  
-/* Make the grid responsive on smaller screens */
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-}
-/* ... (previously existing code) */
-
-.table-container {
-
-    display: flex;
-    justify-content: center;
-
-  }
-
-.columnTitle{
-    font-size: 2.4vh;
-    border-radius: 10px;
-    background-color: rgba(232, 232, 232, 0);
-    color: green;
-}
-
-/* Style the table */
-.table {
-    border-radius: 10px;
-
-    width: 100%;
-    margin-bottom: 0px;
-  }
-  
-  /* Style the table rows */
-  .table tr {
- 
-    border-bottom: 1px solid #858585;
-  }
-  
-  /* Style the ranking column */
-  .table .ranking {
-    color: #1DB954;
-    font-size: 5vw;
-    padding: 10px;
-  }
-  
-  /* Style the description column */
-  .table .description {
-
-  }
-  
-  /* Style the image column */
-  .table .image-container {
-    padding: 10px;
-  }
-  
-  /* Style the album image inside the image container */
-  .table .image-container{
-
-  }
-  
-  img {
-    width: 100%;
-    max-width: 100px; /* Set a maximum width for the image */
-    height: auto; /* Automatically adjust the height */
-  }
 
 /* width */
 ::-webkit-scrollbar {

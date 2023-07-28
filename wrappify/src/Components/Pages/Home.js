@@ -156,6 +156,10 @@ function Home({ setToken }) {
     setTimeRange(e.target.value);
   };
 
+  const handleLogoClick = () => {
+    setShowWelcome(true); // Set the state to show the welcome content when the logo is clicked
+  };
+
 
   const createPlaylist = async () => {
     try {
@@ -324,6 +328,7 @@ function Home({ setToken }) {
   return (
     <div>
       <Navbar 
+        onLogoClick={handleLogoClick}
         onTopArtists={handleTopArtists}
         onTopTracks={handleTopTracks}
         onTopGenres={handleTopGenres}
@@ -361,10 +366,11 @@ function Home({ setToken }) {
                 </>
               ) : (
                 <>
-                    {/* Render the appropriate table based on the selected table */}
+                  <div className="renderedPage">
                     {selectedTable === 'artists' && renderArtists()}
                     {selectedTable === 'tracks' && renderTracks()}
                     {selectedTable === 'genres' && renderGenres()}
+                  </div>
 
                 </>
               )}
