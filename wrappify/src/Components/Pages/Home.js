@@ -173,13 +173,12 @@ function Home({ setToken }) {
                 Authorization: `Bearer ${token}`
             }
         });
-
-        setPlaylistUrl(playlist.data.external_urls.spotify); // Save the playlist's Spotify URL to the state
-        alert('Your playlist has been created! You can now view it on Spotify.');
+        const playlistUrl = playlist.data.external_urls.spotify;
+        setPlaylistUrl(playlistUrl); // Save the playlist's Spotify URL to the state
+        window.open(playlistUrl, "_blank");
 
     } catch (err) {
         console.error(err);
-        alert('An error occurred when trying to create the playlist');
     }
 }
 
@@ -187,7 +186,14 @@ function Home({ setToken }) {
 
   const renderArtists = () => {
     return (
-      <div className="center-container">
+        <div className="center-container">
+          <div className='selections'>
+          <select className="duration" onChange={handleDurationChange} value={timeRange}>
+            <option value="short_term">Monthly</option>
+            <option value="medium_term">6 Months</option>
+            <option value="long_term">Yearly</option>
+          </select>
+        </div>
         <div className="table-container">
           <table className="table">
             <thead>
@@ -225,7 +231,17 @@ function Home({ setToken }) {
   const renderTracks = () => {
     return (
       <div className="center-container">
+        <div className='selections'>
+          <select className="duration" onChange={handleDurationChange} value={timeRange}>
+            <option value="short_term">Monthly</option>
+            <option value="medium_term">6 Months</option>
+            <option value="long_term">Yearly</option>
+          </select>
+          {tracks.length > 0 && <button className="playlist" onClick={createPlaylist}>Create Playlist</button>}
+          {playlistUrl && <a className="playlistLink" href={playlistUrl} target="_blank" rel="noreferrer"></a>}
+        </div>
         <div className="table-container">
+
           <table className="table">
             <thead>
               <tr className="columnTitle">
@@ -267,6 +283,13 @@ function Home({ setToken }) {
   const renderGenres = () => {
     return (
       <div className="center-container">
+        <div className='selections'>
+          <select className="duration" onChange={handleDurationChange} value={timeRange}>
+            <option value="short_term">Monthly</option>
+            <option value="medium_term">6 Months</option>
+            <option value="long_term">Yearly</option>
+          </select>
+        </div>
         <div className="table-container">
           <table className="table">
             <thead>
@@ -275,7 +298,7 @@ function Home({ setToken }) {
                 <th>Genre</th>
                 <th>Percentage</th>
               </tr>
-            </thead>
+              </thead>
             <tbody>
               {genres.map((genre, index) => (
                 <tr key={index}>
@@ -294,39 +317,29 @@ function Home({ setToken }) {
 
   return (
     <div>
-      <Navbar
-        onTopArtists={handleTopArtists}
-        onTopTracks={handleTopTracks}
-        onTopGenres={handleTopGenres}
-        onLogout={logout}
-        isLoggedIn={isLoggedIn} // Pass the isLoggedIn state to the Navbar
-      />
-      <section className="three">
-        <div className="image-grid">
-          {token ? (
-            <>
-              <select className="duration" onChange={handleDurationChange} value={timeRange}>
-                <option value="short_term">Monthly</option>
-                <option value="medium_term">6 Months</option>
-                <option value="long_term">Yearly</option>
-              </select>
-              {tracks.length > 0 && <button className="playlist" onClick={createPlaylist}>Create Playlist</button>}
-              {playlistUrl && <a className="playlistLink" href={playlistUrl} target="_blank" rel="noreferrer">View the new playlist on Spotify</a>}
-
-              <div className="table">
-                <div className="selections"></div>
-                {selectedTable === 'artists' && renderArtists()}
-                {selectedTable === 'tracks' && renderTracks()}
-                {selectedTable === 'genres' && renderGenres()}
-              </div>
-            </>
-          ) : (
-            <h2>Please login</h2>
-          )}
-        </div>
-      </section>
-    </div>
-  );
+    <Navbar
+      onTopArtists={handleTopArtists}
+      onTopTracks={handleTopTracks}
+      onTopGenres={handleTopGenres}
+      onLogout={logout}
+      isLoggedIn={isLoggedIn}
+    />
+    <section className="three">
+      <div className="image-grid">
+        {token ? (
+          <>
+            {/* Render the appropriate table based on the selected table */}
+            {selectedTable === 'artists' && renderArtists()}
+            {selectedTable === 'tracks' && renderTracks()}
+            {selectedTable === 'genres' && renderGenres()}
+          </>
+        ) : (
+          <h2>Please login</h2>
+        )}
+      </div>
+    </section>
+  </div>
+);
 }
 
 export default Home;
