@@ -5,6 +5,7 @@ import Navbar from '../Navbar';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Spotify-logo.png';
 import music from '../Images/Music.svg';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Button, Card } from '@mui/material';
 
 function Home({ setToken }) {
   const navigate = useNavigate();
@@ -193,154 +194,163 @@ function Home({ setToken }) {
 }
 
 
-
-  const renderArtists = () => {
-    return (
-        <div className="center-container">
-          <div className='selections'>
-          <select className="duration" onChange={handleDurationChange} value={timeRange}>
-            <option value="short_term">Monthly</option>
-            <option value="medium_term">6 Months</option>
-            <option value="long_term">Yearly</option>
-          </select>
-        </div>
-        <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr className="columnTitle">
-                <th>Ranking</th>
-                <th>Artist Name</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              {artists.map((artist, index) => (
-                <tr key={artist.id}>
-                  <td className="ranking">{`${index + 1}`}</td>
-                  <td className="description">{artist.name}</td>
-                  <td className="image-container">
-                    {artist.images.length ? (
-                      <img className="artistImg" src={artist.images[0].url} alt="" />
-                    ) : (
-                      <div>No Image</div>
-                    )}
-                    <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className="spotify-button">
-                      <img src={logo} alt="Spotify Logo" className="spotify-logo" />
-                      View Artist
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };
-
-  const renderTracks = () => {
-    return (
-      <div className="center-container">
-        <div className='selections'>
-          <select className="duration" onChange={handleDurationChange} value={timeRange}>
-            <option value="short_term">Monthly</option>
-            <option value="medium_term">6 Months</option>
-            <option value="long_term">Yearly</option>
-          </select>
-          {tracks.length > 0 && <button className="playlist" onClick={createPlaylist}>Create Playlist</button>}
-          {playlistUrl && <a className="playlistLink" href={playlistUrl} target="_blank" rel="noreferrer"></a>}
-        </div>
-        <div className="table-container">
-
-          <table className="table">
-            <thead>
-              <tr className="columnTitle">
-                <th>Ranking</th>
-                <th>Artist Name with Track Name</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tracks.map((track, index) => (
-                <tr key={track.id}>
-                  <td className="ranking">{`${index + 1}`}</td>
-                  <td className="description">
-                    <div className="trackName">{track.name}</div>
-                    <div className="artistName">
-                      {track.artists.map((artist) => artist.name).join(' ft. ')}
-                    </div>
-                  </td>
-                  <td className="image-container">
-                    {track.album.images.length ? (
-                      <img className="albumImg" src={track.album.images[0].url} alt="" />
-                    ) : (
-                      <div>No Image</div>
-                    )}
-                    <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className="spotify-button">
-                      <img src={logo} alt="Spotify Logo" className="spotify-logo" />
-                      OPEN TRACK
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };
-
-  const renderGenres = () => {
-    return (
-      <div className="center-container">
-        <div className='selections'>
-          <select className="duration" onChange={handleDurationChange} value={timeRange}>
-            <option value="short_term">Monthly</option>
-            <option value="medium_term">6 Months</option>
-            <option value="long_term">Yearly</option>
-          </select>
-        </div>
-        <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr className="columnTitle">
-                <th>Ranking</th>
-                <th>Genre</th>
-                <th>Percentage</th>
-              </tr>
-              </thead>
-            <tbody>
-              {genres.map((genre, index) => (
-                <tr key={index}>
-                  <td className="ranking">{`${index + 1}`}</td>
-                  <td className="description">{genre}</td>
-                  {/* Add percentage data if you have it available */}
-                  <td className="percentage">{/* Add percentage data here */}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };
-
+const renderArtists = () => {
   return (
-    <div>
-      <Navbar 
-        onLogoClick={handleLogoClick}
-        onTopArtists={handleTopArtists}
-        onTopTracks={handleTopTracks}
-        onTopGenres={handleTopGenres}
-        onLogout={logout}
-        isLoggedIn={isLoggedIn}
-       />
+    <div className="center-container">
+      <div className="selections">
+        <Select className="duration" onChange={handleDurationChange} value={timeRange}>
+          <MenuItem value="short_term">Monthly</MenuItem>
+          <MenuItem value="medium_term">6 Months</MenuItem>
+          <MenuItem value="long_term">Yearly</MenuItem>
+        </Select>
+      </div>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ranking</TableCell>
+              <TableCell>Artist Name</TableCell>
+              <TableCell>Image</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {artists.map((artist, index) => (
+              <TableRow key={artist.id}>
+                <TableCell>{`${index + 1}`}</TableCell>
+                <TableCell>{artist.name}</TableCell>
+                <TableCell>
+                  {artist.images.length ? (
+                    <img className="artistImg" src={artist.images[0].url} alt="" />
+                  ) : (
+                    <div>No Image</div>
+                  )}
+                  <a href={`https://open.spotify.com/artist/${artist.id}`} target="_blank" rel="noreferrer" className="spotify-button">
+                    <img src={logo} alt="Spotify Logo" className="spotify-logo" />
+                    View Artist
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
+const renderTracks = () => {
+  return (
+    <div className="center-container">
+      <div className="selections">
+        <Select className="duration" onChange={handleDurationChange} value={timeRange}>
+          <MenuItem value="short_term">Monthly</MenuItem>
+          <MenuItem value="medium_term">6 Months</MenuItem>
+          <MenuItem value="long_term">Yearly</MenuItem>
+        </Select>
+        {tracks.length > 0 && (
+          <Button className="playlist" variant="contained" onClick={createPlaylist}>
+            Create Playlist
+          </Button>
+        )}
+        {playlistUrl && (
+          <a className="spotify-link" href={playlistUrl} target="_blank" rel="noreferrer">
+            <Button variant="contained">
+              Open Playlist
+            </Button>
+          </a>
+        )}
+      </div>
+      <TableContainer className='bigTable' component={Card}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ranking</TableCell>
+              <TableCell>Artist Name with Track Name</TableCell>
+              <TableCell>Image</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tracks.map((track, index) => (
+              <TableRow key={track.id}>
+                <TableCell>{`${index + 1}`}</TableCell>
+                <TableCell>
+                  <div className="trackName">{track.name}</div>
+                  <div className="artistName">
+                    {track.artists.map((artist) => artist.name).join(' ft. ')}
+                  </div>
+                </TableCell>
+                <TableCell className="image-container">
+                  {track.album.images.length ? (
+                    <img className="albumImg" src={track.album.images[0].url} alt="" />
+                  ) : (
+                    <div>No Image</div>
+                  )}
+                  <a href={`https://open.spotify.com/track/${track.id}`} target="_blank" rel="noreferrer" className="spotify-button">
+                    <img src={logo} alt="Spotify Logo" className="spotify-logo" />
+                    OPEN TRACK
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
 
-      <section className="three">
-        <div className="image-grid">
-          {token ? (
-            <>
-              {showWelcome ? (
+
+const renderGenres = () => {
+  return (
+    <div className="center-container">
+      <div className="selections">
+        <Select className="duration" onChange={handleDurationChange} value={timeRange}>
+          <MenuItem value="short_term">Monthly</MenuItem>
+          <MenuItem value="medium_term">6 Months</MenuItem>
+          <MenuItem value="long_term">Yearly</MenuItem>
+        </Select>
+      </div>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ranking</TableCell>
+              <TableCell>Genre</TableCell>
+              <TableCell>Percentage</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {genres.map((genre, index) => (
+              <TableRow key={index}>
+                <TableCell>{`${index + 1}`}</TableCell>
+                <TableCell>{genre}</TableCell>
+                {/* Add percentage data if you have it available */}
+                <TableCell>{/* Add percentage data here */}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
+
+
+return (
+  <div>
+    <Navbar 
+      onLogoClick={handleLogoClick}
+      onTopArtists={handleTopArtists}
+      onTopTracks={handleTopTracks}
+      onTopGenres={handleTopGenres}
+      onLogout={logout}
+      isLoggedIn={isLoggedIn}
+     />
+    <div className="center-page">
+    <section className="three">
+      <div className="image-grid">
+        {token ? (
+          <>
+            {showWelcome ? (
                 <>
                 <section class="one">
                   <main className='testimonial-grid'>
@@ -364,24 +374,28 @@ function Home({ setToken }) {
                 </section>
 
                 </>
-              ) : (
-                <>
-                  <div className="renderedPage">
-                    {selectedTable === 'artists' && renderArtists()}
-                    {selectedTable === 'tracks' && renderTracks()}
-                    {selectedTable === 'genres' && renderGenres()}
-                  </div>
+            ) : (
+              <>
+                <div className="renderedPage">
+                  {selectedTable === 'artists' && renderArtists()}
+                  {selectedTable === 'tracks' && renderTracks()}
+                  {selectedTable === 'genres' && renderGenres()}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <h2>Please login</h2>
+        )}
+      </div>
+    </section>
+  </div>
+  </div>
+);
 
-                </>
-              )}
-            </>
-          ) : (
-            <h2>Please login</h2>
-          )}
-        </div>
-      </section>
-    </div>
-  );
 }
 
 export default Home;
+
+
+

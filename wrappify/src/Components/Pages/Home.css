@@ -10,96 +10,112 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.center-container{
-    border: 2px solid white;
+.center-page {
     display: flex;
-    flex-direction: column;
-    align-items: left; /* Change "left" to "center" to center the content horizontally */
     justify-content: center;
-}
+    align-items: center;
+  }
+
 .menu {
-    display: flex;
-    flex-direction: row;
+
     justify-content: space-between; /* Align items evenly in the row */
 }
+/* ... (existing CSS) ... */
 
-.table-container{
-    display: flex;
-    flex-direction: column;
+/* Center all tables horizontally */
+
+/* ... (existing CSS) ... */
+
+/* Center all tables horizontally */
+.table-container {
     border: 2px solid white;
-}
-
-.ranking {
+    background-color: black; /* Set the background color to black */
+    width: 80%;
+    height: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    overflow: auto;
+  }
+  
+  /* Style the table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style the table header cells */
+  .columnTitle th {
+    background-color: #1DB954;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-family: 'Comfortaa', cursive; /* Use the 'Comfortaa' font for the table headers */
+  }
+  
+  /* Style the table body cells */
+  .table tbody td {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif; /* Use the 'DM Sans' font for the table body */
+  }
+  
+  /* Style the ranking cells */
+  .ranking {
     color: #1DB954;
     font-size: 5vw;
     margin-right: 10px;
-}
+    font-family: 'Roboto Slab', serif; /* Use the 'Roboto Slab' font for the ranking */
+  }
   
-/* Style the track name and artist name */
-.trackName,
-.artistName {
-    font-size: 1.8vw;
-    color: white;
-}
-  
-.artistName {
-    color: grey;
-}
-  
-/* Style the album image */
-.albumImg, .artistImg{
-    
+  /* Style the album and artist images */
+  .albumImg,
+  .artistImg {
     width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     max-width: 200px;
-}
+  }
   
-/* Add some margin for spacing */
-.image-container {
-    
-    align-items: center;
-    justify-content: center;
-
-}
-  
-/* Style the Spotify link button */
-.spotify-link {
-
+  /* Style the Spotify link button */
+  .spotify-link {
     display: flex;
     align-items: center;
-}
+  }
   
-.spotify-button {
+  .spotify-button {
     text-align: center;
     font-size: 1vw;
     display: flex;
     align-items: center;
     color: rgb(0, 0, 0);
     background-color: #1DB954;
-    border-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     text-decoration: none;
     transition: background-color 0.2s ease;
-}
+    font-family: 'Poppins', sans-serif; /* Use the 'Poppins' font for the Spotify link button */
+  }
   
-.spotify-button:hover {
+  .spotify-button:hover {
     background-color: #1ED760;
-}
+  }
   
-.spotify-logo {
+  .spotify-logo {
     width: 30px;
     height: 30px;
     margin-right: 5px;
-}
+  }
   
-/* Style the selections container */
-.selections {
-    
+  /* Style the selections container */
+  .selections {
     display: flex;
-    align-items: center;
+    align-items: left;
+    justify-content: left; /* Add this line to center horizontally */
     margin-bottom: 20px;
-}
+  }
   
-/* Style the duration dropdown */
-.duration {
+  /* Style the duration dropdown */
+  .duration {
     font-size: 1.3vw;
     font-family: 'DM Sans', sans-serif;
     border-top-left-radius: 10px;
@@ -107,10 +123,10 @@ body {
     background-color: #1DB954;
     color: white;
     border: none;
-}
+  }
   
-/* Style the create playlist button */
-.playlist {
+  /* Style the create playlist button */
+  .playlist {
     font-size: 1.3vw;
     font-family: 'DM Sans', sans-serif;
     border: none;
@@ -119,7 +135,10 @@ body {
     padding: 5px 10px;
     border-top-right-radius: 10px;
     cursor: pointer;
-}
+  }
+  
+  /* ... (existing CSS) ... */
+  
   
 
 /* width */
