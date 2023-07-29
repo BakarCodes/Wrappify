@@ -14,8 +14,6 @@ body {
 .mainPage{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -35,7 +33,7 @@ section{
   .one{
     display:flex; 
     flex-direction:row;
-    align-items: center;
+
     color: #858585;
     background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
     background-position: center;
@@ -100,10 +98,17 @@ section{
   
   
 
-  .AboutMe{
+  .welcomeMSG{
     color: #ffffff;
     text-align: center;
     font-size: 7vh;
+  }
+
+  .subHeading{
+      margin-top: -5%;
+      color: #1DB954;
+      text-align: center;
+      font-size: 5vh;
   }
 
   
@@ -148,13 +153,12 @@ section{
   }
   
   .testimonial{
-    margin: -5%;
+
     font-family: "Poppins", sans-serif;
     color: rgb(255, 255, 255);
     font-size: 1.1vw;
     text-align: left;
-    margin-left: auto;
-    margin-right: auto;
+
   
   }
   

@@ -11,7 +11,7 @@ body {
   
   .center-page {
     width: 100%;
-    margin-top: 2%;
+    margin-top: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,7 @@ body {
   /* Style the table header cells */
   .columnTitle th {
     background-color: #1DB954;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 20px;
     font-weight: bold; /* Add bold font weight */
   }
@@ -52,7 +52,7 @@ body {
   /* Style the table body cells */
   .table tbody td {
     background-color: rgba(255, 255, 255, 0.2);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 10px;
     font-family: 'DM Sans', sans-serif; /* Use the 'DM Sans' font for the table body */
   }
@@ -72,7 +72,7 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     max-width: 150px;
-    border: 2px solid black;
+    border: 2px solid rgb(255, 255, 255);
   }
   
   /* Style the Spotify link button */
@@ -88,7 +88,7 @@ body {
     width: 100%;
     max-width: 150px;
     align-items: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border: 2px solid black;
@@ -110,26 +110,23 @@ body {
   
   /* Style the selections container */
   .selections {
+    margin-top: 20px;
     display: flex;
     align-items: left;
     justify-content: left; /* Add this line to center horizontally */
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif; 
-  }
-
-  MenuItem{
+    height: 3em;
     font-family: 'Poppins', sans-serif; 
   }
   
   /* Style the duration dropdown */
   .duration {
-    font-size: 2vw;
     font-family: 'Poppins', sans-serif; 
-    border-top-left-radius: 10px;
-    padding: 5px 10px;
+    border: none;
     background-color: #1DB954;
     color: white;
-    border: none;
+    padding: 5px 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
     font-weight: bold; /* Add bold font weight */
   }
   
@@ -167,3 +164,75 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #19647e;
 }
+
+
+@media screen and (max-width: 767px) {
+    /* Adjust layout and font sizes for smaller screens */
+    body {
+      font-size: 16px; /* Adjust as needed */
+    }
+    
+    .center-container {
+      padding: 10px; /* Add some spacing around the content */
+    }
+    
+    .spotify-table-container {
+      width: 100%;
+      overflow-x: auto; /* Allow horizontal scrolling for small screens */
+    }
+    
+    /* Style the table for small screens */
+    .spotify-table {
+      width: 100%;
+    }
+    
+    .spotify-table-cell {
+      padding: 8px; /* Reduce cell padding for small screens */
+      font-size: 1rem; /* Adjust font size for table cells */
+    }
+    
+    /* Increase button size for better touch experience */
+    .playlist, .spotify-button {
+      font-size: 1.2rem; /* Adjust font size as needed */
+      padding: 12px 20px; /* Add more padding for larger buttons */
+    }
+    
+    /* Style the mobile menu if you have one */
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        background-color: #1DB954;
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+      }
+    
+      /* Style for the links in the mobile menu */
+      .mobile-menu a {
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    
+      /* Add a hover effect for links in the mobile menu */
+      .mobile-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+      }
+    
+      /* Style for the close button in the mobile menu */
+      .mobile-menu .close-button {
+        color: white;
+        font-size: 1.2rem;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+  }

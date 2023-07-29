@@ -41,51 +41,36 @@ function Land({ setToken }) {
     return (
         <div className="App">
             <Navbar onLogin={loginToSpotify} onLogout={logout} />
-            <header className="App-header">
-                <section class="one">
-                <main className='testimonial-grid'>
-                    <article className='testimonial'>
-                    <h2 className='AboutMe'>Get wrapped in today</h2>
-                    <div className='landGridOne'>
-                        <div className='personal'>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <button className="loginButton" onClick={loginToSpotify}>
-                                Check Yourself
-                            </button>
-                        </div>
-                        
-                        <div className='musicSVG'>
-                            <img src={music} alt="music" />
-                        </div>
+            <section class="one">
+            <main className='testimonial-grid'>
+                <article className='testimonial'>
+                <div className='heading'>
+                    <h2 className='welcomeMSG'>Get wrapped in today</h2>
+                </div>
+                <div>
+                    <h3 className='subHeading'>track your spotify habits</h3>
+                </div>
+                <div className='landGridOne'>
+                    <div className='personal'>
+                        <p>Introducing Wrappify, putting the power of Spotify Wrapped in your hands, whenever you want it! Say goodbye to the year-long wait and hello to instant access of your top listens, spanning up to a whole year from today! Discover your destiny in music and dive deep into your musical journey with just a few taps.</p>
+                        <button className="loginButton" onClick={loginToSpotify}>
+                            Check Yourself
+                        </button>
                     </div>
-                    </article>
                     
-                </main>
-                </section>
+                    <div className='musicSVG'>
+                        <img src={music} alt="music" />
+                    </div>
+                </div>
+                </article>
+                
+            </main>
+            </section>
                 {!window.localStorage.getItem("token") ?
-                <section class="one">
-                <main className='testimonial-grid'>
-                    <article className='testimonial'>
-                    <h2 className='AboutMe'>Get wrapped in today</h2>
-                    <div className='landGridOne'>
-                        <div className='personal'>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <button className="loginButton" onClick={loginToSpotify}>
-                                Login to Spotify
-                            </button>
-                        </div>
-                        
-                        <div className='musicSVG'>
-                            <img src={music} alt="music" />
-                        </div>
-                    </div>
-                    </article>
-                    
-                </main>
-                </section> :
+                <h2>HELLO</h2> :
                     <p>hello</p>
                 }
-            </header>
+
         </div>
     );    
 }

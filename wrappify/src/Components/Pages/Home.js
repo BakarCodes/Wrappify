@@ -194,6 +194,51 @@ function Home({ setToken }) {
 }
 
 
+const tableStyles = {
+  backgroundColor: 'black',
+  color: 'white', // Change the text color to white
+  fontFamily: 'Poppins, sans-serif',
+  fontWeight: 'bold',
+  fontSize: '1.2rem',
+};
+
+const tableCellStyles = {
+  padding: '10px',
+  borderBottom: '2px solid #1DB954',
+  color: 'white', // Change the text color to white
+};
+
+const imageStyles = {
+  width: '100%',
+  borderTopLeftRadius: '10px',
+  borderTopRightRadius: '10px',
+  maxWidth: '150px',
+  border: '2px solid white', // Change the border color to white
+};
+
+const spotifyButtonStyles = {
+  textAlign: 'center',
+  fontSize: '1rem',
+  display: 'flex',
+  width: '100%',
+  maxWidth: '150px',
+  alignItems: 'center',
+  color: 'black', // Change the text color to black
+  backgroundColor: '#1DB954',
+  borderBottomLeftRadius: '10px',
+  borderBottomRightRadius: '10px',
+  border: '2px solid white', // Change the border color to white
+  textDecoration: 'none',
+  transition: 'background-color 0.2s ease',
+  fontFamily: 'Poppins, sans-serif',
+  fontWeight: 'bold',
+};
+
+const spotifyButtonHoverStyles = {
+  backgroundColor: '#1ED760',
+};
+
+
 const renderArtists = () => {
   return (
     <div className="center-container">
@@ -205,22 +250,22 @@ const renderArtists = () => {
         </Select>
       </div>
       <TableContainer component={Paper} className="spotify-table-container">
-        <Table className="spotify-table">
+        <Table className="spotify-table" style={tableStyles}>
           <TableHead>
             <TableRow>
-              <TableCell className="spotify-table-cell">Ranking</TableCell>
-              <TableCell className="spotify-table-cell">Artist Name</TableCell>
-              <TableCell className="spotify-table-cell">Image</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Ranking</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Artist Name</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Image</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {artists.map((artist, index) => (
               <TableRow key={artist.id}>
-                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
-                <TableCell className="spotify-table-cell">{artist.name}</TableCell>
-                <TableCell className="spotify-table-cell">
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{artist.name}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>
                   {artist.images.length ? (
-                    <img className="artistImg" src={artist.images[0].url} alt="" />
+                    <img className="artistImg" src={artist.images[0].url} alt="" style={imageStyles} />
                   ) : (
                     <div>No Image</div>
                   )}
@@ -229,7 +274,7 @@ const renderArtists = () => {
                     target="_blank"
                     rel="noreferrer"
                     className="spotify-button"
-                    style={{ backgroundColor: 'var(--spotify-green)', color: 'var(--spotify-white)' }}
+                    style={spotifyButtonStyles}
                   >
                     <img src={logo} alt="Spotify Logo" className="spotify-logo" />
                     View Artist
@@ -243,6 +288,9 @@ const renderArtists = () => {
     </div>
   );
 };
+
+
+
 const renderTracks = () => {
   return (
     <div className="center-container">
@@ -253,9 +301,9 @@ const renderTracks = () => {
           <MenuItem value="long_term">Yearly</MenuItem>
         </Select>
         {tracks.length > 0 && (
-          <Button className="playlist" variant="contained" onClick={createPlaylist}>
+          <button className="playlist" variant="contained" onClick={createPlaylist}>
             Create Playlist
-          </Button>
+          </button>
         )}
         {playlistUrl && (
           <a className="spotify-link" href={playlistUrl} target="_blank" rel="noreferrer">
@@ -263,19 +311,19 @@ const renderTracks = () => {
         )}
       </div>
       <TableContainer component={Card} className="spotify-table-container">
-        <Table className="spotify-table">
+        <Table className="spotify-table" style={tableStyles}>
           <TableHead>
             <TableRow>
-              <TableCell className="spotify-table-cell">Ranking</TableCell>
-              <TableCell className="spotify-table-cell">Artist Name with Track Name</TableCell>
-              <TableCell className="spotify-table-cell">Image</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Ranking</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Artist Name with Track Name</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Image</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tracks.map((track, index) => (
               <TableRow key={track.id}>
-                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
-                <TableCell className="spotify-table-cell">
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>
                   <div className="trackName">{track.name}</div>
                   <div className="artistName">
                     {track.artists.map((artist) => artist.name).join(' ft. ')}
@@ -283,7 +331,7 @@ const renderTracks = () => {
                 </TableCell>
                 <TableCell className="spotify-table-cell image-container">
                   {track.album.images.length ? (
-                    <img className="albumImg" src={track.album.images[0].url} alt="" />
+                    <img className="albumImg" src={track.album.images[0].url} alt="" style={imageStyles} />
                   ) : (
                     <div>No Image</div>
                   )}
@@ -292,7 +340,7 @@ const renderTracks = () => {
                     target="_blank"
                     rel="noreferrer"
                     className="spotify-button"
-                    style={{ backgroundColor: 'var(--spotify-green)', color: 'var(--spotify-white)' }}
+                    style={spotifyButtonStyles}
                   >
                     <img src={logo} alt="Spotify Logo" className="spotify-logo" />
                     OPEN TRACK
@@ -311,28 +359,28 @@ const renderGenres = () => {
   return (
     <div className="center-container">
       <div className="selections">
-        <Select className="duration" onChange={handleDurationChange} value={timeRange}>
+      <Select className="duration" onChange={handleDurationChange} value={timeRange}>
           <MenuItem value="short_term">Monthly</MenuItem>
           <MenuItem value="medium_term">6 Months</MenuItem>
           <MenuItem value="long_term">Yearly</MenuItem>
         </Select>
       </div>
       <TableContainer component={Paper} className="spotify-table-container">
-        <Table className="spotify-table">
+        <Table className="spotify-table" style={tableStyles}>
           <TableHead>
             <TableRow>
-              <TableCell className="spotify-table-cell">Ranking</TableCell>
-              <TableCell className="spotify-table-cell">Genre</TableCell>
-              <TableCell className="spotify-table-cell">Percentage</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Ranking</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Genre</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Percentage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {genres.map((genre, index) => (
               <TableRow key={index}>
-                <TableCell className="spotify-table-cell">{`${index + 1}`}</TableCell>
-                <TableCell className="spotify-table-cell">{genre}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{`${index + 1}`}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{genre}</TableCell>
                 {/* Add percentage data if you have it available */}
-                <TableCell className="spotify-table-cell">{/* Add percentage data here */}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>{/* Add percentage data here */}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -341,6 +389,7 @@ const renderGenres = () => {
     </div>
   );
 };
+
 
 
 return (

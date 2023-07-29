@@ -5,6 +5,7 @@ import { Button } from './Button';
 
 function Navbar({ onLogin, onLogout, onTopArtists, onTopTracks, onTopGenres, onLogoClick, isLoggedIn }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  
 
   useEffect(() => {
     // Set the login status based on the 'isLoggedIn' prop passed from the parent component (App.js)
