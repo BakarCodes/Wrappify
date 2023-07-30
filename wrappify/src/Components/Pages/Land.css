@@ -78,7 +78,7 @@ section{
     display: flex;
     gap: 20px
   }
-  .musicSVG {
+  .musicSVG, .visualSVG {
 
     flex: 4; /* Take 70% of the available space */
     display: flex;
@@ -86,7 +86,7 @@ section{
     align-items: center;
   }
   
-  .musicSVG img {
+  .musicSVG, .visualSVG, img {
     max-width: 100%; /* Set the maximum width for the music SVG */
     max-height: 100%; /* Set the maximum height for the music SVG */
   }
@@ -101,6 +101,12 @@ section{
   .welcomeMSG{
     color: #ffffff;
     text-align: center;
+    font-size: 7vh;
+  }
+
+  .topTracksMsg{
+    color: #ffffff;
+    text-align: right;
     font-size: 7vh;
   }
 

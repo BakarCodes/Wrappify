@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar'
 import './Land.css';
 import music from '../Images/Music.svg';
+import visualise from '../Images/Visual.svg';
 
 function Land({ setToken }) {
     const CLIENT_ID = "da420f0feb8244f4a8c20acd024a6a45";
@@ -46,13 +47,14 @@ function Land({ setToken }) {
                 <article className='testimonial'>
                 <div className='heading'>
                     <h2 className='welcomeMSG'>Get wrapped in today</h2>
-                </div>
-                <div>
                     <h3 className='subHeading'>track your spotify habits</h3>
                 </div>
+
                 <div className='landGridOne'>
                     <div className='personal'>
-                        <p>Introducing Wrappify, putting the power of Spotify Wrapped in your hands, whenever you want it! Say goodbye to the year-long wait and hello to instant access of your top listens, spanning up to a whole year from today! Discover your destiny in music and dive deep into your musical journey with just a few taps.</p>
+                        <p>Introducing Wrappify, putting the power of Spotify Wrapped in your hands, whenever you want it!</p>
+                        <p>Say goodbye to the year-long wait and hello to instant access of your top listens, spanning up to a whole year from today!</p>
+                        <p>Discover your destiny in music and dive deep into your musical journey with just a few taps.</p>
                         <button className="loginButton" onClick={loginToSpotify}>
                             Check Yourself
                         </button>
@@ -66,9 +68,35 @@ function Land({ setToken }) {
                 
             </main>
             </section>
+            <section class="two">
+            <main className='testimonial-grid'>
+                <article className='testimonial'>
+                <div className='headingTwo'>
+                    <h2 className='topTracksMsg'>Visualise Spotify like never before!</h2>
+                </div>
+                <div className='landGridOne'>
+                    <div className='visualSVG'>
+                        <img src={visualise} alt="visual" />
+                    </div>
+                    <div className='personal'>
+                        <h3>Step into the world of music data with Wrappify!</h3>
+                        <p>Our app brings you a whole new level of visualization features that allow you to explore your Spotify habits in an innovative way. Gone are the days of waiting for your annual Spotify Wrapped, as Wrappify grants you instant access to your top listens.</p>
+                        <p>Discover fascinating insights about your favorite artists, most-played tracks, and trending genres all in one place. Our intelligent algorithms analyze your listening patterns to generate personalized recommendations, giving you the opportunity to explore new music effortlessly.</p>
+                    </div>
+
+                </div>
+                </article>
+                
+            </main>
+            </section>
                 {!window.localStorage.getItem("token") ?
-                <h2>HELLO</h2> :
-                    <p>hello</p>
+                <footer className="footer">
+                    <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+                </footer> :
+                <footer className="footer">
+                    <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+                </footer>
+
                 }
 
         </div>
