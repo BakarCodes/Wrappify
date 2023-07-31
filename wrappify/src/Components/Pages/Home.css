@@ -9,6 +9,10 @@ body {
     background-position: center;
   }
   
+  .AboutMe{
+    text-align: center;
+    font-size: 7vh;
+  }
   .center-page {
     width: 100%;
     margin-top: 10%;
@@ -74,6 +78,13 @@ body {
     max-width: 150px;
     border: 2px solid rgb(255, 255, 255);
   }
+
+.loveSVG{
+  flex: 4; /* Take 70% of the available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   /* Style the Spotify link button */
   .spotify-link {
@@ -165,6 +176,30 @@ body {
     background: #19647e;
 }
 
+/* Home.css */
+
+/* Add the styles for the genre bar visualization */
+.genreBarContainer {
+    position: relative;
+    width: 100%;
+  }
+  
+  .genreBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #1DB954;
+  }
+  
+  .genreBar span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
 
 @media screen and (max-width: 767px) {
     /* Adjust layout and font sizes for smaller screens */

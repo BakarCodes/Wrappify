@@ -5,6 +5,8 @@ import Navbar from '../Navbar';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Spotify-logo.png';
 import music from '../Images/Music.svg';
+import love from '../Images/Love.svg';
+
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Button, Card } from '@mui/material';
 
 function Home({ setToken }) {
@@ -43,6 +45,8 @@ function Home({ setToken }) {
   const [playlistUrl, setPlaylistUrl] = useState('');
   const [timeRange, setTimeRange] = useState('short_term');
   const [selectedTable, setSelectedTable] = useState('tracks');
+  const [genreFreqMap, setGenreFreqMap] = useState({});
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -122,6 +126,8 @@ function Home({ setToken }) {
     let topGenres = sortedGenres.slice(0, 20);
 
     setGenres(topGenres);
+
+    setGenreFreqMap(genreFreqMap); // Set the genre frequency map in the state
   };
 
   useEffect(() => {
@@ -355,11 +361,12 @@ const renderTracks = () => {
   );
 };
 
+
 const renderGenres = () => {
   return (
     <div className="center-container">
       <div className="selections">
-      <Select className="duration" onChange={handleDurationChange} value={timeRange}>
+        <Select className="duration" onChange={handleDurationChange} value={timeRange}>
           <MenuItem value="short_term">Monthly</MenuItem>
           <MenuItem value="medium_term">6 Months</MenuItem>
           <MenuItem value="long_term">Yearly</MenuItem>
@@ -371,16 +378,23 @@ const renderGenres = () => {
             <TableRow>
               <TableCell className="spotify-table-cell" style={tableCellStyles}>Ranking</TableCell>
               <TableCell className="spotify-table-cell" style={tableCellStyles}>Genre</TableCell>
-              <TableCell className="spotify-table-cell" style={tableCellStyles}>Percentage</TableCell>
+              <TableCell className="spotify-table-cell" style={tableCellStyles}>Time Spent</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {genres.map((genre, index) => (
-              <TableRow key={index}>
+              <TableRow key={genre}>
                 <TableCell className="spotify-table-cell" style={tableCellStyles}>{`${index + 1}`}</TableCell>
                 <TableCell className="spotify-table-cell" style={tableCellStyles}>{genre}</TableCell>
-                {/* Add percentage data if you have it available */}
-                <TableCell className="spotify-table-cell" style={tableCellStyles}>{/* Add percentage data here */}</TableCell>
+                <TableCell className="spotify-table-cell" style={tableCellStyles}>
+                  <div className="genreBarContainer">
+                    <div
+                      className="genreBar"
+                      style={{ width: `${(genreFreqMap[genre] / 30) * 100}%` }}
+                    ></div>
+                    <span>{genreFreqMap[genre]}</span>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -415,14 +429,14 @@ return (
                     <h2 className='AboutMe'>Who was your guilty pleasure?</h2>
                     <div className='landGridOne'>
                         <div className='personal'>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Everyone has a guilty pleasure, that one artist, track, or genre they secretly enjoy and can't resist tapping their feet to. It's the guilty pleasure that brings out the inner music lover, the one you indulge in when no one's watching.</p>
                             <div className="home-buttons">
-                              <button className='loginButton' onClick={handleTopTracks}>Wrap Up</button>
+                              <button className='loginButton' onClick={handleTopTracks}>Get Wrapped Up</button>
                             </div>
                         </div>
                   
-                        <div className='musicSVG'>
-                            <img src={music} alt="music" />
+                        <div className='loveSVG'>
+                            <img src={love} alt="love" />
                         </div>
                     </div>
                     </article>
@@ -440,9 +454,18 @@ return (
                 </div>
               </>
             )}
-          </>
+                <footer className="footer">
+                    <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+                    <p> We are not related to Spotify AB or any of it´s partners in any way</p>
+                </footer> 
+            </>
+   
         ) : (
-          <h2>Please login</h2>
+          <footer className="footer">
+              <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+              <p> We are not related to Spotify AB or any of it´s partners in any way</p>
+          </footer>
+
         )}
       </div>
     </section>

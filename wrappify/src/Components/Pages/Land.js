@@ -92,9 +92,11 @@ function Land({ setToken }) {
                 {!window.localStorage.getItem("token") ?
                 <footer className="footer">
                     <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+                    <p> We are not related to Spotify AB or any of it´s partners in any way</p>
                 </footer> :
                 <footer className="footer">
                     <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
+                    <p> We are not related to Spotify AB or any of it´s partners in any way</p>
                 </footer>
 
                 }
