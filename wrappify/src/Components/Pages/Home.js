@@ -216,8 +216,6 @@ const tableCellStyles = {
 
 const imageStyles = {
   width: '100%',
-  borderTopLeftRadius: '10px',
-  borderTopRightRadius: '10px',
   maxWidth: '150px',
   border: '2px solid white', // Change the border color to white
 };
@@ -231,8 +229,6 @@ const spotifyButtonStyles = {
   alignItems: 'center',
   color: 'black', // Change the text color to black
   backgroundColor: '#1DB954',
-  borderBottomLeftRadius: '10px',
-  borderBottomRightRadius: '10px',
   border: '2px solid white', // Change the border color to white
   textDecoration: 'none',
   transition: 'background-color 0.2s ease',

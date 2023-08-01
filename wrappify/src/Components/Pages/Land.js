@@ -7,7 +7,7 @@ import visualise from '../Images/Visual.svg';
 
 function Land({ setToken }) {
     const CLIENT_ID = "da420f0feb8244f4a8c20acd024a6a45";
-    const REDIRECT_URI = "https://wrappify.uk/home"; // Updated redirect URI
+    const REDIRECT_URI = "http://localhost:3000/home"; // Updated redirect URI
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
     const RESPONSE_TYPE = "token";
     const SCOPES = "user-top-read playlist-modify-public";
@@ -52,8 +52,8 @@ function Land({ setToken }) {
 
                 <div className='landGridOne'>
                     <div className='personal'>
-                        <p>Introducing Wrappify, putting the power of Spotify Wrapped in your hands, whenever you want it!</p>
-                        <p>Say goodbye to the year-long wait and hello to instant access of your top listens, spanning up to a whole year from today!</p>
+                        <p>Introducing Wrappify, putting the power of Spotify API in your hands, whenever you want it!</p>
+                        <p>Wrappify gives instant access to your top listens, spanning up to a whole year from today!</p>
                         <p>Discover your destiny in music and dive deep into your musical journey with just a few taps.</p>
                         <button className="loginButton" onClick={loginToSpotify}>
                             Check Yourself
@@ -81,7 +81,7 @@ function Land({ setToken }) {
                     <div className='personal'>
                         <h3>Step into the world of music data with Wrappify!</h3>
                         <p>Our app brings you a whole new level of visualization features that allow you to explore your Spotify habits in an innovative way. Gone are the days of waiting for your annual Spotify Wrapped, as Wrappify grants you instant access to your top listens.</p>
-                        <p>Discover fascinating insights about your favorite artists, most-played tracks, and trending genres all in one place. Our intelligent algorithms analyze your listening patterns to generate personalized recommendations, giving you the opportunity to explore new music effortlessly.</p>
+                        <p>Discover fascinating insights about your favorite artists, most-played tracks, and trending genres all in one place.</p>
                     </div>
 
                 </div>
