@@ -80,7 +80,7 @@ function Land({ setToken }) {
                     </div>
                     <div className='personal'>
                         <h3>Step into the world of music data with Wrappify!</h3>
-                        <p>Our app brings you a whole new level of visualization features that allow you to explore your Spotify habits in an innovative way. Gone are the days of waiting for your annual Spotify Wrapped, as Wrappify grants you instant access to your top listens.</p>
+                        <p>Our app brings you a whole new level of visualization features that allow you to explore your Spotify habits in an innovative way. Wrappify grants you instant access to your top listens.</p>
                         <p>Discover fascinating insights about your favorite artists, most-played tracks, and trending genres all in one place.</p>
                     </div>
 
