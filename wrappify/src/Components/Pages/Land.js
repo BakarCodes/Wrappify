@@ -4,10 +4,13 @@ import Navbar from '../Navbar'
 import './Land.css';
 import music from '../Images/Music.svg';
 import visualise from '../Images/Visual.svg';
+import { fetchAccessToken } from './spotifyAuthUtils';
+
+
 
 function Land({ setToken }) {
     const CLIENT_ID = "da420f0feb8244f4a8c20acd024a6a45";
-    const REDIRECT_URI = "https://wrappify.uk/home"; // Updated redirect URI
+    const REDIRECT_URI = "http://localhost:3000/home"; // Updated redirect URI
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
     const RESPONSE_TYPE = "token";
     const SCOPES = "user-top-read playlist-modify-public";
@@ -27,6 +30,7 @@ function Land({ setToken }) {
                 navigate('/home');
             }
         }
+
     }, [navigate, setToken]);
 
     const logout = () => {
@@ -34,6 +38,16 @@ function Land({ setToken }) {
         setToken("");
         navigate('/');
     };
+
+    useEffect(() => {
+        // In a useEffect or equivalent:
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        if (code) {
+            fetchAccessToken(code);
+        // Then fetch user data as needed using the access token
+        }
+    })
 
     const loginToSpotify = () => {
         window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`;

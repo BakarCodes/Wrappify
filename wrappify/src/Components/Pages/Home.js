@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Spotify-logo.png';
 import music from '../Images/Music.svg';
 import love from '../Images/Love.svg';
+import { fetchAccessToken } from './spotifyAuthUtils';
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Button, Card } from '@mui/material';
 
@@ -18,6 +19,16 @@ function Home({ setToken }) {
   };
 
   console.log('Home page rendered');
+
+  useEffect (() => {
+    // In a useEffect or equivalent:
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+      fetchAccessToken(code);
+      // Then fetch user data as needed using the access token
+    }
+  })
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -419,7 +430,7 @@ return (
           <>
             {showWelcome ? (
                 <>
-                <section class="one">
+                <section className="one">
                   <main className='testimonial-grid'>
                     <article className='testimonial'>
                     <h2 className='AboutMe'>Who was your guilty pleasure?</h2>
