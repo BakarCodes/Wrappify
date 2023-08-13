@@ -5,33 +5,38 @@ import './Land.css';
 import music from '../Images/Music.svg';
 import visualise from '../Images/Visual.svg';
 import { fetchAccessToken } from './spotifyAuthUtils';
+import Footer from '../Footer';
 
 
 
 function Land({ setToken }) {
     const CLIENT_ID = "da420f0feb8244f4a8c20acd024a6a45";
-    const REDIRECT_URI = "https://wrappify.uk/home"; // Updated redirect URI
+    const REDIRECT_URI = "http://localhost:3000/home"; // Updated redirect URI
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
     const RESPONSE_TYPE = "token";
-    const SCOPES = "user-top-read playlist-modify-public";
+    const SCOPES = "user-top-read playlist-modify-public user-read-private user-read-email";
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const hash = window.location.hash;
-
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        
         if (hash) {
             const token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
-            
             if (token) {
                 window.location.hash = "";
+                // Store token in an HttpOnly cookie or maintain it in a server-side session for better security
                 window.localStorage.setItem("token", token);
                 setToken(token);
                 navigate('/home');
             }
+        } else if (code) {
+            fetchAccessToken(code); // Implement error handling inside this function
         }
-
     }, [navigate, setToken]);
+    
 
     const logout = () => {
         window.localStorage.removeItem("token");
@@ -39,15 +44,6 @@ function Land({ setToken }) {
         navigate('/');
     };
 
-    useEffect(() => {
-        // In a useEffect or equivalent:
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        if (code) {
-            fetchAccessToken(code);
-        // Then fetch user data as needed using the access token
-        }
-    })
 
     const loginToSpotify = () => {
         window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`;
@@ -104,14 +100,9 @@ function Land({ setToken }) {
             </main>
             </section>
                 {!window.localStorage.getItem("token") ?
-                <footer className="footer">
-                    <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
-                    <p> We are not related to Spotify AB or any of it´s partners in any way</p>
-                </footer> :
-                <footer className="footer">
-                    <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>
-                    <p> We are not related to Spotify AB or any of it´s partners in any way</p>
-                </footer>
+                Footer()
+                 :
+                Footer()
 
                 }
 

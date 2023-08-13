@@ -7,8 +7,10 @@ import logo from '../Images/Spotify-logo.png';
 import music from '../Images/Music.svg';
 import love from '../Images/Love.svg';
 import { fetchAccessToken } from './spotifyAuthUtils';
+import Footer from './Land'
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Button, Card } from '@mui/material';
+
 
 function Home({ setToken }) {
   const navigate = useNavigate();
@@ -20,15 +22,7 @@ function Home({ setToken }) {
 
   console.log('Home page rendered');
 
-  useEffect (() => {
-    // In a useEffect or equivalent:
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-      fetchAccessToken(code);
-      // Then fetch user data as needed using the access token
-    }
-  })
+
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -40,9 +34,21 @@ function Home({ setToken }) {
         window.location.hash = '';
         window.localStorage.setItem('token', token);
         setToken(token);
+              getUserProfile();
       }
     }
   }, [setToken]);
+
+
+  useEffect (() => {
+    // In a useEffect or equivalent:
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+      fetchAccessToken(code);
+      // Then fetch user data as needed using the access token
+    }
+  })
 
   const token = window.localStorage.getItem('token');
   console.log('Token:', token);
@@ -76,6 +82,41 @@ function Home({ setToken }) {
     });
     return data.id;
   };
+
+const fetchUserProfile = async (token) => {
+  try {
+      const response = await fetch("https://api.spotify.com/v1/me", {
+          headers: {
+              "Authorization": `Bearer ${token}`
+          }
+      });
+      const data = await response.json();
+      if (data.error) {
+          throw new Error(data.error.message);
+      }
+      return data;
+  } catch (error) {
+      console.error("Error fetching user profile:", error);
+  }
+};  
+
+useEffect(() => {
+  const token = window.localStorage.getItem("token");
+  if (token) {
+      const getUserData = async () => {
+          const userProfile = await fetchUserProfile(token);
+          if (userProfile) {
+              const userId = userProfile.id;
+              const userEmail = userProfile.email;
+              console.log("User ID:", userId);
+              console.log("User Email:", userEmail);
+              // Store them in state or do whatever you need with these values
+          }
+      };
+      getUserData();
+  }
+}, []);  // <-- Empty dependency array ensures this useEffect runs once after component mounts
+
 
   const getTopArtists = async () => {
     try {
@@ -250,6 +291,29 @@ const spotifyButtonStyles = {
 const spotifyButtonHoverStyles = {
   backgroundColor: '#1ED760',
 };
+
+async function getUserProfile() {
+  try {
+    const response = await axios.get('https://api.spotify.com/v1/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    if (response.data && response.data.display_name) {
+      console.log(`User is logged in as: ${response.data.display_name}`);
+    } else {
+      console.log('User is logged in, but display name is not available.');
+    }
+
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      console.log('User is not logged in.');
+    } else {
+      console.error('An error occurred:', error);
+    }
+  }
+}
 
 
 const renderArtists = () => {
