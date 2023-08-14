@@ -1,15 +1,29 @@
+import { getDatabase, ref, set } from "firebase/database";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css';
 import Navbar from '../Navbar';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Images/Spotify-logo.png';
-import music from '../Images/Music.svg';
 import love from '../Images/Love.svg';
 import { fetchAccessToken } from './spotifyAuthUtils';
-import Footer from './Land'
-
+import firebaseConfig from "../firebase";
+import { initializeApp } from "firebase/app";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Button, Card } from '@mui/material';
+import addUserToSpotify from "../automate";
+
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+function saveUserToDatabase(userId, email) {
+  const userRef = ref(db, 'users/' + userId);
+  set(userRef, {
+    email: email,
+    spotifyUserId: userId
+  });
+}
 
 
 function Home({ setToken }) {
@@ -108,14 +122,31 @@ useEffect(() => {
           if (userProfile) {
               const userId = userProfile.id;
               const userEmail = userProfile.email;
+              
               console.log("User ID:", userId);
               console.log("User Email:", userEmail);
-              // Store them in state or do whatever you need with these values
+
+              // Save user details to Firebase
+              saveUserToDatabase(userId, userEmail);
+
+              try {
+                const success = await addUserToSpotify(userEmail, userId);
+                if (success) {
+                    console.log('User added successfully to Spotify User Management.');
+                } else {
+                    console.log('Failed to add user to Spotify User Management.');
+                }
+            } catch (error) {
+                console.error('Error occurred while adding user to Spotify:', error);
+            }
+              
+              // Store them in state or do whatever else you need with these values
           }
       };
       getUserData();
   }
-}, []);  // <-- Empty dependency array ensures this useEffect runs once after component mounts
+}, []);
+ // <-- Empty dependency array ensures this useEffect runs once after component mounts
 
 
   const getTopArtists = async () => {
@@ -547,6 +578,7 @@ return (
 }
 
 export default Home;
+
 
 
 
