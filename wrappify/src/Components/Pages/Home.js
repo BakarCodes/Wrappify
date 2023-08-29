@@ -296,7 +296,7 @@ class Callback extends React.Component {
     }
     redirectToHome() {
         if (process.env.NODE_ENV === "production") {
-            window.location = "https://wrappedwhenever.com/"
+            window.location = "https://wrappify.uk/"
         } else {
             window.location = "http://localhost:3000"
         }
