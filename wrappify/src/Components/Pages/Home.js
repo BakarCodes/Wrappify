@@ -296,9 +296,9 @@ class Callback extends React.Component {
     }
     redirectToHome() {
         if (process.env.NODE_ENV === "production") {
-            window.location = "https://wrappify.uk/"
+            window.location = "https://wrappify.uk/home"
         } else {
-            window.location = "http://localhost:3000"
+            window.location = "http://localhost:3000/home"
         }
     }
     render() {
