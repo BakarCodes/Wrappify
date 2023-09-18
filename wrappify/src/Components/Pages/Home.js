@@ -14,15 +14,11 @@ function generateRandomString(length) {
 class Home extends React.Component {
     constructor(props){
         super(props);
+        
+        const redirect_uri = 'https://www.wrappify.uk/wrapped' 
 
-        let redirect_uri = ""
-        if(process.env.NODE_ENV === 'production') {
-            redirect_uri = 'https://www.wrappedwhenever.com/wrapped'
-        } else {
-            redirect_uri = 'http://localhost:3000/wrapped'
-        }
         this.state = {
-            client_id: "97d84be4746b4a5886291bf732c0bc44",
+            client_id: "da420f0feb8244f4a8c20acd024a6a45",
             redirect_uri: redirect_uri,
             scope: "user-top-read playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative",
             state: generateRandomString(16)
