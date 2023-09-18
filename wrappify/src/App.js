@@ -1,32 +1,16 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Land from './Components/Pages/Land';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Home from './Components/Pages/Home';
+import Wrapped from './Components/Pages/Wrapped';
 
 function App() {
-  const [token, setToken] = useState(window.localStorage.getItem('token') || '');
-
-  // Define isLoggedIn state to pass to Home and Navbar components
-  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-
-
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<Land token={token} setToken={setToken} isLoggedIn={isLoggedIn} />}
-        />
-        <Route
-          path="/home"
-          element={<Home token={token} setToken={setToken} isLoggedIn={isLoggedIn} />}
-        />
-      </Routes>
-    </Router>
+    <Routes> {/* Use Routes component */}
+      <Route path="/" element={<Home />} />
+      <Route path="/wrapped" element={<Wrapped />} />
+    </Routes>
   );
 }
 
 export default App;
-
-
 
