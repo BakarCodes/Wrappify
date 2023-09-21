@@ -18,7 +18,7 @@ class Home extends React.Component {
     constructor(props){
         super(props);
         
-        const redirect_uri = 'https://wrappify.uk/wrapped' 
+        const redirect_uri = 'https://www.wrappify.uk/wrapped' 
 
         this.state = {
             client_id: "da420f0feb8244f4a8c20acd024a6a45",
