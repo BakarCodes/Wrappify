@@ -4,266 +4,199 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
 
 body {
-    color: #858585;
-    background-image: url("../Images/background.jpg");
-    background-position: center;
+  display:flex; 
+  flex-direction:row;
+  color: white;
+  background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
+  background-position: center;
+
+  /* Align all text to the right */
+}
+
+.App {
+
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.landTitle {
+    text-align: center;
+
+
+}
+
+
+section{
+    height:92vh;
+    display: flex;
+    scroll-snap-align: start;
   }
   
-  .AboutMe{
+  .one{
+    display:flex; 
+    flex-direction:row;
+
+    color: #858585;
+    background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
+    background-position: center;
+
+    /* Align all text to the right */
     text-align: center;
-    font-size: 7vh;
   }
-  .center-page {
-    width: 100%;
-    margin-top: 10%;
+
+  .two{
+    display:flex; 
+    flex-direction:row;
+
+    color: #858585;
+    background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
+    background-position: center;
+
+    /* Align all text to the right */
+    text-align: center;
+  }
+
+  .landGridOne {
+    height: 50vh;
+    display: flex;
+  }
+  
+  .personal {
+    flex: 6; /* Take 30% of the available space */
+    padding: 20px; /* Optional: Add padding for better spacing */
+    font-size: 2.4vh;
+  }
+
+  .loginButton{
+    margin-top: 2%;
+    font-family: "Poppins", sans-serif;
+    background-color: #1DB954;
+    border-radius: 12px;
+    border: none;
+    color: #000000;
+    font-size: 1.2vw;
+    text-decoration: none;
+    padding: 10px 10px;
+    transition: color 0.2s ease;
+    height: 6vh;
+  }
+  
+  .loginButton:hover{
+    background-color: #6dffa0;
+    text-decoration: none;
+    transition: color 0.6s ease-in-out;
+    cursor: pointer;
+  }
+  .buttons{
+    padding: 2%;
+    display: flex;
+    gap: 20px
+  }
+  .musicSVG, .visualSVG {
+
+    flex: 4; /* Take 70% of the available space */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+  }
+  
+  .musicSVG, .visualSVG, img {
+    max-width: 100%; /* Set the maximum width for the music SVG */
+    max-height: 100%; /* Set the maximum height for the music SVG */
   }
 
-  .renderedPage{
-    min-width: 50vw;
-    max-width: 50vw;
-  }
-  
-  .menu {
-    justify-content: space-between; /* Align items evenly in the row */
-  }
-  
-  .table-container {/* Set the background color to black */
-    width: 80%;
-    height: 300px;
-    margin: 20px auto;
-    padding: 20px;
-    overflow: auto;
-  }
-  
-  /* Style the table */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  /* Style the table header cells */
-  .columnTitle th {
-    background-color: #1DB954;
-    color: rgb(255, 255, 255);
-    padding: 20px;
-    font-weight: bold; /* Add bold font weight */
-  }
-  
-  /* Style the table body cells */
-  .table tbody td {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
-    padding: 10px;
-    font-family: 'DM Sans', sans-serif; /* Use the 'DM Sans' font for the table body */
-  }
-  
-  /* Style the ranking cells */
-  .ranking {
-    color: #1DB954;
-    font-size: 5vw;
-    margin-right: 10px;
-    font-family: 'Roboto Slab', serif; /* Use the 'Roboto Slab' font for the ranking */
-  }
-  
-  /* Style the album and artist images */
-  .albumImg,
-  .artistImg {
-    width: 100%;
-    max-width: 150px;
-    border: 2px solid rgb(255, 255, 255);
-  }
+  .buttons{
 
-.loveSVG{
-  flex: 4; /* Take 70% of the available space */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-  
-  /* Style the Spotify link button */
-  .spotify-link {
-    display: flex;
-    align-items: center;
   }
   
-  .spotify-button {
+  
+  
+
+  .welcomeMSG{
+    color: #ffffff;
     text-align: center;
-    font-size: 1vw;
-    display: flex;
-    width: 100%;
-    max-width: 150px;
-    align-items: center;
+    font-size: 7vh;
+  }
+
+  .topTracksMsg{
+    color: #ffffff;
+    text-align: right;
+    font-size: 7vh;
+  }
+
+  .subHeading{
+      margin-top: -5%;
+      color: #1DB954;
+      text-align: center;
+      font-size: 5vh;
+  }
+
+  
+  .Home{
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+  
+
+  .grid-col-span2 {
+    grid-column: span 1;
+  }
+  
+  .testimonial-grid{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: min(70%,170vw);
+    height: min(80%,92vh);
+    margin-inline: auto;
+
+  
+  }
+  
+  .testimonial{
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 1px;
+    padding: 20px; /* Adjust padding as needed */
+    overflow-wrap: break-word;
+    
+  }
+  
+  article {
+    transition: transform 0.2s ease-in;
+  }
+  
+  .personal{
+
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  }
+  
+  .testimonial{
+
+    font-family: "Poppins", sans-serif;
     color: rgb(255, 255, 255);
-    border: 2px solid black;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-    font-family: 'Poppins', sans-serif; /* Use the 'Poppins' font for the Spotify link button */
-    font-weight: bold; /* Add bold font weight */
-  }
-  
-  .spotify-button:hover {
-    background-color: #1ED760;
-  }
-  
-  .spotify-logo {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-  }
-  
-  /* Style the selections container */
-  .selections {
-    margin-top: 20px;
-    display: flex;
-    align-items: left;
-    justify-content: left; /* Add this line to center horizontally */
-    height: 3em;
-    font-family: 'Poppins', sans-serif; 
-  }
-  
-  /* Style the duration dropdown */
-  .duration {
-    font-family: 'Poppins', sans-serif; 
-    border: none;
-    background-color: #1DB954;
-    color: white;
-    padding: 5px 10px;
-    border-top-right-radius: 10px;
-    cursor: pointer;
-    font-weight: bold; /* Add bold font weight */
-  }
-  
-  /* Style the create playlist button */
-  .playlist {
-    font-family: 'Poppins', sans-serif; 
-    border: none;
-    background-color: #1DB954;
-    color: white;
-    padding: 5px 10px;
-    border-top-right-radius: 10px;
-    cursor: pointer;
-    font-weight: bold; /* Add bold font weight */
-  }
-  
-  
+    font-size: 1.1vw;
+    text-align: left;
 
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
   
-/* Track */
-::-webkit-scrollbar-track {
-    background: #212121;
-}
-  
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #1DB954;
-    border-radius: 0px;
-}
-  
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #19647e;
-}
-
-/* Home.css */
-
-/* Add the styles for the genre bar visualization */
-.genreBarContainer {
-    position: relative;
-    width: 100%;
   }
   
-  .genreBar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: #1DB954;
+  .testimonial:first-child{
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start: 1;
+    grid-row-end: 10;
   }
   
-  .genreBar span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
   
-
-@media screen and (max-width: 767px) {
-    /* Adjust layout and font sizes for smaller screens */
-    body {
-      font-size: 16px; /* Adjust as needed */
-    }
-    
-    .center-container {
-      padding: 10px; /* Add some spacing around the content */
-    }
-    
-    .spotify-table-container {
-      width: 100%;
-      overflow-x: auto; /* Allow horizontal scrolling for small screens */
-    }
-    
-    /* Style the table for small screens */
-    .spotify-table {
-      width: 100%;
-    }
-    
-    .spotify-table-cell {
-      padding: 8px; /* Reduce cell padding for small screens */
-      font-size: 1rem; /* Adjust font size for table cells */
-    }
-    
-    /* Increase button size for better touch experience */
-    .playlist, .spotify-button {
-      font-size: 1.2rem; /* Adjust font size as needed */
-      padding: 12px 20px; /* Add more padding for larger buttons */
-    }
-    
-    /* Style the mobile menu if you have one */
-    .mobile-menu {
-        display: flex;
-        flex-direction: column;
-        background-color: #1DB954;
-        padding: 20px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 9999;
-      }
-    
-      /* Style for the links in the mobile menu */
-      .mobile-menu a {
-        color: white;
-        font-size: 1.2rem;
-        text-decoration: none;
-        padding: 10px;
-        margin-bottom: 10px;
-      }
-    
-      /* Add a hover effect for links in the mobile menu */
-      .mobile-menu a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 5px;
-      }
-    
-      /* Style for the close button in the mobile menu */
-      .mobile-menu .close-button {
-        color: white;
-        font-size: 1.2rem;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-      }
+  .testimonial:nth-child(2){
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start: 4;
+    grid-row-end: 10;
   }

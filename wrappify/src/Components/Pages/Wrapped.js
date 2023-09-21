@@ -2,6 +2,7 @@ import React from 'react'
 import ReactSwipe from 'react-swipe'
 import superagent from 'superagent'
 import toast, { Toaster } from 'react-hot-toast';
+import './Wrapped.css'
 
 
 function getHashParams() {
@@ -100,14 +101,7 @@ class Callback extends React.Component {
         const colorIdx = Math.floor(Math.random() * (max - min + 1)) + min
 
         // set bg based on user device
-        if (window.mobileCheck()) {
-            document.body.style.backgroundImage = this.state.colors[colorIdx];
-        } else {
-            document.body.style.backgroundColor = '#181818'
-        }
 
-        const mainPanelWidth = parseInt(document.getElementById("main-panel").style.width.slice(0, -2))
-        this.setState({ albumOffset: Math.floor((mainPanelWidth - 126 - 24) / 5), albumContainerOffset: mainPanelWidth })
 
 
         // check if user is logged in
@@ -195,10 +189,6 @@ class Callback extends React.Component {
                 })
 
         })
-    }
-
-    componentWillUnmount() {
-        document.body.style.backgroundImage = null;
     }
 
     updateTermCount() {
@@ -296,190 +286,100 @@ class Callback extends React.Component {
     }
     redirectToHome() {
         if (process.env.NODE_ENV === "production") {
-            window.location = "https://wrappedwhenever.com/"
+            window.location = "https//www.wrappify.uk/"
         } else {
             window.location = "http://localhost:3000"
         }
     }
     render() {
-        const data = this.state.data[this.state.termCount % 3]
-        const Genres = Array.from(data.genres.keys()).slice(0, 5).map((genre, i) => {
-            return (
-                <p key={i} className="d-sm-block text-truncate" ><b>{i + 1}</b>&nbsp;&nbsp;{genre}</p>
-            )
-        })
-
+        const data = this.state.data[this.state.termCount % 3];
+    
         const TrackList = data.tracks.slice(0, 20).map((track, i) => {
-            let artists = ""
-            track.artists.forEach((artist, i) => {
-                artists += (i === track.artists.length - 1) ? `${artist.name}` : `${artist.name}, `
-            });
-            return (
-                <div key={i} className="d-flex flex-row" style={{ paddingBottom: 20 }}>
-                    <img alt={i} src={track.album.images[2].url} height="64" width="64" className="square-img" />
-                    <div className="d-flex flex-column justify-content-center ps-3">
-                        <b>{track.name}</b>
-                        <small>{artists}</small>
-                    </div>
-                </div>
-            )
-        })
+          let artists = '';
+          track.artists.forEach((artist, i) => {
+            artists += i === track.artists.length - 1 ? `${artist.name}` : `${artist.name}, `;
+          });
+          return (
+            <div key={i} className="row mb-3">
+              <div className="col-md-2">
+                <img alt={i} src={track.album.images[2].url} className="img-fluid" />
+              </div>
+              <div className="col-md-10">
+                <h4>{track.name}</h4>
+                <p>{artists}</p>
+              </div>
+            </div>
+          );
+        });
+    
         const Artists = data.artists.slice(0, 20).map((artist, i) => {
-            return (
-                <div key={i} className="d-flex flex-row" style={{ paddingBottom: 20 }}>
-                    <img alt={i} src={artist.images[2].url} height="64" width="64" className="square-img" />
-                    <div className="d-flex flex-column justify-content-center ps-3">
-                        <b>{artist.name}</b>
-                    </div>
-                </div>
-            )
-        })
+          return (
+            <div key={i} className="row mb-3">
+              <div className="col-md-2">
+                <img alt={i} src={artist.images[2].url} className="img-fluid" />
+              </div>
+              <div className="col-md-10">
+                <h4>{artist.name}</h4>
+              </div>
+            </div>
+          );
+        });
+    
+        const Genres = Array.from(data.genres.keys()).slice(0, 5).map((genre, i) => {
+          return (
+            <p key={i}>
+              <b>{i + 1}</b>&nbsp;&nbsp;{genre}
+            </p>
+          );
+        });
 
-        const styles = {
-            main_color: '#181818',
-            mobile_container: {
-                padding: 20
-            },
-            main_card: {
-                height: window.innerHeight - this.state.footerHeight - 40,
-                backgroundImage: "linear-gradient(360deg, #181818 0%, #343434 100%)",
-                borderRadius: 10,
-                position: 'relative',
-                overflowY: 'hidden'
-            },
-            button_panel: {
-                height: window.innerHeight - this.state.footerHeight - 40,
-                position: 'relative'
-            },
-            topHeading: {
-                fontWeight: 700
-            },
-            textItem: {
-                marginBottom: -4,
-                fontSize: 12,
-                maxWidth: 130
-            },
-            genreText: {
-                textTransform: 'capitalize'
-            },
-            footerTag: {
-                marginBottom: 0,
-                fontWeight: 700,
-                fontSize: 14
-            }
-        }
-
-        const main_color = '#181818'
-
-
-        let reactSwipeEl;
         return (
             <div>
-                <div className="d-md-none d-lg-none d-xl-none d-xxl-none d-lg-block d-xl-block">
-                    <div className="container">
-                        <div className="row d-md-none d-lg-none d-xl-none d-xxl-none d-lg-block d-xl-block">
-                            <div style={styles.mobile_container} className="col-sm">
-                                <ReactSwipe
-                                    className="carousel"
-                                    swipeOptions={{ continuous: false }}
-                                    ref={el => (reactSwipeEl = el)}
-                                >
-                                    <div id="main-panel" style={styles.main_card}>
-                                        <div className="parent perspective" style={{ marginLeft: this.state.albumContainerOffset }}>
-                                            {data.tracks.slice(0, 5).map((track, i) => {
-
-                                                const offset = i * this.state.albumOffset;
-                                                const index = 5 - i;
-                                                return (
-                                                    <img key={i} alt={i} id="track" style={{ right: offset, zIndex: index }} src={track.album.images[1].url} height="190" width="190" className="square-img child" />
-                                                )
-                                            })}
-                                        </div>
-                                        <div className="container-sm">
-                                            <div className="row" style={{ marginTop: 210 }}>
-                                                <div className="col">
-                                                    <h6 style={styles.topHeading}>TOP ARTISTS</h6>
-                                                    {data.artists.slice(0, 5).map((artist, i) => {
-                                                        return (
-                                                            <div key={i}><p className="d-block text-truncate" style={styles.textItem}><b>{i + 1}</b>&nbsp;&nbsp;{artist.name}</p></div>
-                                                        )
-                                                    })}
-                                                </div>
-                                                <div className="col">
-                                                    <h6 style={styles.topHeading}>TOP SONGS</h6>
-                                                    {data.tracks.slice(0, 5).map((track, i) => {
-                                                        return (
-                                                            <div key={i}><p className="d-block text-truncate" style={styles.textItem}><b>{i + 1}</b>&nbsp;&nbsp;{track.name}</p></div>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </div>
-                                            <div className="row" style={{ marginTop: 20 }}>
-                                                <h6 style={{ ...styles.topHeading, textAlign: 'center' }}>TOP GENRES</h6>
-                                                <div className="d-flex flex-column">
-                                                    {Array.from(data.genres.keys()).slice(0, 5).map((genre, i) => {
-                                                        return (
-                                                            <p key={i} className="d-sm-block text-truncate" style={{ ...styles.textItem, ...styles.genreText }}><b>{i + 1}</b>&nbsp;&nbsp;{genre}</p>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style={{ bottom: 0, position: 'absolute', width: '100%', textAlign: 'center' }} className="row justify-content-center">
-                                            <p style={{ marginLeft: 20 }}><small style={{ color: '#a6a6a6', fontSize: 10 }}>Swipe right to add to playlist &#8594;</small></p>
-                                        </div>
-                                    </div>
-
-                                    <div id="main" style={styles.button_panel}>
-                                        <div style={{ height: '100%' }} className="d-flex align-items-end justify-content-center">
-                                            <button id="playlistBtn" onClick={this.addToPlaylist} className="login-btn">Add to playlist</button>
-                                        </div>
-                                    </div>
-                                </ReactSwipe>
-
-                            </div>
+                <div>
+                    <div >
+                        <div>
 
                         </div>
                     </div>
 
 
-                    <div id="footer" style={{ backgroundColor: main_color }} className="fixed-bottom share-footer d-flex flex-row justify-content-between align-items-center">
-                        <div className="d-flex flex-column">
-                            <p style={styles.footerTag}>#WRAPPEDWHENEVER</p>
+                    <div id="footer">
+                        <div>
+                            <p >#WRAPPEDWHENEVER</p>
                         </div>
-                        <a href="#" onClick={this.updateTermCount} className="term-select" style={{ fontSize: 14 }}>{this.state.data[this.state.termCount % 3].label}</a>
+                        <a href="#" onClick={this.updateTermCount} className="term-select">{this.state.data[this.state.termCount % 3].label}</a>
                     </div>
-                    <Toaster />
+                    
                 </div>
-                <div className="d-sm-none d-md-block 	d-md-none d-lg-block">
-                    <div className="container" style={{ marginTop: 20, paddingBottom: 60 }}>
-                        <div className="row">
-                            <div className="col-sm">
-                                <div className="d-flex flex-row justify-content-between">
-                                    <h1 style={{ color: '#fff', fontWeight: 700, paddingBottom: 15 }}>Top Tracks</h1>
+                <div>
+                    <div >
+                        <div >
+                            <div>
+                                <div>
+                                    <h1>Top Tracks</h1>
                                 </div>
 
                                 {TrackList}
                             </div>
-                            <div className="col-sm">
-                                <div className="d-flex flex-row justify-content-between">
-                                    <h1 style={{ color: '#fff', fontWeight: 700, paddingBottom: 15 }}>Top Artists</h1>
+                            <div >
+                                <div >
+                                    <h1>Top Artists</h1>
                                 </div>
 
                                 {Artists}
                             </div>
 
-                            <div className="col-sm ">
-                                <h1 style={{ color: '#fff', fontWeight: 700, paddingBottom: 15 }}>Top Genres</h1>
+                            <div>
+                                <h1>Top Genres</h1>
                                 {Genres}
                             </div>
                         </div>
                     </div>
-                    <div id="footer" style={{ backgroundColor: main_color }} className="fixed-bottom share-footer d-flex flex-row justify-content-between align-items-center">
-                        <div className="d-flex flex-column">
-                            <p style={styles.footerTag}>#WRAPPEDWHENEVER</p>
+                    <div>
+                        <div >
+                            <p>#WRAPPEDWHENEVER</p>
                         </div>
-                        <a href="#" onClick={this.updateTermCount} className="term-select" style={{ fontSize: 14 }}>{this.state.data[this.state.termCount % 3].label}</a>
+                        <a></a>
                     </div>
                 </div>
 
