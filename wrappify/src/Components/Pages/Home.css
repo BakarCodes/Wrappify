@@ -4,11 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
 
 body {
-  display:flex; 
-  flex-direction:row;
-  color: white;
-  background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
-  background-position: center;
 
   /* Align all text to the right */
 }

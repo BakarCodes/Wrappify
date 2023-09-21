@@ -3,7 +3,7 @@ import ReactSwipe from 'react-swipe'
 import superagent from 'superagent'
 import toast, { Toaster } from 'react-hot-toast';
 import './Wrapped.css'
-
+import Navbar from '../Navbar';
 
 function getHashParams() {
     var hashParams = {};
@@ -73,16 +73,21 @@ class Callback extends React.Component {
             validToken: true,
             loading: true,
             albumOffset: 0,
-            albumContainerOffset: 0
+            albumContainerOffset: 0,
+            // Add a new state for controlling which section to show
+            showTopTracks: true,
+            showTopArtists: false,
+            showTopGenres: false,
+            selectedDuration: "short_term",
+          };
+      
+          this.getTopItems = this.getTopItems.bind(this);
+          this.getArtistInfo = this.getArtistInfo.bind(this);
+          this.redirectToHome = this.redirectToHome.bind(this);
+          this.updateTermCount = this.updateTermCount.bind(this);
+          this.updateGenres = this.updateGenres.bind(this);
+          this.addToPlaylist = this.addToPlaylist.bind(this);
         }
-
-        this.getTopItems = this.getTopItems.bind(this)
-        this.getArtistInfo = this.getArtistInfo.bind(this)
-        this.redirectToHome = this.redirectToHome.bind(this)
-        this.updateTermCount = this.updateTermCount.bind(this)
-        this.updateGenres = this.updateGenres.bind(this)
-        this.addToPlaylist = this.addToPlaylist.bind(this)
-    }
 
     componentDidMount() {
         // add function to check if user is on mobile
@@ -191,6 +196,30 @@ class Callback extends React.Component {
         })
     }
 
+    toggleTopTracks = () => {
+        this.setState({
+          showTopTracks: true,
+          showTopArtists: false,
+          showTopGenres: false,
+        });
+      };
+
+      toggleTopArtists = () => {
+        this.setState({
+          showTopTracks: false,
+          showTopArtists: true,
+          showTopGenres: false,
+        });
+      };
+    
+      toggleTopGenres = () => {
+        this.setState({
+          showTopTracks: false,
+          showTopArtists: false,
+          showTopGenres: true,
+        });
+      };
+
     updateTermCount() {
         this.setState({ loading: true, termCount: this.state.termCount + 1 }, this.updateValues);
     }
@@ -291,6 +320,7 @@ class Callback extends React.Component {
             window.location = "http://localhost:3000"
         }
     }
+    
     render() {
         const data = this.state.data[this.state.termCount % 3];
     
@@ -334,57 +364,49 @@ class Callback extends React.Component {
         });
 
         return (
-            <div>
-                <div>
-                    <div >
-                        <div>
-
-                        </div>
-                    </div>
-
-
-                    <div id="footer">
-                        <div>
-                            <p >#WRAPPEDWHENEVER</p>
-                        </div>
-                        <a href="#" onClick={this.updateTermCount} className="term-select">{this.state.data[this.state.termCount % 3].label}</a>
-                    </div>
+            <div className="wrapped-container">
+            <Navbar></Navbar>
+                <div className="controls">
+                    {/* Buttons to show/hide sections */}
+                    <button onClick={this.toggleTopTracks}>Top Tracks</button>
+                    <button onClick={this.toggleTopArtists}>Top Artists</button>
+                    <button onClick={this.toggleTopGenres}>Top Genres</button>
                     
+                    <a href="#" onClick={this.updateTermCount} className="term-select">{this.state.data[this.state.termCount % 3].label}</a>
                 </div>
-                <div>
-                    <div >
-                        <div >
-                            <div>
-                                <div>
-                                    <h1>Top Tracks</h1>
-                                </div>
-
-                                {TrackList}
-                            </div>
-                            <div >
-                                <div >
-                                    <h1>Top Artists</h1>
-                                </div>
-
-                                {Artists}
-                            </div>
-
-                            <div>
-                                <h1>Top Genres</h1>
-                                {Genres}
-                            </div>
+    
+                <div className="content">
+                    {/* Conditionally rendered lists */}
+                    {this.state.showTopTracks && (
+                        <div className="top-tracks">
+                            <h1>Top Tracks</h1>
+                            {TrackList}
                         </div>
-                    </div>
+                    )}
+    
+                    {this.state.showTopArtists && (
+                        <div className="top-artists">
+                            <h1>Top Artists</h1>
+                            {Artists}
+                        </div>
+                    )}
+    
+                    {this.state.showTopGenres && (
+                        <div className="top-genres">
+                            <h1>Top Genres</h1>
+                            {Genres}
+                        </div>
+                    )}
+                </div>
+    
+                <footer id="footer">
                     <div>
-                        <div >
-                            <p>#WRAPPEDWHENEVER</p>
-                        </div>
-                        <a></a>
+                        
                     </div>
-                </div>
 
+                </footer>
             </div>
-        )
+        );
     }
 }
 
