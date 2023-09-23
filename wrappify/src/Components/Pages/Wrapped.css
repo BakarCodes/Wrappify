@@ -8,8 +8,8 @@
 /* Main Page Styling */
 body {
   font-family: 'Arial', sans-serif;
-  background: #181818; /* Dark Spotify Background */
-  color: #FFFFFF; /* White for contrast */
+  background: #121212; /* Dark background */
+  color: #FFFFFF; /* White text for contrast */
 }
 
 /* Header */
@@ -22,15 +22,15 @@ h1 {
 
 /* Lists */
 .row {
-  width: 60%; /* Set to 60% as requested */
+  width: 60%;
   display: flex;
   align-items: center;
-  margin: 1rem auto; /* Updated margin to center the row */
+  margin: 1rem auto;
   background: #282828; /* Slightly lighter than main background */
   padding: 1rem;
   transition: all 0.3s;
-}
 
+}
 
 .row:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -38,27 +38,47 @@ h1 {
 
 .col-md-2, .col-md-10 {
   display: flex;
-  align-items: center;
 }
 
 .col-md-2 img {
   max-width: 100%;
+  
+}
+
+/* Add a CSS class to style the container for the duration buttons */
+.termDates {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Style the buttons within the container */
+.termDates button {
+  margin: 0 10px; /* Add some spacing between the buttons */
+}
+
+
+.col-md-10 {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 20px;
 }
 
 .col-md-10 {
-  text-align: left;
-  padding-left: 15px; /* Give some spacing from the image */
-}
-
-.col-md-10 h4 {
-  font-size: 1.5rem;
   margin-bottom: 0.5rem;
   color: #FFFFFF; 
 }
 
 .col-md-10 p {
-  color: #B3B3B3; /* Slightly gray for lesser importance text */
+  color: #B3B3B3;
 }
+
+.col-md-10 h4 {
+  color: white;
+  font-size: 2rem;
+}
+
 
 /* Footer */
 #footer {
@@ -71,23 +91,12 @@ h1 {
   font-size: 1.2rem;
 }
 
-.term-select {
-  padding: 0.5rem 1rem;
-  background-color: #1DB954; /* Spotify Green */
-  color: #ffffff;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.term-select:hover {
-  background-color: #128D40; /* Darkened Spotify Green */
-}
 
 /* Buttons and Dropdowns */
 .button-group {
   display: flex;
   margin-bottom: 1.5rem;
-  justify-content: center; /* Center the buttons */
+  justify-content: center;
 }
 
 .button {
@@ -96,7 +105,7 @@ h1 {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-weight: bold; /* Making buttons bold for emphasis */
+  font-weight: bold;
 }
 
 .button-track {
@@ -105,7 +114,7 @@ h1 {
 }
 
 .button-artist {
-  background-color: #BB86FC; /* Another Spotify accent color */
+  background-color: #BB86FC;
   color: #ffffff;
 }
 
@@ -147,18 +156,17 @@ h1 {
 }
 
 .dropdown-option:hover {
-  background-color: #383838; /* Slightly lighter for hover */
+  background-color: #383838;
 }
-
 
 /* Centering the controls on the page */
 .controls {
   display: flex;
-  justify-content: center; /* Horizontally center the controls */
-  align-items: center; /* Vertically center the controls */
-  flex-direction: row; /* Make controls stack vertically */
-  height: 10vh; /* Take full viewport height */
-  background-color: #181818; /* Spotify Dark Background */
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 10vh;
+  background-color: #121212; /* Dark background */
 }
 
 /* Styling for the buttons */
@@ -166,15 +174,15 @@ button {
   margin: 0.5rem;
   padding: 0.5rem 1.5rem;
   border: none;
-  background-color: #1DB954; /* Spotify Green */
-  color: #FFFFFF; /* White Text */
+  background-color: #1DB954;
+  color: #FFFFFF;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #128743; /* Darker shade of Spotify Green for hover */
+  background-color: #128743;
 }
 
 /* Styling for the term-select link */
@@ -183,12 +191,15 @@ button:hover {
   margin: 0.5rem;
   padding: 0.5rem 1.5rem;
   text-decoration: none;
-  background-color: #1DB954; /* Spotify Green */
-  color: #FFFFFF; /* White Text */
+  color: #FFFFFF;
   transition: background-color 0.3s;
 }
 
 .term-select:hover {
-  background-color: #128743; /* Darker shade of Spotify Green for hover */
+  background-color: #128743;
 }
 
+
+.col-md-10{
+
+}

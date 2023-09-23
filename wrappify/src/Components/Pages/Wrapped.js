@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import './Wrapped.css'
 import Navbar from '../Navbar';
 
+
 function getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -77,7 +78,6 @@ class Callback extends React.Component {
             // Add a new state for controlling which section to show
             showTopTracks: true,
             showTopArtists: false,
-            showTopGenres: false,
             selectedDuration: "short_term",
           };
       
@@ -85,7 +85,6 @@ class Callback extends React.Component {
           this.getArtistInfo = this.getArtistInfo.bind(this);
           this.redirectToHome = this.redirectToHome.bind(this);
           this.updateTermCount = this.updateTermCount.bind(this);
-          this.updateGenres = this.updateGenres.bind(this);
           this.addToPlaylist = this.addToPlaylist.bind(this);
         }
 
@@ -200,7 +199,6 @@ class Callback extends React.Component {
         this.setState({
           showTopTracks: true,
           showTopArtists: false,
-          showTopGenres: false,
         });
       };
 
@@ -208,17 +206,9 @@ class Callback extends React.Component {
         this.setState({
           showTopTracks: false,
           showTopArtists: true,
-          showTopGenres: false,
         });
       };
     
-      toggleTopGenres = () => {
-        this.setState({
-          showTopTracks: false,
-          showTopArtists: false,
-          showTopGenres: true,
-        });
-      };
 
     updateTermCount() {
         this.setState({ loading: true, termCount: this.state.termCount + 1 }, this.updateValues);
@@ -251,6 +241,8 @@ class Callback extends React.Component {
         })
     }
 
+      
+
     addToPlaylist() {
         const playlistName = this.state.data[this.state.termCount % 3].label.toLowerCase()
         let today = new Date();
@@ -263,7 +255,7 @@ class Callback extends React.Component {
             .set("Authorization", "Bearer " + this.state.access_token)
             .set('Content-Type', 'application/json')
             .send({
-                name: `Your WrappedWhenever from ${playlistName}`,
+                name: `Your Top Tracks from ${playlistName}`,
                 description: `Created on ${today}`,
                 public: false
             })
@@ -313,6 +305,50 @@ class Callback extends React.Component {
             .query({ offset: offset })
             .set("Authorization", "Bearer " + this.state.access_token)
     }
+    handleDurationChange = (duration) => {
+        this.selectedDuration = duration;
+        // Fetch and update the tracks for the selected duration
+        this.getTopItems("tracks", duration, 50)
+            .then((res) => {
+                if (res.status === 429) {
+                    console.log(res.headers['Retry-After']);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, res.headers['Retry-After'] * 1000);
+                } else {
+                    const updatedData = [...this.state.data];
+                    updatedData[this.state.termCount % 3].tracks = res.body.items;
+                    this.setState({ data: updatedData });
+                }
+            })
+            .catch((err) => {
+                if (err.status === 401) {
+                    console.log(err.status);
+                    this.setState({ validToken: false });
+                    this.redirectToHome();
+                }
+            });
+            this.getTopItems("artists", duration)
+            .then((res) => {
+                if (res.status === 429) {
+                    console.log(res.headers['Retry-After']);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, res.headers['Retry-After'] * 1000);
+                } else {
+                    const updatedData = [...this.state.data];
+                    updatedData[this.state.termCount % 3].artists = res.body.items;
+                    this.setState({ data: updatedData });
+                }
+            })
+            .catch((err) => {
+                if (err.status === 401) {
+                    console.log(err.status);
+                    this.setState({ validToken: false });
+                    this.redirectToHome();
+                }
+            });
+    };
     redirectToHome() {
         if (process.env.NODE_ENV === "production") {
             window.location = "https//www.wrappify.uk/"
@@ -335,8 +371,8 @@ class Callback extends React.Component {
                 <img alt={i} src={track.album.images[2].url} className="img-fluid" />
               </div>
               <div className="col-md-10">
-                <h4>{track.name}</h4>
-                <p>{artists}</p>
+                <h4 className='trackName'>{track.name}</h4>
+                <p className='artistName'>{artists}</p>
               </div>
             </div>
           );
@@ -355,49 +391,47 @@ class Callback extends React.Component {
           );
         });
     
-        const Genres = Array.from(data.genres.keys()).slice(0, 5).map((genre, i) => {
-          return (
-            <p key={i}>
-              <b>{i + 1}</b>&nbsp;&nbsp;{genre}
-            </p>
-          );
-        });
 
         return (
             <div className="wrapped-container">
-            <Navbar></Navbar>
-                <div className="controls">
-                    {/* Buttons to show/hide sections */}
-                    <button onClick={this.toggleTopTracks}>Top Tracks</button>
-                    <button onClick={this.toggleTopArtists}>Top Artists</button>
-                    <button onClick={this.toggleTopGenres}>Top Genres</button>
-                    
-                    <a href="#" onClick={this.updateTermCount} className="term-select">{this.state.data[this.state.termCount % 3].label}</a>
-                </div>
+            <div className="controls">
+                {/* Buttons to show/hide sections */}
+                <button onClick={this.toggleTopTracks}>Top Tracks</button>
+                <button onClick={this.toggleTopArtists}>Top Artists</button>
+
+
+            </div>
+
     
                 <div className="content">
                     {/* Conditionally rendered lists */}
                     {this.state.showTopTracks && (
                         <div className="top-tracks">
                             <h1>Top Tracks</h1>
+                            <div className='termDates'>
+                                <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
+                                <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
+                                <button onClick={() => this.handleDurationChange('long_term')}>Last Year</button>
+                            </div>
                             {TrackList}
                         </div>
                     )}
-    
+
                     {this.state.showTopArtists && (
                         <div className="top-artists">
+                        
                             <h1>Top Artists</h1>
+                            <div className='termDates'>
+                                <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
+                                <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
+                                <button onClick={() => this.handleDurationChange('long_term')}>Last Year</button>
+                            </div>
                             {Artists}
                         </div>
                     )}
-    
-                    {this.state.showTopGenres && (
-                        <div className="top-genres">
-                            <h1>Top Genres</h1>
-                            {Genres}
-                        </div>
-                    )}
+
                 </div>
+
     
                 <footer id="footer">
                     <div>
