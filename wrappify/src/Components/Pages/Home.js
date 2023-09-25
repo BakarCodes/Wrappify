@@ -18,7 +18,7 @@ class Home extends React.Component { onLoginClick
     constructor(props){
         super(props);
         
-        const redirect_uri = 'https://www.wrappify.uk/wrapped' 
+        const redirect_uri = 'http://localhost:3000/wrapped' 
 
         this.state = {
             client_id: "da420f0feb8244f4a8c20acd024a6a45",
@@ -35,15 +35,19 @@ class Home extends React.Component { onLoginClick
     }
     handleAuthClick(event) {
         var url = 'https://accounts.spotify.com/authorize';
-            url += '?response_type=token';
-            url += '&client_id=' + encodeURIComponent(this.state.client_id);
-            url += '&scope=' + encodeURIComponent(this.state.scope);
-            url += '&redirect_uri=' + encodeURIComponent(this.state.redirect_uri);
-            url += '&state=' + encodeURIComponent(this.state.state);
-
+        url += '?response_type=token';
+        url += '&client_id=' + encodeURIComponent(this.state.client_id);
+        url += '&scope=' + encodeURIComponent(this.state.scope);
+        url += '&redirect_uri=' + encodeURIComponent(this.state.redirect_uri);
+        url += '&state=' + encodeURIComponent(this.state.state);
+      
         event.preventDefault();
-        window.location = url 
-    }
+        window.location = url;
+      
+        // Set loggedIn to true when the user initiates the login process
+        this.setState({ loggedIn: true });
+      }
+      
     render(){
         return(
             <div>
@@ -83,7 +87,7 @@ class Home extends React.Component { onLoginClick
                     <main className='testimonial-gridTwo'>
                         <article className='testimonial'>
                         <div className='heading'>
-                            <h2 className='welcomeMSG'>What is Wrappify?</h2>
+                            <h2 className='welcomeMSGTwo'>What is Wrappify?</h2>
                         </div>
 
                         <div className='landGridTwo'>

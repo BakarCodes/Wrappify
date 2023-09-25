@@ -3,6 +3,7 @@ import { useTable } from 'react-table';
 import superagent from 'superagent';
 import toast from 'react-hot-toast';
 import './Wrapped.css';
+import Navbar from '../Navbar';
 
 
 function getHashParams() {
@@ -15,62 +16,30 @@ function getHashParams() {
     return hashParams;
 }
 
-function YourTable({ columns, data }) {
-    // Create a table instance with fixed-width columns
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-    } = useTable(
-      {
-        columns,
-        data,
-        // Add any additional options you need here
-      },
-      []
-    );
+function generateRandomString(length) {
+  var text = '';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-
-return (
-    <table {...getTableProps()} className="table">
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td {...cell.getCellProps()} className="table-cell">
-                    {cell.render('Cell')}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+  for (var i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
 }
+
 
 class Callback extends React.Component {
     constructor(props) {
         super(props)
+        const redirect_uri = 'http://localhost:3000/wrapped';
 
         var params = getHashParams();
         this.state = {
             access_token: params.access_token,
+            client_id: "da420f0feb8244f4a8c20acd024a6a45",
+            redirect_uri: redirect_uri,
+            scope: "user-top-read playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative",
+            state: generateRandomString(16),
+            loggedIn: false, // Initialize loggedIn state to false
             top_artists: [],
             top_tracks: [],
             data: [
@@ -127,6 +96,9 @@ class Callback extends React.Component {
             showTopArtists: false,
             selectedDuration: "short_term",
           };
+          
+      
+      
       
           this.getTopItems = this.getTopItems.bind(this);
           this.getArtistInfo = this.getArtistInfo.bind(this);
@@ -443,20 +415,16 @@ class Callback extends React.Component {
     
         return (
           <div className="wrapped-container">
+            <Navbar
+                onLoginClick={this.handleAuthClick}
+                onLogoClick={this.handleLogoClick}
+                toggleTopTracks={this.toggleTopTracks}
+                toggleTopArtists={this.toggleTopArtists}
+            />
+
             <div className="sidebar">
                 {/* Sidebar buttons */}
-                <button
-                    className={this.state.showTopTracks ? 'active' : ''}
-                    onClick={this.toggleTopTracks}
-                >
-                    Top Tracks
-                </button>
-                <button
-                    className={this.state.showTopArtists ? 'active' : ''}
-                    onClick={this.toggleTopArtists}
-                >
-                    Top Artists
-                </button>
+   
                 
                 {/* Add a "Create Playlist" button */}
                 {this.state.showTopTracks && (
