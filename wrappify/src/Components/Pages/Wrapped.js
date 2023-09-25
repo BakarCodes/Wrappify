@@ -288,49 +288,6 @@ class Callback extends React.Component {
         })
     }
 
-    createPlaylist = () => {
-        const selectedDuration = this.state.selectedDuration;
-        const playlistName = this.state.termLabels[this.state.terms.indexOf(selectedDuration)].toLowerCase();
-    
-        // Create the playlist
-        superagent
-          .post(`https://api.spotify.com/v1/users/${this.state.userData.id}/playlists`)
-          .set("Authorization", "Bearer " + this.state.access_token)
-          .set('Content-Type', 'application/json')
-          .send({
-            name: `Your Top Tracks from ${playlistName}`,
-            description: `Created on ${new Date().toLocaleDateString()}`,
-            public: false
-          })
-          .end((err, res) => {
-            if (err) {
-              console.log(err);
-            } else {
-              if (res.created === true) {
-                const trackURIs = this.state.data[this.state.termCount % 3].tracks.map((track, i) => {
-                  return track.uri;
-                });
-    
-                // Add tracks to the created playlist
-                superagent
-                  .post(`https://api.spotify.com/v1/playlists/${res.body.id}/tracks`)
-                  .set("Authorization", "Bearer " + this.state.access_token)
-                  .set('Content-Type', 'application/json')
-                  .send(trackURIs)
-                  .end((err, res) => {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      toast.success('Added your playlist!');
-                    }
-                  });
-              } else {
-                console.log("couldn't make playlist");
-                console.log(res);
-              }
-            }
-          });
-      }
     
 
     addToPlaylist() {
@@ -503,7 +460,7 @@ class Callback extends React.Component {
                 
                 {/* Add a "Create Playlist" button */}
                 {this.state.showTopTracks && (
-                    <button onClick={this.createPlaylist}>Create Playlist</button>
+                    <button onClick={this.addToPlaylist}>Create Playlist</button>
                 )}
             </div>
     
