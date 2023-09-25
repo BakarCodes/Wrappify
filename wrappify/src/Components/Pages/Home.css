@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
 
 body {
-
+  background-color: #161616;;
   /* Align all text to the right */
 }
 
@@ -26,44 +26,105 @@ body {
 
 
 section{
-    height:92vh;
+    height:75vh;
     display: flex;
     scroll-snap-align: start;
   }
   
   .one{
+    margin-top: 4%;
+    height: 70%;
     display:flex; 
     flex-direction:row;
-
-    color: #858585;
-    background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
-    background-position: center;
-
-    /* Align all text to the right */
+    color: #000000;
     text-align: center;
   }
 
+  .newsBox {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    height: 30px; /* Set the height of the div to 100% to make it take the full height of its parent */
+    margin-bottom: 2%;
+  }
+  
+  .newAlerts{
+    background-color: #a5d6b6;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%;
+    height: 30px;
+    padding: 5px;
+  }
+  
   .two{
+    margin-top: 5%;
     display:flex; 
     flex-direction:row;
-
+    height: 92vh;
     color: #858585;
-    background-image: url("../Images/background.jpg"); /* Replace "path/to/grainy.jpg" with the actual path to your image */
-    background-position: center;
+
 
     /* Align all text to the right */
     text-align: center;
   }
 
   .landGridOne {
+    height: 22vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .landGridTwo {
     height: 50vh;
     display: flex;
+    flex-direction: column;
   }
   
   .personal {
     flex: 6; /* Take 30% of the available space */
-    padding: 20px; /* Optional: Add padding for better spacing */
-    font-size: 2.4vh;
+    padding: 10px; /* Optional: Add padding for better spacing */
+    font-size: 3.7vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    width: 100%;
+    color: #9b9b9b;
+
+    height: 20%;
+  }
+
+  .personalTwo{
+    padding: 10px; /* Optional: Add padding for better spacing */
+    font-size: 2.7vh;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    flex: 6;
+  }
+
+  .homeButtons{
+    justify-content: center;
+
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tryOutButton{
+    padding: 10px;
+    font-size: 2vh;
+    font-family: "Poppins", sans-serif;
+    background-color: #00ff59;
+    border: 2px solid black;
+    border-radius: 7px;
+  }
+
+  .tryOutButton:hover{
+    background-color: #6dffa0;
+    cursor: pointer;
+    transition: 0.3s;
   }
 
   .loginButton{
@@ -92,7 +153,7 @@ section{
     gap: 20px
   }
   .musicSVG, .visualSVG {
-
+    
     flex: 4; /* Take 70% of the available space */
     display: flex;
     justify-content: center;
@@ -124,7 +185,7 @@ section{
   }
 
   .subHeading{
-      margin-top: -5%;
+      margin-top: 0%;
       color: #1DB954;
       text-align: center;
       font-size: 5vh;
@@ -138,23 +199,28 @@ section{
     overflow-y: scroll;
   }
   
-
-  .grid-col-span2 {
-    grid-column: span 1;
-  }
   
   .testimonial-grid{
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     width: min(70%,170vw);
-    height: min(80%,92vh);
+    height: min(70%,92vh);
+    margin-inline: auto;
+
+  
+  }
+  .testimonial-gridTwo{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: min(70%,170vw);
+    height: min(70%,100vh);
     margin-inline: auto;
 
   
   }
   
   .testimonial{
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #161616;
     border-radius: 1px;
     padding: 20px; /* Adjust padding as needed */
     overflow-wrap: break-word;
@@ -194,4 +260,9 @@ section{
     grid-column-end: 10;
     grid-row-start: 4;
     grid-row-end: 10;
+  }
+
+  footer{
+    background-color: #161616;
+    text-align: center;
   }

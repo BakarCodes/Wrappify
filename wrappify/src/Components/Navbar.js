@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLoginClick, onLogoClick }) {
-  
+function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists }) {
 
 
   const handleLogoClick = () => {
@@ -19,7 +18,7 @@ function Navbar({ onLoginClick, onLogoClick }) {
           Wrappify
         </Link>
         <div className="navbar-buttons">
-          <Button onClick={onLoginClick} className="login-btn">Login with Spotify</Button>
+          <button onClick={onLoginClick} className="login-btn">LOG IN</button>
         </div>
       </div>
     </nav>

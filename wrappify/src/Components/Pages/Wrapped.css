@@ -8,7 +8,7 @@
 /* Main Page Styling */
 body {
   font-family: 'Arial', sans-serif;
-  background: #121212; /* Dark background */
+  background: #161616;; /* Dark background */
   color: #FFFFFF; /* White text for contrast */
 }
 
@@ -45,18 +45,6 @@ h1 {
   
 }
 
-/* Add a CSS class to style the container for the duration buttons */
-.termDates {
-  display: flex;
-  justify-content: center; /* Center the buttons horizontally */
-  margin-top: 20px; /* Adjust the margin as needed */
-}
-
-/* Style the buttons within the container */
-.termDates button {
-  margin: 0 10px; /* Add some spacing between the buttons */
-}
-
 
 .col-md-10 {
   display: flex;
@@ -80,24 +68,8 @@ h1 {
 }
 
 
-/* Footer */
-#footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: #282828;
-  color: #B3B3B3;
-  font-size: 1.2rem;
-}
 
 
-/* Buttons and Dropdowns */
-.button-group {
-  display: flex;
-  margin-bottom: 1.5rem;
-  justify-content: center;
-}
 
 .button {
   padding: 0.75rem 1.5rem;
@@ -108,32 +80,7 @@ h1 {
   font-weight: bold;
 }
 
-.button-track {
-  background-color: #1DB954;
-  color: #ffffff;
-}
 
-.button-artist {
-  background-color: #BB86FC;
-  color: #ffffff;
-}
-
-.button-genre {
-  background-color: #2ecc71;
-  color: #ffffff;
-}
-
-.button-track:hover {
-  background-color: #128D40;
-}
-
-.button-artist:hover {
-  background-color: #9858D5;
-}
-
-.button-genre:hover {
-  background-color: #27ae60;
-}
 
 .dropdown-container {
   position: relative;
@@ -170,20 +117,6 @@ h1 {
 }
 
 /* Styling for the buttons */
-button {
-  margin: 0.5rem;
-  padding: 0.5rem 1.5rem;
-  border: none;
-  background-color: #1DB954;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #128743;
-}
 
 /* Styling for the term-select link */
 .term-select {
@@ -200,6 +133,62 @@ button:hover {
 }
 
 
-.col-md-10{
 
+/* Resetting some browser defaults */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* Main Page Styling */
+
+/* Header */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1DB954; /* Spotify Green */
+  text-align: center;
+}
+
+.table {
+  width: 60%; /* Set the table width to 60% of the page */
+  margin: 0 auto; /* Center the table horizontally */
+}
+
+/* Add this CSS rule to create a gap between table columns */
+.table th,
+.table td {
+  padding: 10px; /* Add padding to create the gap */
+}
+
+/* Lists */
+.row {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+  background: #282828; /* Slightly lighter than the main background */
+  padding: 1rem;
+  transition: all 0.3s;
+  border-radius: 10px; /* Rounded corners for the table */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.col-md-2 img {
+  max-width: 100%;
+}
+
+/* Add a CSS class to style the container for the duration buttons */
+.termDates {
+  display: flex;
+  justify-content: space-between; /* Distribute the buttons evenly */
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Style the buttons within the container */
+
+
+
+
+/* Other styles remain the same as in your original CSS */

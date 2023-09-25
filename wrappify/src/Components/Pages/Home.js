@@ -14,7 +14,7 @@ function generateRandomString(length) {
     return text;
 }
 
-class Home extends React.Component {
+class Home extends React.Component { onLoginClick
     constructor(props){
         super(props);
         
@@ -31,7 +31,7 @@ class Home extends React.Component {
     }
     componentDidMount() {
         const body = document.querySelector("body")
-        body.style.background = "#181818"
+        body.style.background = "#161616"
     }
     handleAuthClick(event) {
         var url = 'https://accounts.spotify.com/authorize';
@@ -52,47 +52,55 @@ class Home extends React.Component {
                   <section class="one">
                   <main className='testimonial-grid'>
                       <article className='testimonial'>
+
                       <div className='heading'>
-                          <h2 className='welcomeMSG'>Get wrapped in today</h2>
-                          <h3 className='subHeading'>track your spotify habits</h3>
+                        <div className='newsBox'>
+                            <h5 className='newAlerts'>NEW - Create playlists based on your top listens using Wrappify</h5>
+                        </div>
+                            <h2 className='welcomeMSG'>Track your Spotify habits with Wrappify</h2>
+                            <h4 className='subHeading'></h4>
                       </div>
 
                       <div className='landGridOne'>
                           <div className='personal'>
-                              <p>Introducing Wrappify, putting the power of Spotify Wrapped in your hands, whenever you want it!</p>
-                              <p>Say goodbye to the year-long wait and hello to instant access of your top listens, spanning up to a whole year from today!</p>
-                              <p>Discover your destiny in music and dive deep into your musical journey with just a few taps.</p>
+                            <p>Find out your top tracks and your top artists from last month to over a year. Create playlists with your most listened tracks.</p>
+                          </div>
+                          <div className='homeButtons'>
+                            <div>
+                            <div>
+                                <button className='tryOutButton' onClick={this.handleAuthClick}>TRY WRAPPIFY NOW</button>
+                            </div>
+                            </div>
+
                           </div>
                           
-                          <div className='musicSVG'>
-                              <img src={music} alt="music" />
-                          </div>
                       </div>
                       </article>
                       
                   </main>
                   </section>
                   <section class="two">
-                  <main className='testimonial-grid'>
-                      <article className='testimonial'>
-                      <div className='headingTwo'>
-                          <h2 className='topTracksMsg'>Visualise Spotify like never before!</h2>
-                      </div>
-                      <div className='landGridOne'>
-                          <div className='visualSVG'>
-                              <img src={visualise} alt="visual" />
-                          </div>
-                          <div className='personal'>
-                              <h3>Step into the world of music data with Wrappify!</h3>
-                              <p>Our app brings you a whole new level of visualization features that allow you to explore your Spotify habits in an innovative way. Gone are the days of waiting for your annual Spotify Wrapped, as Wrappify grants you instant access to your top listens.</p>
-                              <p>Discover fascinating insights about your favorite artists, most-played tracks, and trending genres all in one place. Our intelligent algorithms analyze your listening patterns to generate personalized recommendations, giving you the opportunity to explore new music effortlessly.</p>
-                          </div>
+                    <main className='testimonial-gridTwo'>
+                        <article className='testimonial'>
+                        <div className='heading'>
+                            <h2 className='welcomeMSG'>What is Wrappify?</h2>
+                        </div>
 
-                      </div>
-                      </article>
-                      
-                  </main>
+                        <div className='landGridTwo'>
+                            <div className='personalTwo'>
+                                <p>Wrappify harnesses the incredible capabilities of Spotify's APIs to provide users with a comprehensive overview of their musical preferences and listening habits. Users gain access to a wealth of valuable information about their music consumption. </p>
+                            </div>
+                            
+                            <div className='musicSVG'>
+                                <img src={music} alt="music" />
+                            </div>
+                        </div>
+                        </article>
+                        
+                    </main>
                   </section>
+                  
+     
                       {!window.localStorage.getItem("token") ?
                       <footer className="footer">
                           <p>&copy; {new Date().getFullYear()} Wrappify. All rights reserved.</p>

@@ -1,9 +1,8 @@
-import React from 'react'
-import ReactSwipe from 'react-swipe'
-import superagent from 'superagent'
-import toast, { Toaster } from 'react-hot-toast';
-import './Wrapped.css'
-import Navbar from '../Navbar';
+import React, { useEffect, useState } from 'react';
+import { useTable } from 'react-table';
+import superagent from 'superagent';
+import toast from 'react-hot-toast';
+import './Wrapped.css';
 
 
 function getHashParams() {
@@ -16,6 +15,54 @@ function getHashParams() {
     return hashParams;
 }
 
+function YourTable({ columns, data }) {
+    // Create a table instance with fixed-width columns
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+    } = useTable(
+      {
+        columns,
+        data,
+        // Add any additional options you need here
+      },
+      []
+    );
+
+
+return (
+    <table {...getTableProps()} className="table">
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return (
+                  <td {...cell.getCellProps()} className="table-cell">
+                    {cell.render('Cell')}
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
 
 class Callback extends React.Component {
     constructor(props) {
@@ -241,7 +288,50 @@ class Callback extends React.Component {
         })
     }
 
-      
+    createPlaylist = () => {
+        const selectedDuration = this.state.selectedDuration;
+        const playlistName = this.state.termLabels[this.state.terms.indexOf(selectedDuration)].toLowerCase();
+    
+        // Create the playlist
+        superagent
+          .post(`https://api.spotify.com/v1/users/${this.state.userData.id}/playlists`)
+          .set("Authorization", "Bearer " + this.state.access_token)
+          .set('Content-Type', 'application/json')
+          .send({
+            name: `Your Top Tracks from ${playlistName}`,
+            description: `Created on ${new Date().toLocaleDateString()}`,
+            public: false
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            } else {
+              if (res.created === true) {
+                const trackURIs = this.state.data[this.state.termCount % 3].tracks.map((track, i) => {
+                  return track.uri;
+                });
+    
+                // Add tracks to the created playlist
+                superagent
+                  .post(`https://api.spotify.com/v1/playlists/${res.body.id}/tracks`)
+                  .set("Authorization", "Bearer " + this.state.access_token)
+                  .set('Content-Type', 'application/json')
+                  .send(trackURIs)
+                  .end((err, res) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      toast.success('Added your playlist!');
+                    }
+                  });
+              } else {
+                console.log("couldn't make playlist");
+                console.log(res);
+              }
+            }
+          });
+      }
+    
 
     addToPlaylist() {
         const playlistName = this.state.data[this.state.termCount % 3].label.toLowerCase()
@@ -359,89 +449,115 @@ class Callback extends React.Component {
     
     render() {
         const data = this.state.data[this.state.termCount % 3];
+        
     
-        const TrackList = data.tracks.slice(0, 20).map((track, i) => {
+        const TrackTable = data.tracks.slice(0, 20).map((track, i) => {
           let artists = '';
           track.artists.forEach((artist, i) => {
             artists += i === track.artists.length - 1 ? `${artist.name}` : `${artist.name}, `;
           });
           return (
-            <div key={i} className="row mb-3">
-              <div className="col-md-2">
-                <img alt={i} src={track.album.images[2].url} className="img-fluid" />
-              </div>
-              <div className="col-md-10">
+            <tr key={i}>
+              <td className="table-cell">{i + 1}</td>
+              <td className="table-cell">
+                <img alt={i} src={track.album.images[2].url} className="table-image" />
+              </td>
+              <td className="table-cell">
                 <h4 className='trackName'>{track.name}</h4>
                 <p className='artistName'>{artists}</p>
-              </div>
-            </div>
+              </td>
+            </tr>
           );
         });
     
-        const Artists = data.artists.slice(0, 20).map((artist, i) => {
+        const ArtistTable = data.artists.slice(0, 20).map((artist, i) => {
           return (
-            <div key={i} className="row mb-3">
-              <div className="col-md-2">
-                <img alt={i} src={artist.images[2].url} className="img-fluid" />
-              </div>
-              <div className="col-md-10">
+            <tr key={i}>
+              <td className="table-cell">{i + 1}</td>
+              <td className="table-cell">
+                <img alt={i} src={artist.images[2].url} className="table-image" />
+              </td>
+              <td className="table-cell">
                 <h4>{artist.name}</h4>
-              </div>
-            </div>
+              </td>
+            </tr>
           );
         });
     
-
         return (
-            <div className="wrapped-container">
-            <div className="controls">
-                {/* Buttons to show/hide sections */}
-                <button onClick={this.toggleTopTracks}>Top Tracks</button>
-                <button onClick={this.toggleTopArtists}>Top Artists</button>
-
-
+          <div className="wrapped-container">
+            <div className="sidebar">
+                {/* Sidebar buttons */}
+                <button
+                    className={this.state.showTopTracks ? 'active' : ''}
+                    onClick={this.toggleTopTracks}
+                >
+                    Top Tracks
+                </button>
+                <button
+                    className={this.state.showTopArtists ? 'active' : ''}
+                    onClick={this.toggleTopArtists}
+                >
+                    Top Artists
+                </button>
+                
+                {/* Add a "Create Playlist" button */}
+                {this.state.showTopTracks && (
+                    <button onClick={this.createPlaylist}>Create Playlist</button>
+                )}
             </div>
-
     
-                <div className="content">
-                    {/* Conditionally rendered lists */}
-                    {this.state.showTopTracks && (
-                        <div className="top-tracks">
-                            <h1>Top Tracks</h1>
-                            <div className='termDates'>
-                                <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
-                                <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
-                                <button onClick={() => this.handleDurationChange('long_term')}>Last Year</button>
-                            </div>
-                            {TrackList}
-                        </div>
-                    )}
-
-                    {this.state.showTopArtists && (
-                        <div className="top-artists">
-                        
-                            <h1>Top Artists</h1>
-                            <div className='termDates'>
-                                <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
-                                <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
-                                <button onClick={() => this.handleDurationChange('long_term')}>Last Year</button>
-                            </div>
-                            {Artists}
-                        </div>
-                    )}
-
+            <div className="content">
+              {/* Conditionally rendered tables */}
+              {this.state.showTopTracks && (
+                <div className="top-tracks">
+                  <h1>Top Tracks</h1>
+                  <div className='termDates'>
+                    <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
+                    <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
+                    <button onClick={() => this.handleDurationChange('long_term')}>All Time</button>
+                  </div>
+                  <table className='table'>
+                    <thead>
+                      <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {TrackTable}
+                    </tbody>
+                  </table>
                 </div>
-
+              )}
     
-                <footer id="footer">
-                    <div>
-                        
-                    </div>
-
-                </footer>
+              {this.state.showTopArtists && (
+                <div className="top-artists">
+                  <h1>Top Artists</h1>
+                  <div className='termDates'>
+                    <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
+                    <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
+                    <button onClick={() => this.handleDurationChange('long_term')}>All Time</button>
+                  </div>
+                  <table className='table'>
+                    <thead>
+                      <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ArtistTable}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
+    
+            <footer id="footer">
+              <div>
+                {/* Footer content */}
+              </div>
+            </footer>
+          </div>
         );
+      }
     }
-}
-
-export default Callback;
+    
+    export default Callback;

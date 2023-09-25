@@ -3,7 +3,7 @@
 /* Navbar styles */
 .navbar {
   background: #161616;
-  height: 8vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@
 }
 
 .navbar-logo {
-  color: #ffffff;
+  color: #1DB954;
   font-family: 'DM Sans', sans-serif;
   font-size: 2rem;
   text-decoration: none;
@@ -64,7 +64,6 @@
   color: #1DB954;
   font-size: 1.3vw;
   padding: 8px 16px;
-  border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -73,4 +72,14 @@
 .navbar__logout:hover {
   background-color: #1DB954;
   color: #fff;
+}
+
+.login-btn{
+  font-size: 2vh;
+  background-color: #6e837500;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  font-family: "Poppins", sans-serif;
 }
