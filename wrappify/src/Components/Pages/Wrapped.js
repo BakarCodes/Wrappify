@@ -388,11 +388,11 @@ class Callback extends React.Component {
           });
           return (
             <tr key={i}>
-              <td className="table-cell">{i + 1}</td>
-              <td className="table-cell">
+              <td className="tableRank">{i + 1}</td>
+              <td className="tableImage">
                 <img alt={i} src={track.album.images[2].url} className="table-image" />
               </td>
-              <td className="table-cell">
+              <td className="tableInfo">
                 <h4 className='trackName'>{track.name}</h4>
                 <p className='artistName'>{artists}</p>
               </td>
@@ -403,11 +403,11 @@ class Callback extends React.Component {
         const ArtistTable = data.artists.slice(0, 20).map((artist, i) => {
           return (
             <tr key={i}>
-              <td className="table-cell">{i + 1}</td>
-              <td className="table-cell">
+              <td className="tableRank">{i + 1}</td>
+              <td className="tableImage">
                 <img alt={i} src={artist.images[2].url} className="table-image" />
               </td>
-              <td className="table-cell">
+              <td className="tableInfo">
                 <h4>{artist.name}</h4>
               </td>
             </tr>
@@ -422,15 +422,6 @@ class Callback extends React.Component {
                 toggleTopArtists={this.toggleTopArtists}
             />
 
-            <div className="sidebar">
-                {/* Sidebar buttons */}
-   
-                
-                {/* Add a "Create Playlist" button */}
-                {this.state.showTopTracks && (
-                    <button onClick={this.addToPlaylist}>Create Playlist</button>
-                )}
-            </div>
     
             <div className="content">
               {/* Conditionally rendered tables */}

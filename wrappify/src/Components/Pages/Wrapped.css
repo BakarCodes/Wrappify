@@ -10,6 +10,11 @@ body {
   font-family: 'Arial', sans-serif;
   background: #161616;; /* Dark background */
   color: #FFFFFF; /* White text for contrast */
+  width: 100%;
+  
+}
+
+.wrapped-container{
   width: 90%;
   margin-left: 10%;
 }
@@ -153,29 +158,9 @@ h1 {
   text-align: center;
 }
 
-.table {
-  width: 60%; /* Set the table width to 60% of the page */
-  margin: 0 auto; /* Center the table horizontally */
-}
 
 /* Add this CSS rule to create a gap between table columns */
-.table th,
-.table td {
-  padding: 10px; /* Add padding to create the gap */
-}
 
-/* Lists */
-.row {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  margin: 1rem auto;
-  background: #282828; /* Slightly lighter than the main background */
-  padding: 1rem;
-  transition: all 0.3s;
-  border-radius: 10px; /* Rounded corners for the table */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
 
 .col-md-2 img {
   max-width: 100%;
@@ -183,14 +168,35 @@ h1 {
 
 /* Add a CSS class to style the container for the duration buttons */
 .termDates {
+  border: 2px solid yellow;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: space-between; /* Distribute the buttons evenly */
   margin-top: 20px; /* Adjust the margin as needed */
 }
 
 /* Style the buttons within the container */
+.table {
+  border: 2px solid white;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-
+.tableRank{
+  width: 10%;
+  border: 2px solid red;
+}
+.tableImage{
+  border: 2px solid blue;
+  
+}
+.tableInfo{
+  border: 2px solid green;
+  width: 10%;
+}
 
 
 /* Other styles remain the same as in your original CSS */

@@ -53,7 +53,7 @@ section{
   .testimonial-grid{
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    width: min(60%,170vw);
+    width: min(64%,170vw);
     height: min(70%,92vw);
     margin-inline: auto;
 
@@ -62,7 +62,7 @@ section{
   .testimonial-gridTwo{
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    width: min(60%,170vw);
+    width: min(51%,170vw);
     height: min(70%,100vw);
     margin-inline: auto;
 
@@ -193,7 +193,7 @@ section{
   .welcomeMSGTwo{
     color: #ffffff;
     text-align: center;
-    font-size: 3vw;
+    font-size: 2.1vw;
   }
 
   
