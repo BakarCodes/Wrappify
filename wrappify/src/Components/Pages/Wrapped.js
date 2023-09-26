@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import toast from 'react-hot-toast';
 import './Wrapped.css';
 import Navbar from '../Navbar';
-import Sidebar from '../Sidebar';
+
 
 
 function getHashParams() {
@@ -96,6 +96,9 @@ class Callback extends React.Component {
             showTopTracks: true,
             showTopArtists: false,
             selectedDuration: "short_term",
+            createdPlaylistLink: null,
+            showPlaylistLink: false,
+            profilePic: null,
           };
           
       
@@ -301,6 +304,15 @@ class Callback extends React.Component {
                                     toast.success('Added your playlist!')
                                 }
                             })
+                            this.setState({
+                                createdPlaylistLink: `https://open.spotify.com/playlist/${res.body.id}`,
+                                showPlaylistLink: true
+                            }, () => {
+                              setTimeout(() => {
+                                this.setState({ showPlaylistLink: false });
+                              }, 10000);  // Hide after 10 seconds
+                            });
+                            
                     } else {
                         console.log("couldn't make playlist")
                         console.log(res)
@@ -308,6 +320,36 @@ class Callback extends React.Component {
                 }
             })
     }
+
+    async fetchUserProfilePicture() {
+        try {
+            const response = await superagent.get(`https://api.spotify.com/v1/me`)
+                .set("Authorization", "Bearer " + this.state.access_token);
+            
+            if (response && response.body && response.body.images && response.body.images[0]) {
+                this.setState({ profilePic: response.body.images[0].url });
+            }
+            
+                // Inside the check if user is logged in block
+            superagent.get(`https://api.spotify.com/v1/me`)
+            .set("Authorization", "Bearer " + this.state.access_token)
+            .end((err, res) => {
+                if (err) {
+                    console.log(err)
+                
+                } else {
+                    this.setState({ userData: res.body }, () => {
+                        this.fetchUserProfilePicture();
+                    });
+                }
+            });
+        } catch (err) {
+            console.error("Error fetching profile picture: ", err);
+        }
+    }
+
+
+    
 
     async getArtistInfo(artistId) {
         return superagent.get(`https://api.spotify.com/v1/artists/${artistId}`)
@@ -416,10 +458,11 @@ class Callback extends React.Component {
     
         return (
           <div className="wrapped-container">
-            <Sidebar
+            <Navbar
                 onLogoClick={this.handleLogoClick}
                 toggleTopTracks={this.toggleTopTracks}
                 toggleTopArtists={this.toggleTopArtists}
+                profilePic={this.state.profilePic} 
             />
 
     
@@ -427,32 +470,45 @@ class Callback extends React.Component {
               {/* Conditionally rendered tables */}
               {this.state.showTopTracks && (
                 <div className="top-tracks">
-                  <h1>Top Tracks</h1>
+                  <h1 className='headingTopTracks'>TOP TRACKS</h1>
                   <div className='termDates'>
                     <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
                     <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
                     <button onClick={() => this.handleDurationChange('long_term')}>All Time</button>
                   </div>
-                  <table className='table'>
-                    <thead>
-                      <tr>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {TrackTable}
-                    </tbody>
-                  </table>
+                  <div className='table-container'>
+                    <table className='table'>
+                        <thead>
+                        <tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {TrackTable}
+                        </tbody>
+                    </table>
+                  </div>
+                    <button className="addToPlaylistButton" onClick={this.addToPlaylist}>
+                        *NEW - CREATE A PLAYLIST!
+                    </button>
+                    {this.state.showPlaylistLink && (
+                        <div className="playlist-link-container">
+                            <a href={this.state.createdPlaylistLink} target="_blank" rel="noopener noreferrer">
+                            View Created Playlist
+                            </a>
+                        </div>
+                    )}
                 </div>
               )}
     
               {this.state.showTopArtists && (
                 <div className="top-artists">
-                  <h1>Top Artists</h1>
+                  <h1 className='headingTopArtists'>TOP ARTISTS</h1>
                   <div className='termDates'>
                     <button onClick={() => this.handleDurationChange('short_term')}>Last Month</button>
                     <button onClick={() => this.handleDurationChange('medium_term')}>Last 6 Months</button>
                     <button onClick={() => this.handleDurationChange('long_term')}>All Time</button>
                   </div>
+                  <div className='table-container'> 
                   <table className='table'>
                     <thead>
                       <tr>
@@ -462,6 +518,7 @@ class Callback extends React.Component {
                       {ArtistTable}
                     </tbody>
                   </table>
+                  </div>
                 </div>
               )}
             </div>

@@ -5,74 +5,36 @@
 .navbar {
   background: #161616;
   height: 4vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+
   font-size: 1.3vh;
-  position: sticky;
+
   top: 0;
   z-index: 999;
 }
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .navbar-logo {
+  text-align: left;
   color: #1DB954;
   font-family: 'DM Sans', sans-serif;
   font-size: 2rem;
   text-decoration: none;
 }
 
-.nav-menu {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-item {
-  margin-right: 30px;
-}
-
-.nav-links {
-  color: #fff;
-  font-size: 1.3vw;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
 
 .nav-links:hover {
   color: #1DB954;
 }
 
-.navbar-buttons {
-  display: flex;
-  align-items: center;
-}
 
-.navbar__logout {
-  background-color: transparent;
-  border: 1px solid #1DB954;
-  color: #1DB954;
-  font-size: 1.3vw;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-}
-
-.navbar__logout:hover {
-  background-color: #1DB954;
-  color: #fff;
-}
 
 .login-btn{
   font-size: 2vh;
@@ -90,4 +52,20 @@
   cursor: pointer;
   transition: color 0.3s ease;
 
+}
+
+
+.sidebar-buttons button {
+  justify-content: left;
+  border: none;
+  width: 200px; /* Set a fixed width for the buttons */
+  margin-bottom: 15px; /* Space between buttons */
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #00000000; /* Darker button color */
 }

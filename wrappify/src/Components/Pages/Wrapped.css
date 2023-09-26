@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
 /* Resetting some browser defaults */
 * {
   box-sizing: border-box;
@@ -15,32 +18,25 @@ body {
 }
 
 .wrapped-container{
-  width: 90%;
-  margin-left: 10%;
+  width: 100%;
+
 }
 
 /* Header */
-h1 {
+.headingTopTracks {
+  font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #1DB954; /* Spotify Green */
+  color: #ffffff; /* Spotify Green */
   text-align: center;
 }
 
-/* Lists */
-.row {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  margin: 1rem auto;
-  background: #282828; /* Slightly lighter than main background */
-  padding: 1rem;
-  transition: all 0.3s;
-
-}
-
-.row:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.headingTopArtists {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff; /* Spotify Green */
+  text-align: center;
 }
 
 .col-md-2, .col-md-10 {
@@ -76,42 +72,6 @@ h1 {
 
 
 
-
-
-.button {
-  padding: 0.75rem 1.5rem;
-  margin: 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: bold;
-}
-
-
-
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  background-color: #282828;
-  min-width: 150px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
-.dropdown-option {
-  padding: 10px 15px;
-  cursor: pointer;
-  color: #B3B3B3;
-}
-
-.dropdown-option:hover {
-  background-color: #383838;
-}
 
 /* Centering the controls on the page */
 .controls {
@@ -168,35 +128,153 @@ h1 {
 
 /* Add a CSS class to style the container for the duration buttons */
 .termDates {
-  border: 2px solid yellow;
-  width: 70%;
+  width: 65%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: space-between; /* Distribute the buttons evenly */
   margin-top: 20px; /* Adjust the margin as needed */
+
 }
+
+.termDates button{
+  width: 100%;
+  background-color: #1DB954;
+  color: #121212;
+  border: 2px solid black;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1vw;
+  padding: 10px 15px; 
+  cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+.termDates button:hover{
+  background-color: #1AA84E;
+  
+}
+.table-container {
+  width: 65%;
+  max-height: 72vh; /* You can adjust this value depending on your needs */
+  overflow-y: auto;
+  border-radius: 10px; /* Optional: for rounded corners if desired */
+  -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for depth */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Customize the table's scrollbar */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* Adjust width of the scrollbar */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #1DB954; /* Spotify green color for the scroll handle */
+  border-radius: 0px; /* Optional: for rounded corners if desired */
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #121212; /* Black background for the track */
+  border-radius: 5px; /* Optional: for rounded corners if desired */
+}
+
+/* For Firefox (starting from version 64) */
+.table-container {
+  scrollbar-width: thin;
+  scrollbar-color: #1DB954 #121212; 
+}
+
 
 /* Style the buttons within the container */
 .table {
-  border: 2px solid white;
-  width: 70%;
+
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .tableRank{
+  font-family: 'DM Sans', sans-serif;
   width: 10%;
-  border: 2px solid red;
+  font-size: 2.2vw;
+
+  text-align: right;
+  padding-right: 1.5%;
 }
 .tableImage{
-  border: 2px solid blue;
+
+  width: 5%;
   
 }
 .tableInfo{
-  border: 2px solid green;
-  width: 10%;
+  width: 80%;
+  padding-left: 3%;
 }
 
 
+
+
+
 /* Other styles remain the same as in your original CSS */
+@keyframes popUpAnimation {
+  from {
+    bottom: -60px; /* starting from outside the viewport */
+    opacity: 0;
+  }
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
+}
+
+.addToPlaylistButton {
+  font-family: 'DM Sans', sans-serif;
+  position: fixed;
+  bottom: 20px; /* or any desired distance from the bottom of the screen */
+  right: 20px; /* or any desired distance from the right side of the screen */
+  padding: 10px 20px;
+  background-color: #1DB954; /* Spotify green color */
+  border: none;
+  width: 20%;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 1000; /* Ensure the button appears on top of other elements */
+  left: 50%;
+  transform: translateX(-50%); /* This centers the button horizontally */
+  animation: popUpAnimation 0.5s forwards; 
+}
+
+.addToPlaylistButton:hover {
+  background-color: #17A040; /* Slightly darker green for hover effect */
+}
+
+
+.playlist-link-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1DB954; /* Spotify green */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transform: translateX(-50%); /* This centers the button horizontally */
+  animation: popUpAnimation 0.5s forwards; 
+}
+
+.playlist-link-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.playlist-link-container a:hover {
+  text-decoration: underline;
+}
+
+
+.active-term {
+  background-color: solid red;
+}

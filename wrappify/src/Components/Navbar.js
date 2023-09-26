@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists }) {
+function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic }){
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -18,11 +18,31 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists }
         <Link to="/" className="navbar-logo" onClick={onLogoClick}>
           Wrappify
         </Link>
-        <div className="navbar-buttons">
-          <button onClick={onLoginClick} className="login-btn">
-            LOG IN
-          </button>
-        </div>
+        {loggedIn && (
+          <>
+            <button
+              className={toggleTopTracks ? 'active' : ''}
+              onClick={() => toggleTopTracks()}
+            >
+              Top Tracks
+            </button>
+            <button
+              className={toggleTopArtists ? 'active' : ''}
+              onClick={() => toggleTopArtists()}
+            >
+              Top Artists
+            </button>
+            <img src={profilePic} alt="User Profile" />
+
+          </>
+        )}
+        {!loggedIn && (
+          <div className="navbar-buttons">
+            <button onClick={onLoginClick} className="login-btn">
+              LOG IN
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );
