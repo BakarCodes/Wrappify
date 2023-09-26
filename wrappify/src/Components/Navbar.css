@@ -1,21 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@1000&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 /* Navbar styles */
 .navbar {
   background: #161616;
   height: 4vw;
-
-
   font-size: 1.3vh;
-
   top: 0;
   z-index: 999;
 }
 
+/* Updated CSS */
 .navbar-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -29,14 +28,29 @@
   text-decoration: none;
 }
 
-
-.nav-links:hover {
-  color: #1DB954;
+.navbar-links button {
+  font-family: 'Poppins', sans-serif;
+  background-color: #16161600;
+  color: white;
+  font-size: 1.2vw;
+  border: none;
 }
 
+.navbar-links button:hover {
+  cursor: pointer;
+}
 
+/* Adjusted navbar-links */
+.navbar-links {
+  list-style-type: none;
+  padding-top: 1.5%;
+  display: flex;
+  flex-direction: row;
+  gap: 3vh; /* Adjust the gap to 3vh */
+  margin-left: 5vh; /* Add margin to push buttons away from the logo */
+}
 
-.login-btn{
+.login-btn {
   font-size: 2vh;
   background-color: #6e837500;
   padding: 10px;
@@ -46,26 +60,15 @@
   font-family: "DM Sans", sans-serif;
 }
 
-.login-btn:hover{
+.login-btn:hover {
   color: #4ac274;
   border-bottom: 1px solid #1DB954;
   cursor: pointer;
   transition: color 0.3s ease;
-
 }
 
-
-.sidebar-buttons button {
-  justify-content: left;
-  border: none;
-  width: 200px; /* Set a fixed width for the buttons */
-  margin-bottom: 15px; /* Space between buttons */
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-  background-color: #00000000; /* Darker button color */
+.navbar-buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

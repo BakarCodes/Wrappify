@@ -99,6 +99,7 @@ class Callback extends React.Component {
             createdPlaylistLink: null,
             showPlaylistLink: false,
             profilePic: null,
+            loggedIn: false
           };
           
       
@@ -109,6 +110,7 @@ class Callback extends React.Component {
           this.redirectToHome = this.redirectToHome.bind(this);
           this.updateTermCount = this.updateTermCount.bind(this);
           this.addToPlaylist = this.addToPlaylist.bind(this);
+          
         }
 
     componentDidMount() {
@@ -133,21 +135,21 @@ class Callback extends React.Component {
 
         // check if user is logged in
         superagent.get(`https://api.spotify.com/v1/me`)
-            .set("Authorization", "Bearer " + this.state.access_token)
-            .end((err, res) => {
-                if (err) {
-                    console.log(err)
-                    if (err.status === 429) {
-                        console.log(res.headers['Retry-After'])
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, res.headers['Retry-After'] * 1000)
-                    }
-                } else {
-                    this.setState({ userData: res.body })
-                }
-            })
-        
+        .set("Authorization", "Bearer " + this.state.access_token)
+        .end((err, res) => {
+          if (err) {
+            console.log(err)
+            if (err.status === 429) {
+              console.log(res.headers['Retry-After'])
+              setTimeout(() => {
+                window.location.reload();
+              }, res.headers['Retry-After'] * 1000)
+            }
+          } else {
+            this.setState({ userData: res.body, loggedIn: true }); // Update loggedIn state
+          }
+        });
+      
         // get top tracks, artists for each term [short, medium, long]
         this.state.data.forEach((item, i) => {
             this.getTopItems("tracks", item.term, 50)

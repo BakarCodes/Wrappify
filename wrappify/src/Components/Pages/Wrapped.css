@@ -155,7 +155,7 @@ h1 {
 }
 .table-container {
   width: 65%;
-  max-height: 72vh; /* You can adjust this value depending on your needs */
+  max-height: 30vw; /* You can adjust this value depending on your needs */
   overflow-y: auto;
   border-radius: 10px; /* Optional: for rounded corners if desired */
   -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for depth */

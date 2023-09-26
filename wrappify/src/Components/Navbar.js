@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic }){
+function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -15,27 +15,19 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo" onClick={onLogoClick}>
-          Wrappify
-        </Link>
-        {loggedIn && (
-          <>
-            <button
-              className={toggleTopTracks ? 'active' : ''}
-              onClick={() => toggleTopTracks()}
-            >
-              Top Tracks
-            </button>
-            <button
-              className={toggleTopArtists ? 'active' : ''}
-              onClick={() => toggleTopArtists()}
-            >
-              Top Artists
-            </button>
-            <img src={profilePic} alt="User Profile" />
-
-          </>
-        )}
+        <div className='navbar-buttons'>
+          <Link to="/" className="navbar-logo" onClick={onLogoClick}>
+            Wrappify
+          </Link>
+          <ul className="navbar-links">
+            <li className={`navbar-link ${toggleTopTracks ? 'active' : ''}`}>
+              <button onClick={toggleTopTracks}>TOP TRACKS</button>
+            </li>
+            <li className={`navbar-link ${toggleTopArtists ? 'active' : ''}`}>
+              <button onClick={toggleTopArtists}>TOP ARTISTS</button>
+            </li>
+          </ul>
+        </div>
         {!loggedIn && (
           <div className="navbar-buttons">
             <button onClick={onLoginClick} className="login-btn">

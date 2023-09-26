@@ -18,7 +18,7 @@ class Home extends React.Component { onLoginClick
     constructor(props){
         super(props);
         
-        const redirect_uri = 'https://www.wrappify.uk/wrapped' 
+        const redirect_uri = 'http://localhost:3000/wrapped' 
 
         this.state = {
             client_id: "da420f0feb8244f4a8c20acd024a6a45",
