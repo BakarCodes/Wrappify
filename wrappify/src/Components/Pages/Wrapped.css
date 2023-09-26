@@ -10,6 +10,8 @@ body {
   font-family: 'Arial', sans-serif;
   background: #161616;; /* Dark background */
   color: #FFFFFF; /* White text for contrast */
+  width: 90%;
+  margin-left: 10%;
 }
 
 /* Header */

@@ -19,22 +19,6 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists }
           Wrappify
         </Link>
         <div className="navbar-buttons">
-          {loggedIn && (
-            <button
-              className={toggleTopTracks ? 'active' : ''}
-              onClick={() => toggleTopTracks()}
-            >
-              Top Tracks
-            </button>
-          )}
-          {loggedIn && (
-            <button
-              className={toggleTopArtists ? 'active' : ''}
-              onClick={() => toggleTopArtists()}
-            >
-              Top Artists
-            </button>
-          )}
           <button onClick={onLoginClick} className="login-btn">
             LOG IN
           </button>

@@ -31,7 +31,8 @@ section{
     display: flex;
     scroll-snap-align: start;
   }
-  
+
+      
   .one{
     margin-top: 4%;
     height: 70%;
@@ -41,164 +42,6 @@ section{
     text-align: center;
   }
 
-  .newsBox {
-    display: flex;
-    justify-content: center; /* Horizontally center the content */
-    align-items: center; /* Vertically center the content */
-    height: 30px; /* Set the height of the div to 100% to make it take the full height of its parent */
-    margin-bottom: 2%;
-  }
-  
-  .newAlerts{
-    background-color: #a5d6b6;
-    color: black;
-    border-radius: 5px;
-    text-align: center;
-    width: 50%;
-    height: 30px;
-    padding: 5px;
-  }
-  
-  .two{
-    margin-top: 5%;
-    display:flex; 
-    flex-direction:row;
-    height: 92vh;
-    color: #858585;
-
-
-    /* Align all text to the right */
-    text-align: center;
-  }
-
-  .landGridOne {
-    height: 22vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .landGridTwo {
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .personal {
-    flex: 6; /* Take 30% of the available space */
-    padding: 10px; /* Optional: Add padding for better spacing */
-    font-size: 3.5vh;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    width: 100%;
-    color: #9b9b9b;
-
-    height: 20%;
-  }
-
-  .personalTwo{
-    padding: 10px; /* Optional: Add padding for better spacing */
-    font-size: 2.7vh;
-    display: flex;
-    text-align: center;
-    flex-direction: row;
-    justify-content: center;
-    flex: 6;
-    color: #9b9b9b;
-  }
-
-  .homeButtons{
-    justify-content: center;
-
-    display: flex;
-    flex-direction: row;
-  }
-
-  .tryOutButton{
-    padding: 10px;
-    font-size: 2vh;
-    font-family: 'DM Sans', sans-serif;
-    background-color: #00ff59;
-    border: 2px solid black;
-    border-radius: 7px;
-  }
-
-  .tryOutButton:hover{
-    background-color: #6dffa0;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .loginButton{
-    margin-top: 2%;
-    font-family: "Poppins", sans-serif;
-    background-color: #1DB954;
-    border-radius: 12px;
-    border: none;
-    color: #000000;
-    font-size: 1.2vw;
-    text-decoration: none;
-    padding: 10px 10px;
-    transition: color 0.2s ease;
-    height: 6vh;
-  }
-  
-  .loginButton:hover{
-    background-color: #6dffa0;
-    text-decoration: none;
-    transition: color 0.6s ease-in-out;
-    cursor: pointer;
-  }
-  .buttons{
-    padding: 2%;
-    display: flex;
-    gap: 20px
-  }
-  .musicSVG, .visualSVG {
-    
-    flex: 4; /* Take 70% of the available space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .musicSVG, .visualSVG, img {
-    max-width: 100%; /* Set the maximum width for the music SVG */
-    max-height: 100%; /* Set the maximum height for the music SVG */
-  }
-
-  .buttons{
-
-  }
-  
-  
-  
-
-  .welcomeMSG{
-    color: #ffffff;
-    text-align: center;
-    font-size: 6vh;
-  }
-  .welcomeMSGTwo{
-    color: #ffffff;
-    text-align: center;
-    font-size: 5vh;
-  }
-
-  .topTracksMsg{
-    color: #ffffff;
-    text-align: right;
-    font-size: 7vh;
-  }
-
-  .subHeading{
-      margin-top: 0%;
-      color: #1DB954;
-      text-align: center;
-      font-size: 5vh;
-  }
-
-  
   .Home{
     font-family: "Poppins", sans-serif;
     scroll-behavior: smooth;
@@ -210,8 +53,8 @@ section{
   .testimonial-grid{
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    width: min(70%,170vw);
-    height: min(70%,92vh);
+    width: min(60%,170vw);
+    height: min(70%,92vw);
     margin-inline: auto;
 
   
@@ -220,7 +63,7 @@ section{
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     width: min(60%,170vw);
-    height: min(70%,100vh);
+    height: min(70%,100vw);
     margin-inline: auto;
 
   
@@ -273,3 +116,135 @@ section{
     background-color: #161616;
     text-align: center;
   }
+
+  .newsBox {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    margin-bottom: 2%;
+    font-size: 1vw;
+
+  }
+  
+  .newAlerts{
+    background-color: #a5d6b6;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    padding: 5px;
+    color:#414141;
+    
+  }
+  
+  .two{
+    margin-top: 5%;
+    display:flex; 
+    flex-direction:row;
+    height: 92vh;
+    color: #858585;
+
+
+    /* Align all text to the right */
+    text-align: center;
+  }
+
+  .landGridOne {
+    height: 22vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .landGridTwo {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .personal {
+    flex: 6; /* Take 30% of the available space */
+    padding: 10px; /* Optional: Add padding for better spacing */
+    font-size: 1.4vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    width: 100%;
+    color: #9b9b9b;
+
+    height: 20%;
+  }
+
+  .personalTwo{
+    padding: 10px; /* Optional: Add padding for better spacing */
+    font-size: 1.2vw;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    flex: 6;
+    color: #9b9b9b;
+  }
+
+  .welcomeMSG{
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.4vw;
+  }
+  .welcomeMSGTwo{
+    color: #ffffff;
+    text-align: center;
+    font-size: 3vw;
+  }
+
+  
+  .topTracksMsg{
+    color: #ffffff;
+    text-align: right;
+    font-size: 4vw;
+  }
+
+  .subHeading{
+      margin-top: 0%;
+      color: #1DB954;
+      text-align: center;
+      font-size: 5vw;
+  }
+
+
+  .homeButtons{
+    justify-content: center;
+
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tryOutButton{
+    padding: 12px;
+    font-size: 1vw;
+    font-family: 'Poppins', sans-serif;
+    background-color: #00c946;
+    border: 2px solid black;
+    color: #000000;
+  }
+
+  .tryOutButton:hover{
+    background-color: #6dffa0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+
+
+  .musicSVG, .visualSVG {
+    
+    flex: 4; /* Take 70% of the available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .musicSVG, .visualSVG, img {
+    max-width: 100%; /* Set the maximum width for the music SVG */
+    max-height: 100%; /* Set the maximum height for the music SVG */
+  }
+

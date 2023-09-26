@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import toast from 'react-hot-toast';
 import './Wrapped.css';
 import Navbar from '../Navbar';
+import Sidebar from '../Sidebar';
 
 
 function getHashParams() {
@@ -415,8 +416,7 @@ class Callback extends React.Component {
     
         return (
           <div className="wrapped-container">
-            <Navbar
-                onLoginClick={this.handleAuthClick}
+            <Sidebar
                 onLogoClick={this.handleLogoClick}
                 toggleTopTracks={this.toggleTopTracks}
                 toggleTopArtists={this.toggleTopArtists}
