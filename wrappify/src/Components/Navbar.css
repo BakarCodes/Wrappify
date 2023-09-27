@@ -8,19 +8,33 @@
   font-size: 1.3vh;
   top: 0;
   z-index: 999;
+  position: sticky;
+  padding-top: 1%;
 }
 
 /* Updated CSS */
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between;  /* Added this property */
   width: 100%;
-  max-width: 1200px;
+  max-width: 75%;
   margin: 0 auto;
 }
 
+.navbar-buttons{
+
+  justify-content: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+/* Add margin to the tooltip wrapper to space it from the navbar buttons */
+
 .navbar-logo {
+  justify-content: left;
   text-align: left;
   color: #1DB954;
   font-family: 'DM Sans', sans-serif;
@@ -29,10 +43,11 @@
 }
 
 .navbar-links button {
+  
   font-family: 'Poppins', sans-serif;
   background-color: #16161600;
   color: white;
-  font-size: 1.2vw;
+  font-size: 1vw;
   border: none;
 }
 
@@ -67,8 +82,45 @@
   transition: color 0.3s ease;
 }
 
-.navbar-buttons{
-  display: flex;
-  flex-direction: row;
+
+.user-profile-pic{
+  height: 5vh;
   align-items: center;
+
+  border-radius: 50%;
+  border: 2px solid #1DB954;
+}
+
+.profile-tooltip-wrapper {
+  margin-left: 30px; /* adjust as needed */
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+.user-profile-pic {
+  /* any existing styles */
+}
+
+.profile-tooltip-text {
+  visibility: hidden;
+  width: 6vw;
+  background-color: #141414;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -50%; /* Position the tooltip above the icon */
+  left: 50%;
+  margin-left: -60px; /* Use half of the width to center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile-tooltip-wrapper:hover .profile-tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }

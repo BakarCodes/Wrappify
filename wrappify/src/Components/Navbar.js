@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { Button } from './Button';
 
-function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic }) {
+function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic, spotifyProfileURL }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if the user is logged in when the component mounts
     const token = window.localStorage.getItem('token');
-    setLoggedIn(!!token); // Set loggedIn to true if token is present
+    setLoggedIn(!!token);
   }, []);
 
   return (
@@ -28,7 +27,18 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, 
             </li>
           </ul>
         </div>
-        {!loggedIn && (
+        {loggedIn ? (
+          <>
+            {profilePic && spotifyProfileURL && 
+              <div className="profile-tooltip-wrapper">
+                <a href={spotifyProfileURL} target="_blank" rel="noopener noreferrer">
+                    <img src={profilePic} alt="User Profile" className="user-profile-pic"/>
+                </a>
+                <span className="profile-tooltip-text">OPEN SPOTIFY</span>
+              </div>
+            }
+          </>
+        ) : (
           <div className="navbar-buttons">
             <button onClick={onLoginClick} className="login-btn">
               LOG IN

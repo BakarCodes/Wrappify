@@ -146,7 +146,8 @@ class Callback extends React.Component {
               }, res.headers['Retry-After'] * 1000)
             }
           } else {
-            this.setState({ userData: res.body, loggedIn: true }); // Update loggedIn state
+            this.setState({ userData: res.body, loggedIn: true });
+            this.fetchUserProfilePicture(); // Update loggedIn state
           }
         });
       
@@ -331,26 +332,11 @@ class Callback extends React.Component {
             if (response && response.body && response.body.images && response.body.images[0]) {
                 this.setState({ profilePic: response.body.images[0].url });
             }
-            
-                // Inside the check if user is logged in block
-            superagent.get(`https://api.spotify.com/v1/me`)
-            .set("Authorization", "Bearer " + this.state.access_token)
-            .end((err, res) => {
-                if (err) {
-                    console.log(err)
-                
-                } else {
-                    this.setState({ userData: res.body }, () => {
-                        this.fetchUserProfilePicture();
-                    });
-                }
-            });
         } catch (err) {
             console.error("Error fetching profile picture: ", err);
         }
     }
-
-
+    
     
 
     async getArtistInfo(artistId) {
@@ -452,7 +438,7 @@ class Callback extends React.Component {
                 <img alt={i} src={artist.images[2].url} className="table-image" />
               </td>
               <td className="tableInfo">
-                <h4>{artist.name}</h4>
+                <h4 className='artistOnlyName'>{artist.name}</h4>
               </td>
             </tr>
           );
@@ -464,7 +450,8 @@ class Callback extends React.Component {
                 onLogoClick={this.handleLogoClick}
                 toggleTopTracks={this.toggleTopTracks}
                 toggleTopArtists={this.toggleTopArtists}
-                profilePic={this.state.profilePic} 
+                profilePic={this.state.profilePic}
+                spotifyProfileURL={this.state.userData.external_urls && this.state.userData.external_urls.spotify} 
             />
 
     
