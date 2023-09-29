@@ -32,30 +32,15 @@ class Callback extends React.Component {
                     artists: [],
                     genres: new Map()
                 },
-                {
-                    term: "medium_term",
-                    label: "Last 6 months",
-                    tracks: [],
-                    artists: [],
-                    genres: new Map()
-                },
-                {
-                    term: "long_term",
-                    label: "All time",
-                    tracks: [],
-                    artists: [],
-                    genres: new Map()
-                }
+       
             ],
             terms: [
                 "short_term",
-                "medium_term",
-                "long_term"
+    
             ],
             termLabels: [
                 "Last month",
-                "Last 6 months",
-                "All time"
+
             ],
             colors: [
                 "linear-gradient(0deg, #EC008C 0%, #FC6767 100%)",
