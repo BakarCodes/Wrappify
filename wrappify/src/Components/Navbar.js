@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import { Button } from './Button';
 
 function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, profilePic, spotifyProfileURL }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -10,6 +9,13 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, 
     const token = window.localStorage.getItem('token');
     setLoggedIn(!!token);
   }, []);
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Add your logout logic here, e.g., clearing the token from localStorage
+    window.localStorage.removeItem('token');
+    setLoggedIn(false);
+  };
 
   return (
     <nav className="navbar">
@@ -32,11 +38,14 @@ function Navbar({ onLoginClick, onLogoClick, toggleTopTracks, toggleTopArtists, 
             {profilePic && spotifyProfileURL && 
               <div className="profile-tooltip-wrapper">
                 <a href={spotifyProfileURL} target="_blank" rel="noopener noreferrer">
-                    <img src={profilePic} alt="User Profile" className="user-profile-pic"/>
+                  <img src={profilePic} alt="User Profile" className="user-profile-pic"/>
                 </a>
                 <span className="profile-tooltip-text">OPEN SPOTIFY</span>
               </div>
             }
+            <button onClick={handleLogout} className="logout-btn">
+              LOG OUT
+            </button>
           </>
         ) : (
           <div className="navbar-buttons">

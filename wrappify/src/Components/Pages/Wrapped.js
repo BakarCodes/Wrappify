@@ -219,6 +219,7 @@ class Callback extends React.Component {
                 })
 
         })
+        
     }
 
     toggleTopTracks = () => {
@@ -267,7 +268,15 @@ class Callback extends React.Component {
         })
     }
 
-    
+// Function to handle logout
+handleLogout = () => {
+    // Add your logout logic here, e.g., clearing the token from localStorage
+    window.localStorage.removeItem('token');
+    this.setState({ loggedIn: false });
+
+    // Redirect the user to the home page
+    this.redirectToHome();
+  };
 
     addToPlaylist() {
         const playlistName = this.state.data[this.state.termCount % 3].label.toLowerCase()
@@ -355,21 +364,18 @@ class Callback extends React.Component {
             .query({ offset: offset })
             .set("Authorization", "Bearer " + this.state.access_token)
     }
+
     handleDurationChange = (duration) => {
-        this.selectedDuration = duration;
-        // Fetch and update the tracks for the selected duration
+        // Update the selected duration
+        this.setState({ selectedDuration: duration });
+        
+        // Fetch and update the tracks and artists for the selected duration
         this.getTopItems("tracks", duration, 50)
             .then((res) => {
-                if (res.status === 429) {
-                    console.log(res.headers['Retry-After']);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, res.headers['Retry-After'] * 1000);
-                } else {
-                    const updatedData = [...this.state.data];
-                    updatedData[this.state.termCount % 3].tracks = res.body.items;
-                    this.setState({ data: updatedData });
-                }
+                // Update the tracks data in the state
+                const updatedData = [...this.state.data];
+                updatedData[this.state.termCount % 3].tracks = res.body.items;
+                this.setState({ data: updatedData });
             })
             .catch((err) => {
                 if (err.status === 401) {
@@ -378,18 +384,14 @@ class Callback extends React.Component {
                     this.redirectToHome();
                 }
             });
-            this.getTopItems("artists", duration)
+        
+        // Similarly, fetch and update artists data for the selected duration
+        this.getTopItems("artists", duration)
             .then((res) => {
-                if (res.status === 429) {
-                    console.log(res.headers['Retry-After']);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, res.headers['Retry-After'] * 1000);
-                } else {
-                    const updatedData = [...this.state.data];
-                    updatedData[this.state.termCount % 3].artists = res.body.items;
-                    this.setState({ data: updatedData });
-                }
+                // Update the artists data in the state
+                const updatedData = [...this.state.data];
+                updatedData[this.state.termCount % 3].artists = res.body.items;
+                this.setState({ data: updatedData });
             })
             .catch((err) => {
                 if (err.status === 401) {
@@ -399,6 +401,7 @@ class Callback extends React.Component {
                 }
             });
     };
+    
     redirectToHome() {
         if (process.env.NODE_ENV === "production") {
             window.location = "https//www.wrappify.uk/"
@@ -406,6 +409,8 @@ class Callback extends React.Component {
             window.location = "http://localhost:3000"
         }
     }
+
+    
     
     render() {
         const data = this.state.data[this.state.termCount % 3];
@@ -451,7 +456,9 @@ class Callback extends React.Component {
                 toggleTopTracks={this.toggleTopTracks}
                 toggleTopArtists={this.toggleTopArtists}
                 profilePic={this.state.profilePic}
-                spotifyProfileURL={this.state.userData.external_urls && this.state.userData.external_urls.spotify} 
+                spotifyProfileURL={this.state.userData.external_urls && this.state.userData.external_urls.spotify}
+                // Pass the handleLogout function as a prop to the Navbar component
+                handleLogout={this.handleLogout}
             />
 
     

@@ -18,7 +18,7 @@ class Home extends React.Component { onLoginClick
     constructor(props){
         super(props);
         
-        const redirect_uri = 'https://www.wrappify.uk/wrapped' 
+        const redirect_uri = 'http://localhost:3000/wrapped' 
 
         this.state = {
             client_id: "da420f0feb8244f4a8c20acd024a6a45",
@@ -47,14 +47,21 @@ class Home extends React.Component { onLoginClick
         // Set loggedIn to true when the user initiates the login process
         this.setState({ loggedIn: true });
       }
+
+      handleLogoutClick = () => {
+        // Clear the token from localStorage
+        window.localStorage.removeItem("token");
+      
+        // Redirect to the home page
+        window.location = "/";
+      };
+      
       
     render(){
         return(
             <div>
                 <div className="App">
-                  <Navbar onLoginClick={this.handleAuthClick}
-
-                  />
+                    <Navbar onLoginClick={this.handleAuthClick} onLogoutClick={this.handleLogoutClick} />
                   <section class="one">
                   <main className='testimonial-grid'>
                       <article className='testimonial'>
