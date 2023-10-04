@@ -451,15 +451,16 @@ handleLogout = () => {
     
         return (
           <div className="wrapped-container">
-            <Navbar
-                onLogoClick={this.handleLogoClick}
-                toggleTopTracks={this.toggleTopTracks}
-                toggleTopArtists={this.toggleTopArtists}
-                profilePic={this.state.profilePic}
-                spotifyProfileURL={this.state.userData.external_urls && this.state.userData.external_urls.spotify}
-                // Pass the handleLogout function as a prop to the Navbar component
-                handleLogout={this.handleLogout}
-            />
+          <Navbar
+              onLogoClick={this.handleLogoClick}
+              toggleTopTracks={this.toggleTopTracks}
+              toggleTopArtists={this.toggleTopArtists}
+              profilePic={this.state.profilePic}
+              spotifyProfileURL={this.state.userData.external_urls && this.state.userData.external_urls.spotify}
+              handleLogout={this.handleLogout}
+              loggedIn={this.state.loggedIn}
+          />
+
 
     
             <div className="content">

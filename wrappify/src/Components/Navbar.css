@@ -124,3 +124,41 @@
   visibility: visible;
   opacity: 1;
 }
+
+
+.profile-dropdown-container {
+  position: relative;
+}
+
+.profile-dropdown {
+  width: 7vw;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 2px;
+  background-color: #fff;
+  border: 1px solid #000000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 10;
+  
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+  width: 100%;
+  display: flex;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #1d1d1d;
+  border: none;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+  background-color: #424242;
+}
+
+.logout-dropdown-btn {
+  cursor: pointer;
+}
